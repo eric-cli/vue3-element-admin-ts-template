@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import ElementPlus from "unplugin-element-plus/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import visualizer from "rollup-plugin-visualizer";
 import compressPlugin from "vite-plugin-compression";
 import { viteMockServe } from "vite-plugin-mock";
@@ -26,18 +29,46 @@ export default defineConfig({
           `,
     }),
     AutoImport({
+      // targets to transform
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
+      // global imports to register
       imports: [
+        // presets
         "vue",
         "vue-router",
-        "vue-i18n",
-        "@vueuse/core",
-        // '[package-name]': [
-        //   '[import-names]',
-        //   // alias
-        //   ['[from]', '[alias]']
-        // ]
+        // custom
+        {
+          "@vueuse/core": [
+            // named imports
+            "useMouse", // import { useMouse } from '@vueuse/core',
+            // alias
+            ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',
+          ],
+          axios: [
+            // default imports
+            ["default", "axios"], // import { default as axios } from 'axios',
+          ],
+          // "[package-name]": [
+          //   "[import-names]",
+          //   // alias
+          //   ["[from]", "[alias]"],
+          // ],
+        },
       ],
       dts: "src/auto-imports.d.ts",
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [
+        ElementPlusResolver({
+          importStyle: "sass",
+        }),
+      ],
     }),
     visualizer({
       filename: "./node_modules/.cache/visualizer/stats.html",
@@ -53,6 +84,7 @@ export default defineConfig({
       threshold: 10240,
       algorithm: "gzip",
     }),
+    ElementPlus(),
   ],
   base: "./", //打包路径
   // 配置别名
