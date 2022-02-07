@@ -1,10 +1,10 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
-import visualizer from 'rollup-plugin-visualizer';
-import compressPlugin from 'vite-plugin-compression';
-import {viteMockServe} from 'vite-plugin-mock';
-import {resolve} from 'path'
+import visualizer from "rollup-plugin-visualizer";
+import compressPlugin from "vite-plugin-compression";
+import { viteMockServe } from "vite-plugin-mock";
+import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +12,7 @@ export default defineConfig({
     vue(),
     viteMockServe({
       ignore: /^\_/,
-      mockPath: 'mock',
+      mockPath: "mock",
       localEnabled: true,
       prodEnabled: false,
       // 开发环境无需关心
@@ -31,10 +31,6 @@ export default defineConfig({
         "vue-router",
         "vue-i18n",
         "@vueuse/core",
-        'axios': [
-          // default imports
-          ['default', 'axios'] // import { default as axios } from 'axios',
-        ],
         // '[package-name]': [
         //   '[import-names]',
         //   // alias
@@ -44,40 +40,40 @@ export default defineConfig({
       dts: "src/auto-imports.d.ts",
     }),
     visualizer({
-      filename: './node_modules/.cache/visualizer/stats.html',
+      filename: "./node_modules/.cache/visualizer/stats.html",
       open: true,
       gzipSize: true,
       brotliSize: true,
     }),
     compressPlugin({
-      ext: '.gz',
+      ext: ".gz",
       deleteOriginFile: false,
       verbose: true,
       disable: false,
       threshold: 10240,
-      algorithm: 'gzip'
-    })
+      algorithm: "gzip",
+    }),
   ],
-  base: './', //打包路径
+  base: "./", //打包路径
   // 配置别名
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      "@": resolve(__dirname, "src"),
     },
   },
-  css:{
-    preprocessorOptions:{
-      scss:{
-        additionalData:'@import "@/styles/main.scss";'
-      }
-    }
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "@/styles/main.scss";',
+      },
+    },
   },
-  build:{
+  build: {
     terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-    }
-  }
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
 });
