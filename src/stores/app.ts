@@ -18,11 +18,11 @@ const useAppStore = defineStore({
     },
   },
   actions: {
-    TOGGLE_SIDEBAR() {
+    toggleSideBar() {
       this.sidebar.opened = !this.sidebar.opened;
       this.sidebar.withoutAnimation = false;
     },
-    closeSideBar(withoutAnimation) {
+    closeSideBar(withoutAnimation: boolean) {
       this.sidebar.opened = false;
       this.sidebar.withoutAnimation = withoutAnimation;
     },

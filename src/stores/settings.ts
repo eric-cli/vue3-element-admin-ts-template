@@ -12,10 +12,10 @@ const useSettingStore = defineStore({
     };
   },
   actions: {
-    changeSetting({ key, value }) {
+    changeSetting(settingsObj: { key: string | number; value: any }) {
       // eslint-disable-next-line no-prototype-builtins
-      if (this.hasOwnProperty(key)) {
-        this[key] = value;
+      if (this.hasOwnProperty(settingsObj.key)) {
+        this[settingsObj.key] = settingsObj.value;
       }
     },
   },

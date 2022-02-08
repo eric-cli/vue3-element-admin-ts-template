@@ -39,7 +39,7 @@ const device = computed(() => {
 });
 
 const toggleSideBar = () => {
-  appStore.TOGGLE_SIDEBAR();
+  appStore.toggleSideBar();
 };
 </script>
 

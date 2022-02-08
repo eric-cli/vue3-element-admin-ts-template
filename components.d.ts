@@ -7,12 +7,13 @@ declare module 'vue' {
     Breadcrumb: typeof import('./src/components/Breadcrumb/index.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
-    ElOption: typeof import('element-plus/es')['ElOption']
-    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElRow: typeof import('element-plus/es')['ElRow']
     Hamburger: typeof import('./src/components/Hamburger/index.vue')['default']
     HeaderSearch: typeof import('./src/components/HeaderSearch/index.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RightPanel: typeof import('./src/components/RightPanel/index.vue')['default']
+    ThemePicker: typeof import('./src/components/ThemePicker/index.vue')['default']
   }
 }
 
