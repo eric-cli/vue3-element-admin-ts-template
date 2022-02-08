@@ -57,7 +57,16 @@ const handleLink = (item) => {
   }
   router.push(pathCompile(path));
 };
-
+watch(
+  () => route,
+  (route) => {
+    console.log(route);
+    if (route.path.startsWith("/redirect/")) {
+      return;
+    }
+    this.getBreadcrumb();
+  }
+);
 onBeforeMount(() => {
   getBreadcrumb();
 });
