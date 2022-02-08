@@ -1,12 +1,13 @@
 <template>
   <div class="login-container">
     <el-form
-      ref="loginForm"
+      ref="loginFormRef"
       :model="form"
       :rules="loginRules"
       class="login-form"
-      autocomplete="on"
+      autocomplete="off"
       label-position="left"
+      size="default"
     >
       <div class="title-container">
         <h3 class="title">Login Form</h3>
@@ -48,7 +49,7 @@
             autocomplete="on"
             @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
+            @keyup.enter.native="submitForm"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon
@@ -58,13 +59,17 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button
-        :loading="loading"
-        type="primary"
-        style="width: 100%; margin-bottom: 30px"
-        @click.native.prevent="handleLogin"
-        >Login</el-button
-      >
+      <el-row class="form-btns" justify="space-around">
+        <el-button :loading="loading" @click.prevent="resetForm(loginFormRef)"
+          >Reset</el-button
+        >
+        <el-button
+          :loading="loading"
+          type="primary"
+          @click.prevent="submitForm(loginFormRef)"
+          >Login</el-button
+        >
+      </el-row>
 
       <div style="position: relative">
         <div class="tips">
@@ -100,30 +105,33 @@
 <script setup lang="ts">
 import { validUsername } from "@/utils/validate";
 import SocialSignin from "./components/SocialSignin.vue";
+type FormInstance = InstanceType<typeof ElForm>;
+const loginFormRef = ref<FormInstance>();
 const validateUsername = (rule, value, callback) => {
   if (!validUsername(value)) {
-    callback(new Error("Please enter the correct user name"));
+    // callback(new Error("Please enter the correct user name"));
+    callback(new Error("请输入正确的用户名"));
   } else {
     callback();
   }
 };
 const validatePassword = (rule, value, callback) => {
   if (value.length < 6) {
-    callback(new Error("The password can not be less than 6 digits"));
+    // callback(new Error("The password can not be less than 6 digits"));
+    callback(new Error("密码不能小于6位数字"));
   } else {
     callback();
   }
 };
-const loginRules = {
+const loginRules = reactive({
   username: [{ required: true, trigger: "blur", validator: validateUsername }],
   password: [{ required: true, trigger: "blur", validator: validatePassword }],
-};
-const passwordType = ref("password");
-const form = ref({
-  username: "admin",
-  password: "111111",
 });
-const loginForm = ref(null);
+const passwordType = ref("password");
+const form = reactive({
+  username: "",
+  password: "",
+});
 let username = ref(null);
 let password = ref(null);
 let capsTooltip = ref(false);
@@ -146,27 +154,37 @@ const showPwd = () => {
   });
 };
 
-const handleLogin = () => {
-  loginForm.value.validate((valid) => {
+const submitForm = (formEl: FormInstance | undefined) => {
+  console.log(formEl);
+  if (!formEl) return;
+  formEl.validate((valid) => {
     if (valid) {
+      console.log("submit!");
       loading.value = true;
-      // this.$store
-      //   .dispatch("user/login", this.loginForm)
-      //   .then(() => {
-      //     this.$router.push({
-      //       path: this.redirect || "/",
-      //       query: this.otherQuery,
-      //     });
-      //     this.loading = false;
-      //   })
-      //   .catch(() => {
-      //     this.loading = false;
-      //   });
+      this.$store
+        .dispatch("user/login", form)
+        .then(() => {
+          this.$router.push({
+            path: this.redirect || "/",
+            query: this.otherQuery,
+          });
+          loading.value = false;
+        })
+        .catch(() => {
+          loading.value = false;
+        });
     } else {
       console.log("error submit!!");
       return false;
     }
   });
+};
+
+const resetForm = (formEl: FormInstance | undefined) => {
+  console.log(formEl);
+
+  if (!formEl) return;
+  formEl.resetFields();
 };
 
 const getOtherQuery = (query) => {
@@ -206,19 +224,19 @@ $cursor: #fff;
   height: 100vh;
 
   .el-input {
-    display: inline-block;
-    height: 47px;
+    height: 48px;
     width: 85%;
 
-    input {
+    :deep(input) {
       background: transparent;
       border: 0px;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
       color: $light_gray;
-      height: 47px;
+      height: 48px;
       caret-color: $cursor;
+      display: block;
 
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -254,6 +272,10 @@ $light_gray: #eee;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+
+    .form-btns {
+      margin-bottom: 30px;
+    }
   }
 
   .tips {
@@ -291,11 +313,12 @@ $light_gray: #eee;
   .show-pwd {
     position: absolute;
     right: 10px;
-    top: 7px;
+    top: 50%;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+    transform: translate(0, -50%);
   }
 
   .thirdparty-button {

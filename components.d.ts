@@ -12,6 +12,7 @@ declare module 'vue' {
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']
+    ElRow: typeof import('element-plus/es')['ElRow']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Hamburger: typeof import('./src/components/Hamburger/index.vue')['default']
     HeaderSearch: typeof import('./src/components/HeaderSearch/index.vue')['default']
