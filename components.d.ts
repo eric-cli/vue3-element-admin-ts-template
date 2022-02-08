@@ -4,6 +4,10 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Breadcrumb: typeof import('./src/components/Breadcrumb/index.vue')['default']
+    ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
+    ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
+    Hamburger: typeof import('./src/components/Hamburger/index.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
   }
 }
