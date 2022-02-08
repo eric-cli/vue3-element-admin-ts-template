@@ -21,6 +21,12 @@ const routes: Array<RouteRecordRaw> = [
   //   component: () => import("@/views/Home/index.vue"), // 懒加载组件
   // },
   {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login/index.vue"),
+    // hidden: true,
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",

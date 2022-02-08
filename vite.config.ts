@@ -7,12 +7,14 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import visualizer from "rollup-plugin-visualizer";
 import compressPlugin from "vite-plugin-compression";
 import { viteMockServe } from "vite-plugin-mock";
+import svgLoader from "./plugins/svg-loader";
 import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    svgLoader("./src/icons/svg/"),
     viteMockServe({
       ignore: /^\_/,
       mockPath: "mock",
