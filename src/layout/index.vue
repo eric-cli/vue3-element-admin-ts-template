@@ -1,26 +1,64 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div
-      v-if="device === 'mobile' && sidebar.opened"
+      v-if="device === 'mobile' && opened"
       class="drawer-bg"
       @click="handleClickOutside"
     />
-    <sidebar class="sidebar-container" />
+    <Sidebar class="sidebar-container" />
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar />
-        <tags-view v-if="needTagsView" />
+        <Navbar />
+        <TagsView v-if="needTagsView" />
       </div>
-      <app-main />
-      <right-panel v-if="showSettings">
-        <settings />
-      </right-panel>
+      <AppMain />
+      <RightPanel v-if="showSettings">
+        <Settings />
+      </RightPanel>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Navbar from "./components/Navbar.vue";
+import Navbar from "./components/Navbar/index.vue";
+import Sidebar from "./components/Sidebar/index.vue";
+import TagsView from "./components/TagsView/index.vue";
+import AppMain from "./components/AppMain/index.vue";
+import Settings from "./components/Settings/index.vue";
+import RightPanel from "@/components/RightPanel/index.vue";
+import useAppStore from "@/stores/app";
+import useSettingStore from "@/stores/settings";
+const appStore = useAppStore();
+const settingStore = useSettingStore();
+const device = computed(() => {
+  return appStore.device;
+});
+const opened = computed(() => {
+  return appStore.opened;
+});
+const sidebar = computed(() => {
+  return appStore.sidebar;
+});
+const fixedHeader = computed(() => {
+  return settingStore.fixedHeader;
+});
+const needTagsView = computed(() => {
+  return settingStore.needTagsView;
+});
+const showSettings = computed(() => {
+  return settingStore.showSettings;
+});
+const classObj = computed(() => {
+  return {
+    hideSidebar: !opened,
+    openSidebar: opened,
+    withoutAnimation: sidebar.withoutAnimation,
+    mobile: device === "mobile",
+  };
+});
+const handleClickOutside = () => {
+  appStore.closeSideBar(false);
+};
 </script>
 
 <style lang="scss" scoped>

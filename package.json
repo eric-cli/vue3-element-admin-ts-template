@@ -12,6 +12,7 @@
     "axios": "^0.25.0",
     "dart-sass": "^1.25.0",
     "element-plus": "^2.0.1",
+    "fuse.js": "^6.5.3",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.0",

@@ -21,11 +21,10 @@ const useAppStore = defineStore({
     TOGGLE_SIDEBAR() {
       this.sidebar.opened = !this.sidebar.opened;
       this.sidebar.withoutAnimation = false;
-      // if (state.sidebar.opened) {
-      //   Cookies.set("sidebarStatus", 1);
-      // } else {
-      //   Cookies.set("sidebarStatus", 0);
-      // }
+    },
+    closeSideBar(withoutAnimation) {
+      this.sidebar.opened = false;
+      this.sidebar.withoutAnimation = withoutAnimation;
     },
   },
   // 开启数据缓存
