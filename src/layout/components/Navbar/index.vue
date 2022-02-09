@@ -19,13 +19,52 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip> -->
       </template>
+      <el-dropdown
+        class="avatar-container right-menu-item hover-effect"
+        trigger="click"
+      >
+        <div class="avatar-wrapper">
+          <!-- <img :src="avatar" class="user-avatar" /> -->
+          <el-avatar :size="40" fit="fill" :src="avatar"></el-avatar>
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <router-link to="/profile/index">
+              <el-dropdown-item>Profile</el-dropdown-item>
+            </router-link>
+            <router-link to="/">
+              <el-dropdown-item>Dashboard</el-dropdown-item>
+            </router-link>
+            <a
+              target="_blank"
+              href="https://github.com/eric-cli/vue3-element-admin-ts-template.git"
+            >
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a
+              target="_blank"
+              href="https://panjiachen.github.io/vue-element-admin-site/#/"
+            >
+              <el-dropdown-item>Docs</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click.native="logout">
+              <span style="display: block">Log Out</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import useAppStore from "@/stores/app";
+import useUserStore from "@/stores/user";
 const appStore = useAppStore();
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 import Hamburger from "@/components/Hamburger/index.vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Search from "@/components/HeaderSearch/index.vue";
@@ -34,12 +73,21 @@ const opened = computed(() => {
   return appStore.opened;
 });
 
+const avatar = computed(() => {
+  return userStore.avatar;
+});
+
 const device = computed(() => {
   return appStore.device;
 });
 
 const toggleSideBar = () => {
   appStore.toggleSideBar();
+};
+
+const logout = async () => {
+  await userStore.logout;
+  router.push(`/login?redirect=${route.fullPath}`);
 };
 </script>
 

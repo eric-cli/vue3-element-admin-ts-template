@@ -175,8 +175,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       loading.value = true;
       userStore
         .login(form)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           router.push({
             path: "/",
           });
