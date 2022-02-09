@@ -105,8 +105,12 @@
 <script setup lang="ts">
 import { validUsername } from "@/utils/validate";
 import SocialSignin from "./components/SocialSignin.vue";
+import useUserStore from "@/stores/user";
 type FormInstance = InstanceType<typeof ElForm>;
 const loginFormRef = ref<FormInstance>();
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 const validateUsername = (rule, value, callback) => {
   if (!validUsername(value)) {
     // callback(new Error("Please enter the correct user name"));
@@ -134,6 +138,8 @@ const form = reactive({
 });
 let username = ref(null);
 let password = ref(null);
+let redirect = ref(null);
+let otherQuery = ref({});
 let capsTooltip = ref(false);
 let loading = ref(false);
 let showDialog = ref(false);
@@ -153,24 +159,32 @@ const showPwd = () => {
     password.value.focus();
   });
 };
-
+const getOtherQuery = (query) => {
+  return Object.keys(query).reduce((acc, cur) => {
+    if (cur !== "redirect") {
+      acc[cur] = query[cur];
+    }
+    return acc;
+  }, {});
+};
 const submitForm = (formEl: FormInstance | undefined) => {
-  console.log(formEl);
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
       console.log("submit!");
       loading.value = true;
-      this.$store
-        .dispatch("user/login", form)
-        .then(() => {
-          this.$router.push({
-            path: this.redirect || "/",
-            query: this.otherQuery,
+      userStore
+        .login(form)
+        .then((res) => {
+          router.push({
+            path: redirect || "/",
+            query: otherQuery,
           });
           loading.value = false;
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
+
           loading.value = false;
         });
     } else {
@@ -187,14 +201,17 @@ const resetForm = (formEl: FormInstance | undefined) => {
   formEl.resetFields();
 };
 
-const getOtherQuery = (query) => {
-  return Object.keys(query).reduce((acc, cur) => {
-    if (cur !== "redirect") {
-      acc[cur] = query[cur];
+watch(
+  () => route,
+  (route) => {
+    console.log(route);
+    const query = route.query;
+    if (query) {
+      redirect.value = query.redirect;
+      otherQuery.value = getOtherQuery(query);
     }
-    return acc;
-  }, {});
-};
+  }
+);
 
 onMounted(() => {
   if (form.username === "") {

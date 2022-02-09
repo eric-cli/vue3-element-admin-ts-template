@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { login } from "@/apis/user";
 
 const useUserStore = defineStore({
   id: "user",
@@ -9,17 +10,19 @@ const useUserStore = defineStore({
   },
   actions: {
     // user login
-    login(userInfo) {
+    login(userInfo: { username: any; password: any }) {
       const { username, password } = userInfo;
+      console.log(userInfo);
+
       return new Promise((resolve, reject) => {
         login({ username: username.trim(), password: password })
-          .then((response) => {
+          .then((response: { data: any }) => {
             const { data } = response;
             // commit("SET_TOKEN", data.token);
             // setToken(data.token);
             resolve();
           })
-          .catch((error) => {
+          .catch((error: any) => {
             reject(error);
           });
       });
