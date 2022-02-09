@@ -18,5 +18,11 @@
     // 要包含的类型声明文件名列表
     "types": ["vite/client", "element-plus/global"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "mock/*.ts"
+  ]
 }

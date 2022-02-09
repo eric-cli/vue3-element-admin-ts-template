@@ -12,12 +12,12 @@ const useUserStore = defineStore({
     // user login
     login(userInfo: { username: any; password: any }) {
       const { username, password } = userInfo;
-      console.log(userInfo);
 
       return new Promise((resolve, reject) => {
         login({ username: username.trim(), password: password })
-          .then((response: { data: any }) => {
-            const { data } = response;
+          .then((response) => {
+            console.log(response);
+
             // commit("SET_TOKEN", data.token);
             // setToken(data.token);
             resolve();

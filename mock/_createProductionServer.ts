@@ -15,5 +15,7 @@ Object.keys(modules).forEach((key) => {
  * Used in a production environment. Need to manually import all modules
  */
 export function setupProdMockServer() {
+  console.log(mockModules);
+
   createProdMockServer(mockModules);
 }

@@ -24,7 +24,7 @@
           name="username"
           type="text"
           tabindex="1"
-          autocomplete="on"
+          autocomplete="off"
         />
       </el-form-item>
 
@@ -46,7 +46,7 @@
             placeholder="Password"
             name="password"
             tabindex="2"
-            autocomplete="on"
+            autocomplete="off"
             @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
             @keyup.enter.native="submitForm"
@@ -176,10 +176,14 @@ const submitForm = (formEl: FormInstance | undefined) => {
       userStore
         .login(form)
         .then((res) => {
+          console.log(res);
           router.push({
-            path: redirect || "/",
-            query: otherQuery,
+            path: "/",
           });
+          // router.push({
+          //   path: redirect || "/",
+          //   query: otherQuery,
+          // });
           loading.value = false;
         })
         .catch((err) => {

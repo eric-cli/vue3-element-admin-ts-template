@@ -5,7 +5,12 @@ import store from "./stores";
 import ElementPlus from "element-plus";
 import "normalize.css/normalize.css";
 import SvgIcon from "@/components/SvgIcon/index.vue";
+import { setupProdMockServer } from "../mock/_createProductionServer";
+console.log(import.meta.env);
 
+if (import.meta.env.DEV) {
+  setupProdMockServer();
+}
 import "element-plus/dist/index.css";
 const app = createApp(App);
 // 注册icons组件

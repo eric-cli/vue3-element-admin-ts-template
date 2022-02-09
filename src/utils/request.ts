@@ -16,6 +16,8 @@ axios.interceptors.request.use(
      * 这里对 config 不做任何处理，直接返回
      */
     // NProgress.start();
+    console.log(response);
+
     return response;
   },
   (error) => {
@@ -31,6 +33,7 @@ axios.interceptors.response.use(
      * 这里对 response 和 error 不做任何处理，直接返回
      */
     // NProgress.done();
+    console.log(response);
     return response;
   },
   (error) => {

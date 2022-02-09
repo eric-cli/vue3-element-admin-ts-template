@@ -1404,7 +1404,7 @@
   "resolved" "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
   "version" "1.2.5"
 
-"mockjs@>=1.1.0":
+"mockjs@^1.1.0", "mockjs@>=1.1.0":
   "integrity" "sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ=="
   "resolved" "https://registry.npmjs.org/mockjs/-/mockjs-1.1.0.tgz"
   "version" "1.1.0"
