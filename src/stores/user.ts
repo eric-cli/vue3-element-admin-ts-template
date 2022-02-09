@@ -5,7 +5,9 @@ const useUserStore = defineStore({
   id: "user",
   state: () => {
     return {
-      roles: ["admin"],
+      token: "",
+      userInfos: {},
+      roles: [],
     };
   },
   actions: {
@@ -15,11 +17,10 @@ const useUserStore = defineStore({
 
       return new Promise((resolve, reject) => {
         login({ username: username.trim(), password: password })
-          .then((response) => {
-            console.log(response);
-
-            // commit("SET_TOKEN", data.token);
-            // setToken(data.token);
+          .then(({ data, data: { role_name: roles, token } }) => {
+            this.userInfos = data;
+            this.roles = roles;
+            this.token = token;
             resolve();
           })
           .catch((error: any) => {
@@ -27,6 +28,10 @@ const useUserStore = defineStore({
           });
       });
     },
+  },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
   },
 });
 
