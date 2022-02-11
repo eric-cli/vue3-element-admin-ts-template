@@ -10,6 +10,7 @@ const useAppStore = defineStore({
       },
       device: "desktop",
       size: "default",
+      logs: [],
     };
   },
   getters: {
@@ -28,6 +29,12 @@ const useAppStore = defineStore({
     closeSideBar(withoutAnimation: boolean) {
       this.sidebar.opened = false;
       this.sidebar.withoutAnimation = withoutAnimation;
+    },
+    addErrorLog(log: any) {
+      this.logs.push(log);
+    },
+    clearErrorLog() {
+      this.logs.splice(0); // splice 方法向/从数组添加/删除项目，并返回删除的项目。 如果设置为 0，则不会删除任何项目。
     },
   },
   // 开启数据缓存

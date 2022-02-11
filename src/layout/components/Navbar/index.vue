@@ -9,9 +9,10 @@
     <Breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
+        <!-- TODO: 添加search组件 -->
         <!-- <Search id="header-search" class="right-menu-item" /> -->
 
-        <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
+        <ErrorLog class="errLog-container right-menu-item hover-effect" />
 
         <Screenfull id="screenfull" class="right-menu-item hover-effect" />
 
@@ -70,6 +71,7 @@ import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Search from "@/components/HeaderSearch/index.vue";
 import SizeSelect from "@/components/SizeSelect/index.vue";
 import Screenfull from "@/components/Screenfull/index.vue";
+import ErrorLog from "@/components/ErrorLog/index.vue";
 
 const opened = computed(() => {
   return appStore.opened;
