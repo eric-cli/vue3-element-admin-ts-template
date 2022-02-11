@@ -11,13 +11,13 @@
       <template v-if="device !== 'mobile'">
         <!-- <Search id="header-search" class="right-menu-item" /> -->
 
-        <!-- <error-log class="errLog-container right-menu-item hover-effect" />
+        <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
 
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
 
         <el-tooltip content="Global Size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip> -->
+        </el-tooltip>
       </template>
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
@@ -68,6 +68,7 @@ const route = useRoute();
 import Hamburger from "@/components/Hamburger/index.vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Search from "@/components/HeaderSearch/index.vue";
+import SizeSelect from "@/components/SizeSelect/index.vue";
 
 const opened = computed(() => {
   return appStore.opened;
@@ -131,9 +132,9 @@ const logout = async () => {
     }
 
     .right-menu-item {
-      display: inline-block;
       padding: 0 8px;
       height: 100%;
+      line-height: 50px;
       font-size: 18px;
       color: #5a5e66;
       vertical-align: text-bottom;

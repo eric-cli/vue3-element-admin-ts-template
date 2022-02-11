@@ -18,6 +18,9 @@ const useAppStore = defineStore({
     },
   },
   actions: {
+    setSize(size: any) {
+      this.size = size;
+    },
     toggleSideBar() {
       this.sidebar.opened = !this.sidebar.opened;
       this.sidebar.withoutAnimation = false;

@@ -13,5 +13,5 @@ app.component("svg-icon", SvgIcon); // svg component
 
 app.use(router);
 app.use(store);
-app.use(ElementPlus, { size: "small", zIndex: 3000 });
+app.use(ElementPlus, { zIndex: 3000 });
 app.mount("#app");
