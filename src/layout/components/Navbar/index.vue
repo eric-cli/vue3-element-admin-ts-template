@@ -13,7 +13,7 @@
 
         <!-- <error-log class="errLog-container right-menu-item hover-effect" /> -->
 
-        <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
+        <Screenfull id="screenfull" class="right-menu-item hover-effect" />
 
         <el-tooltip content="Global Size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
@@ -69,6 +69,7 @@ import Hamburger from "@/components/Hamburger/index.vue";
 import Breadcrumb from "@/components/Breadcrumb/index.vue";
 import Search from "@/components/HeaderSearch/index.vue";
 import SizeSelect from "@/components/SizeSelect/index.vue";
+import Screenfull from "@/components/Screenfull/index.vue";
 
 const opened = computed(() => {
   return appStore.opened;

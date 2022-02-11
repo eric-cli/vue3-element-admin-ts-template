@@ -44,6 +44,12 @@ const useUserStore = defineStore({
   // 开启数据缓存
   persist: {
     enabled: true,
+    strategies: [
+      {
+        paths: ["token", "userInfos", "roles"],
+        storage: localStorage,
+      },
+    ],
   },
 });
 

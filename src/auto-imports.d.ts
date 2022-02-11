@@ -47,6 +47,7 @@ declare global {
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useMouse: typeof import('@vueuse/core')['useMouse']
   const useMyFetch: typeof import('@vueuse/core')['useFetch']
   const useRoute: typeof import('vue-router')['useRoute']

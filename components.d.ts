@@ -17,6 +17,7 @@ declare module 'vue' {
     HeaderSearch: typeof import('./src/components/HeaderSearch/index.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RightPanel: typeof import('./src/components/RightPanel/index.vue')['default']
+    Screenfull: typeof import('./src/components/Screenfull/index.vue')['default']
     SizeSelect: typeof import('./src/components/SizeSelect/index.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
     ThemePicker: typeof import('./src/components/ThemePicker/index.vue')['default']

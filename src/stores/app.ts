@@ -9,7 +9,7 @@ const useAppStore = defineStore({
         withoutAnimation: false,
       },
       device: "desktop",
-      size: "medium",
+      size: "default",
     };
   },
   getters: {
