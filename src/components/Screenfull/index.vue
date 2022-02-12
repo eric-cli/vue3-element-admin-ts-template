@@ -7,7 +7,6 @@
 
 <script lang="ts" setup>
 const { isFullscreen, enter, exit, toggle, isSupported } = useFullscreen();
-console.log(isSupported);
 const click = () => {
   if (!isSupported) {
     ElMessage({
