@@ -11,6 +11,7 @@ const user = Mock.mock({
   id: "@id",
   description: "@cparagraph(10, 20)",
   account: "@phone",
+  email: "@email",
   true_name: "@cname",
   created_at: "@datetime",
   "role_name|1": [["admin"], ["editor"], ["admin", "editor"]],

@@ -8,7 +8,6 @@
         <slot />
       </div>
     </div>
-    <!-- eslint-disable-next-line -->
     <div class="pan-thumb">
       <img :src="image" alt="" />
     </div>
