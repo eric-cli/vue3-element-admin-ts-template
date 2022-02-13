@@ -4,20 +4,22 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import adminDashboard from "./Admin/index.vue";
-import editorDashboard from "./Editor/index.vue";
-const currentRole = ref("adminDashboard");
+<script lang="ts" setup>
+import AdminDashboard from "./Admin/index.vue";
+import EditorDashboard from "./Editor/index.vue";
 import useUserStore from "@/stores/user";
 const userStore = useUserStore();
 const roles = computed(() => {
   return userStore.roles;
 });
-onBeforeMount(() => {
-  if (!roles.value.includes("admin")) {
-    currentRole.value = "editorDashboard";
+const currentRole = computed(() => {
+  if (roles.value.includes("admin")) {
+    return AdminDashboard;
+  } else {
+    return EditorDashboard;
   }
 });
+5;
 </script>
 
 <style lang="scss" scoped></style>

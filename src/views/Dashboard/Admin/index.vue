@@ -1,5 +1,6 @@
 <template>
-  <div class="dashboard-editor-container">
+  admin
+  <!-- <div class="dashboard-editor-container">
     <github-corner class="github-corner" />
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
@@ -58,7 +59,7 @@
         <box-card />
       </el-col>
     </el-row>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">

@@ -65,6 +65,19 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/documentation",
+    component: Layout,
+    redirect: "/documentation/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Documentation/index.vue"),
+        name: "Documentation",
+        meta: { title: "Documentation", icon: "documentation", affix: true },
+      },
+    ],
+  },
 ];
 
 /**

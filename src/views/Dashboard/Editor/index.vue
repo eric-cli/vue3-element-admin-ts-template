@@ -1,5 +1,6 @@
 <template>
-  <div class="dashboard-editor-container">
+  editor
+  <!-- <div class="dashboard-editor-container">
     <div class="clearfix">
       <pan-thumb :image="avatar" style="float: left">
         Your roles:
@@ -20,7 +21,7 @@
     <div>
       <img :src="emptyGif" class="emptyGif" />
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">
