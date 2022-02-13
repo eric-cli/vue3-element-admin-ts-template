@@ -954,6 +954,11 @@
     "domelementtype" "^2.2.0"
     "domhandler" "^4.2.0"
 
+"driver.js@^0.9.8":
+  "integrity" "sha512-bczjyKdX6XmFyCDkwtRmlaORDwfBk1xXmRO0CAe5VwNQTM98aWaG2LAIiIdTe53iV/B7W5lXlIy2xYtf0JRb7Q=="
+  "resolved" "https://registry.npmjs.org/driver.js/-/driver.js-0.9.8.tgz"
+  "version" "0.9.8"
+
 "ee-first@1.1.1":
   "integrity" "sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0="
   "resolved" "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"

@@ -78,6 +78,19 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/guide",
+    component: Layout,
+    redirect: "/guide/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Guide/index.vue"),
+        name: "Guide",
+        meta: { title: "Guide", icon: "guide", noCache: true },
+      },
+    ],
+  },
 ];
 
 /**

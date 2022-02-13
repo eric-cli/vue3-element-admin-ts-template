@@ -11,6 +11,7 @@
     "@vueuse/core": "^7.5.5",
     "axios": "^0.25.0",
     "dart-sass": "^1.25.0",
+    "driver.js": "^0.9.8",
     "element-plus": "^2.0.1",
     "fuse.js": "^6.5.3",
     "mockjs": "^1.1.0",
