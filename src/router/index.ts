@@ -91,6 +91,20 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/profile",
+    component: Layout,
+    redirect: "/profile/index",
+    // hidden: true, TODO： 路由类型拓展
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Profile/index.vue"),
+        name: "Profile",
+        meta: { title: "Profile", icon: "user", noCache: true },
+      },
+    ],
+  },
 ];
 
 /**
