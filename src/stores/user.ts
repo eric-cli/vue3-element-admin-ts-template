@@ -34,9 +34,12 @@ const useUserStore = defineStore({
     },
     logout() {
       return new Promise((resolve) => {
+        console.log("触发了啊");
+
         this.userInfos = {};
         this.roles = [];
         this.token = "";
+        localStorage.clear();
         resolve();
       });
     },

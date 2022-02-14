@@ -89,7 +89,7 @@ const toggleSideBar = () => {
 };
 
 const logout = async () => {
-  await userStore.logout;
+  await userStore.logout();
   router.push(`/login?redirect=${route.fullPath}`);
 };
 </script>
