@@ -1,5 +1,5 @@
 export default {
-  title: "Vue Element Admin",
+  title: "Vue Element Admin TypeScript",
 
   /**
    * @type {boolean} true | false
@@ -23,7 +23,7 @@ export default {
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
    */
-  sidebarLogo: false,
+  sidebarLogo: true,
 
   /**
    * @type {array} ['production']
