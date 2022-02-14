@@ -12,6 +12,8 @@
 </template>
 
 <script lang="ts" setup>
+// TODO: check 功能是否开发完成
+
 const tagAndTagSpacing = 4; // tagAndTagSpacing
 const emits = defineEmits(["scroll"]);
 const { ctx } = getCurrentInstance();
@@ -81,13 +83,11 @@ const moveToTarget = (currentTag) => {
   position: relative;
   overflow: hidden;
   width: 100%;
-  ::v-deep {
-    .el-scrollbar__bar {
-      bottom: 0px;
-    }
-    .el-scrollbar__wrap {
-      height: 49px;
-    }
+  :deep(.el-scrollbar__bar) {
+    bottom: 0px;
+  }
+  :deep(.el-scrollbar__wrap) {
+    height: 49px;
   }
 }
 </style>
