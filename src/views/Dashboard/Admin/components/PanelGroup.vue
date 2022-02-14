@@ -71,9 +71,9 @@
 // TODO  学习vue-count-do的写法
 // import CountTo from "vue-count-to";
 import { CountTo } from "vue3-count-to";
-const emit = defineEmits(["handleSetLineChartData"]);
-const handleSetLineChartData = (type) => {
-  emit("handleSetLineChartData", type);
+const emits = defineEmits(["handleSetLineChartData"]);
+const handleSetLineChartData = (type: any) => {
+  emits("handleSetLineChartData", type);
 };
 </script>
 

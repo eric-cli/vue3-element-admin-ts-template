@@ -23,10 +23,6 @@ const props = defineProps({
     type: String,
     default: "350px",
   },
-  autoResize: {
-    type: Boolean,
-    default: true,
-  },
   chartData: {
     type: Object,
     required: true,
@@ -102,7 +98,15 @@ const setOption = ({ expectedData = [], actualData = [] } = {}) => {
     ],
   });
 };
-
+watch(
+  () => props.chartData,
+  (val) => {
+    setOption(val);
+  },
+  {
+    deep: true,
+  }
+);
 onMounted(() => {
   nextTick(() => {
     setOption(props.chartData);

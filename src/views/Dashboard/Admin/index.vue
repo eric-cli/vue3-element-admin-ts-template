@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <GithubCorner class="github-corner" />
 
-    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+    <PanelGroup @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
       <LineChart :chart-data="lineChartData" />
@@ -11,17 +11,17 @@
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <raddar-chart />
+          <RaddarChart />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <pie-chart />
+          <PieChart />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <bar-chart />
+          <BarChart />
         </div>
       </el-col>
     </el-row>
@@ -35,7 +35,7 @@
         :xl="{ span: 12 }"
         style="padding-right: 8px; margin-bottom: 30px"
       >
-        <transaction-table />
+        <TransactionTable />
       </el-col>
       <el-col
         :xs="{ span: 24 }"
@@ -83,10 +83,19 @@ const lineChartDatas = {
 import GithubCorner from "@/components/GithubCorner/index.vue";
 import PanelGroup from "./components/PanelGroup.vue";
 import LineChart from "./components/LineChart.vue";
+import PieChart from "./components/PieChart.vue";
+import RaddarChart from "./components/RaddarChart.vue";
+import BarChart from "./components/BarChart.vue";
+import TransactionTable from "./components/TransactionTable.vue";
+import TodoList from "./components/TodoList/index.vue";
+import BoxCard from "./components/BoxCard.vue";
 
-let lineChartData = reactive(lineChartDatas.newVisitis);
-const handleSetLineChartData = (type) => {
-  lineChartData = lineChartDatas[type];
+let lineChartData = ref(lineChartDatas.newVisitis);
+
+const handleSetLineChartData = (
+  type: "newVisitis" | "messages" | "purchases" | "shoppings"
+) => {
+  lineChartData.value = lineChartDatas[type];
 };
 </script>
 
