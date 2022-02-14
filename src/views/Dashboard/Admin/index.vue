@@ -1,7 +1,6 @@
 <template>
-  admin
-  <!-- <div class="dashboard-editor-container">
-    <github-corner class="github-corner" />
+  <div class="dashboard-editor-container">
+    <GithubCorner class="github-corner" />
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
@@ -59,7 +58,7 @@
         <box-card />
       </el-col>
     </el-row>
-  </div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -81,8 +80,10 @@ const lineChartDatas = {
     actualData: [120, 82, 91, 154, 162, 140, 130],
   },
 };
+import GithubCorner from "@/components/GithubCorner/index.vue";
+import PanelGroup from "./components/PanelGroup.vue";
 
-let lineChartData = ref(lineChartDatas.newVisitis);
+let lineChartData = reactive(lineChartDatas.newVisitis);
 const handleSetLineChartData = (type) => {
   lineChartData = lineChartDatas[type];
 };

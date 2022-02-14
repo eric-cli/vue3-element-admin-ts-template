@@ -290,10 +290,10 @@
   "resolved" "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.0.tgz"
   "version" "3.4.0"
 
-"@element-plus/icons-vue@^0.2.6":
-  "integrity" "sha512-2gg7VCq4d2firgl7/aVym4Cx/wqKFwKybEQGJiiWJN4urW36+QdAEG1knqSD9qidbjhVp0Jnc9XdSTR1/4Whzw=="
-  "resolved" "https://registry.npmjs.org/@element-plus/icons-vue/-/icons-vue-0.2.6.tgz"
-  "version" "0.2.6"
+"@element-plus/icons-vue@^0.2.6", "@element-plus/icons-vue@^0.2.7":
+  "integrity" "sha512-S8kDbfVaWkQvbUYQE1ui448tzaHfUvyESCep9J6uPRlViyQPXjdIfwLBhV6AmQSOfFS8rL+xehJGhvzPXLrSBg=="
+  "resolved" "https://registry.npmjs.org/@element-plus/icons-vue/-/icons-vue-0.2.7.tgz"
+  "version" "0.2.7"
 
 "@emmetio/abbreviation@^2.2.2":
   "integrity" "sha512-TtE/dBnkTCct8+LntkqVrwqQao6EnPAs1YN3cUgxOxTaBlesBCY37ROUAVZrRlG64GNnVShdl/b70RfAI3w5lw=="
@@ -873,7 +873,7 @@
   dependencies:
     "safe-buffer" "~5.1.1"
 
-"core-js@^3.19.1":
+"core-js@^3.19.1", "core-js@^3.8.1":
   "integrity" "sha512-YUdI3fFu4TF/2WykQ2xzSiTQdldLB4KVuL9WeAy5XONZYt5Cun/fpQvctoKbCgvPhmzADeesTk/j2Rdx77AcKQ=="
   "resolved" "https://registry.npmjs.org/core-js/-/core-js-3.21.0.tgz"
   "version" "3.21.0"
@@ -2059,6 +2059,11 @@
     "vscode-pug-languageservice" "0.29.8"
     "vscode-typescript-languageservice" "0.29.8"
 
+"vue-count-to@^1.0.13":
+  "integrity" "sha512-6R4OVBVNtQTlcbXu6SJ8ENR35M2/CdWt3Jmv57jOUM+1ojiFmjVGvZPH8DfHpMDSA+ITs+EW5V6qthADxeyYOQ=="
+  "resolved" "https://registry.npmjs.org/vue-count-to/-/vue-count-to-1.0.13.tgz"
+  "version" "1.0.13"
+
 "vue-demi@*":
   "integrity" "sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw=="
   "resolved" "https://registry.npmjs.org/vue-demi/-/vue-demi-0.12.1.tgz"
@@ -2084,7 +2089,7 @@
     "@volar/shared" "0.29.8"
     "vscode-vue-languageservice" "0.29.8"
 
-"vue@^2.0.0 || >=3.0.0", "vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@2 || 3", "vue@3", "vue@3.2.29":
+"vue@^2.0.0 || >=3.0.0", "vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@>= 3 < 4", "vue@2 || 3", "vue@3", "vue@3.2.29":
   "integrity" "sha512-cFIwr7LkbtCRanjNvh6r7wp2yUxfxeM2yPpDQpAfaaLIGZSrUmLbNiSze9nhBJt5MrZ68Iqt0O5scwAMEVxF+Q=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.29.tgz"
   "version" "3.2.29"
@@ -2094,6 +2099,14 @@
     "@vue/runtime-dom" "3.2.29"
     "@vue/server-renderer" "3.2.29"
     "@vue/shared" "3.2.29"
+
+"vue3-count-to@^1.1.2":
+  "integrity" "sha512-C5AvlcGfyM4XvFqPDkni94rqGd5K/+RB+B4xv/1NQx3RrdC+GvXPFzeXW5hWL/jh8ehWLm4LITyK0eMKf4iJbg=="
+  "resolved" "https://registry.npmjs.org/vue3-count-to/-/vue3-count-to-1.1.2.tgz"
+  "version" "1.1.2"
+  dependencies:
+    "core-js" "^3.8.1"
+    "vue-count-to" "^1.0.13"
 
 "webpack-virtual-modules@^0.4.3":
   "integrity" "sha512-5NUqC2JquIL2pBAAo/VfBP6KuGkHIZQXW/lNKupLPfhViwh8wNsu0BObtl09yuKZszeEUfbXz8xhrHvSG16Nqw=="
