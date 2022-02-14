@@ -1,7 +1,20 @@
 <template>
-  <section class="app-main">
-    <router-view> </router-view>
-  </section>
+  <router-view v-slot="{ Component }">
+    <template v-if="Component">
+      <transition name="fade-transform" mode="out-in">
+        <keep-alive :include="cachedViews">
+          <Suspense>
+            <section class="app-main">
+              <component :is="Component" :key="key"></component>
+            </section>
+            <template #fallback>
+              <div>Loading...</div>
+            </template>
+          </Suspense>
+        </keep-alive>
+      </transition>
+    </template>
+  </router-view>
 </template>
 
 <script setup lang="ts">

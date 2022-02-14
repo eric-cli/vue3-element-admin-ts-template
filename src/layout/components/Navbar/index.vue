@@ -25,7 +25,6 @@
         trigger="click"
       >
         <div class="avatar-wrapper">
-          <!-- <img :src="avatar" class="user-avatar" /> -->
           <el-avatar :size="40" fit="fill" :src="avatar"></el-avatar>
           <i class="el-icon-caret-bottom" />
         </div>
