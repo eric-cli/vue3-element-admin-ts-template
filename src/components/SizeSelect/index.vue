@@ -22,10 +22,9 @@
 import useAppStore from "@/stores/app";
 const appStore = useAppStore();
 const sizeOptions = [
+  { label: "Large", value: "large" },
   { label: "Default", value: "default" },
-  { label: "Medium", value: "medium" },
   { label: "Small", value: "small" },
-  { label: "Mini", value: "mini" },
 ];
 const size = computed(() => {
   return appStore.size;
