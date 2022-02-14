@@ -16,13 +16,16 @@
     },
     "lib": ["esnext", "dom"],
     // 要包含的类型声明文件名列表
-    "types": ["vite/client", "element-plus/global"]
+    "types": ["vite/client", "element-plus/global"],
+    "typeRoots": ["./node_modules/@types/", "./types"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "mock/*.ts"
+    "mock/*.ts",
+    "types/**/*.d.ts",
+    "types/**/*.ts"
   ]
 }

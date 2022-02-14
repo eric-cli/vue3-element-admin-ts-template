@@ -36,3 +36,11 @@ export function isArray(arg: any) {
   }
   return Array.isArray(arg);
 }
+
+/**
+ * @param {unknown} arg
+ * @returns {Boolean}
+ */
+export function isFunction(val: unknown): val is Function {
+  return typeof val === "function";
+}

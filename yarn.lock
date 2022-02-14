@@ -959,6 +959,14 @@
   "resolved" "https://registry.npmjs.org/driver.js/-/driver.js-0.9.8.tgz"
   "version" "0.9.8"
 
+"echarts@^5.3.0":
+  "integrity" "sha512-zENufmwFE6WjM+24tW3xQq4ICqQtI0CGj4bDVDNd3BK3LtaA/5wBp+64ykIyKy3QElz0cieKqSYP4FX9Lv9MwQ=="
+  "resolved" "https://registry.npmjs.org/echarts/-/echarts-5.3.0.tgz"
+  "version" "5.3.0"
+  dependencies:
+    "tslib" "2.3.0"
+    "zrender" "5.3.0"
+
 "ee-first@1.1.1":
   "integrity" "sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0="
   "resolved" "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
@@ -1819,6 +1827,11 @@
   "resolved" "https://registry.npmjs.org/token-stream/-/token-stream-1.0.0.tgz"
   "version" "1.0.0"
 
+"tslib@2.3.0":
+  "integrity" "sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg=="
+  "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz"
+  "version" "2.3.0"
+
 "typescript@*", "typescript@^4.4.3", "typescript@^4.4.4":
   "integrity" "sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.5.5.tgz"
@@ -2159,3 +2172,10 @@
     "string-width" "^4.2.3"
     "y18n" "^5.0.5"
     "yargs-parser" "^21.0.0"
+
+"zrender@5.3.0":
+  "integrity" "sha512-Ln2QB5uqI1ftNYMtCRxd+XDq6MOttLgam2tmhKAVA+j0ko47UT+VNlDvKTkqe4K2sJhBvB0EhYNLebqlCTjatQ=="
+  "resolved" "https://registry.npmjs.org/zrender/-/zrender-5.3.0.tgz"
+  "version" "5.3.0"
+  dependencies:
+    "tslib" "2.3.0"

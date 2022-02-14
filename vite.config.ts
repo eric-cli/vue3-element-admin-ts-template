@@ -56,6 +56,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             "@vueuse/core": [
               // named imports
               "useMouse", // import { useMouse } from '@vueuse/core',
+              "Fn", // import { useMouse } from '@vueuse/core',
+              "tryOnUnmounted", // import { tryOnUnmounted } from '@vueuse/core',
+              "useThrottleFn", // import { useThrottleFn } from '@vueuse/core',
+              "useDebounceFn", // import { useDebounceFn } from '@vueuse/core',
               "useFullscreen", // import { useFullscreen } from '@vueuse/core',
               // alias
               ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',

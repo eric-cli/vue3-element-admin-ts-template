@@ -5,7 +5,7 @@
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
-      <line-chart :chart-data="lineChartData" />
+      <LineChart :chart-data="lineChartData" />
     </el-row>
 
     <el-row :gutter="32">
@@ -82,6 +82,7 @@ const lineChartDatas = {
 };
 import GithubCorner from "@/components/GithubCorner/index.vue";
 import PanelGroup from "./components/PanelGroup.vue";
+import LineChart from "./components/LineChart.vue";
 
 let lineChartData = reactive(lineChartDatas.newVisitis);
 const handleSetLineChartData = (type) => {
