@@ -43,7 +43,7 @@ const fixedHeader = computed(() => {
   return settingStore.fixedHeader;
 });
 const needTagsView = computed(() => {
-  return settingStore.needTagsView;
+  return settingStore.tagsView;
 });
 const showSettings = computed(() => {
   return settingStore.showSettings;
