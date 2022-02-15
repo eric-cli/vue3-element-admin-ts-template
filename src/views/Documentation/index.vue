@@ -24,7 +24,7 @@
       href="https://panjiachen.gitee.io/vue-element-admin-site/zh/"
       >国内文档</a
     >
-    <!-- <dropdown-menu class="document-btn" :items="articleList" title="系列文章" /> -->
+    <dropdown-menu class="document-btn" :items="articleList" title="系列文章" />
     <a
       class="document-btn"
       target="_blank"
@@ -35,6 +35,7 @@
 </template>
 
 <script lang="ts" setup>
+import DropdownMenu from "@/components/DropdownMenu/index.vue";
 const articleList = [
   { title: "基础篇", href: "https://juejin.im/post/59097cd7a22b9d0065fb61d2" },
   {
