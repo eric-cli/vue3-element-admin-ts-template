@@ -54,14 +54,15 @@ const props = defineProps({
     height: 100%;
     width: 100%;
 
-    & .sidebar-logo {
+    .sidebar-logo {
+      display: inline-block;
       width: 32px;
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
     }
 
-    & .sidebar-title {
+    .sidebar-title {
       display: inline-block;
       margin: 0;
       color: #fff;

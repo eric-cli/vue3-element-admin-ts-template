@@ -6,7 +6,7 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 // import "./permission";
 import "normalize.css/normalize.css";
-import "virtual:windi.css";
+// import "virtual:windi.css";
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import errorLogs from "./utils/error-log";
 import { Close } from "@element-plus/icons-vue"; // svg图标

@@ -24,10 +24,10 @@
         class="avatar-container right-menu-item hover-effect"
         trigger="click"
       >
-        <div class="avatar-wrapper">
+        <el-row class="avatar-wrapper" align="middle">
           <el-avatar :size="40" fit="fill" :src="avatar"></el-avatar>
-          <i class="el-icon-caret-bottom" />
-        </div>
+          <CaretBottom class="caret-bottom" />
+        </el-row>
         <template #dropdown>
           <el-dropdown-menu>
             <router-link to="/profile/index">
@@ -71,6 +71,7 @@ import Search from "@/components/HeaderSearch/index.vue";
 import SizeSelect from "@/components/SizeSelect/index.vue";
 import Screenfull from "@/components/Screenfull/index.vue";
 import ErrorLog from "@/components/ErrorLog/index.vue";
+import { CaretBottom } from "@element-plus/icons-vue";
 
 const opened = computed(() => {
   return appStore.opened;
@@ -156,6 +157,7 @@ const logout = async () => {
 
       .avatar-wrapper {
         margin-top: 5px;
+        height: 100%;
         position: relative;
 
         .user-avatar {
@@ -165,12 +167,15 @@ const logout = async () => {
           border-radius: 10px;
         }
 
-        .el-icon-caret-bottom {
+        .caret-bottom {
           cursor: pointer;
           position: absolute;
           right: -20px;
-          top: 25px;
+          top: 50%;
+          transform: translate(0, -50%);
           font-size: 12px;
+          height: 20px;
+          width: 20px;
         }
       }
     }
