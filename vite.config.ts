@@ -88,6 +88,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             importStyle: "sass",
           }),
         ],
+        dts: "src/components.d.ts",
       }),
       visualizer({
         filename: "./node_modules/.cache/visualizer/stats.html",

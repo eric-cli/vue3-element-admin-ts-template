@@ -5,8 +5,11 @@
     "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
+    "noImplicitAny": false,
     "jsx": "preserve",
     "sourceMap": true,
+    // 忽略所有的声明文件（ *.d.ts）的类型检查。
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "baseUrl": ".",

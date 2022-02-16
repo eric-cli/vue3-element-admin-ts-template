@@ -4,8 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Breadcrumb: typeof import('./src/components/Breadcrumb/index.vue')['default']
-    DropdownMenu: typeof import('./src/components/DropdownMenu/index.vue')['default']
+    Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
+    DropdownMenu: typeof import('./components/DropdownMenu/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
@@ -30,18 +30,18 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    ErrorLog: typeof import('./src/components/ErrorLog/index.vue')['default']
-    GithubCorner: typeof import('./src/components/GithubCorner/index.vue')['default']
-    Hamburger: typeof import('./src/components/Hamburger/index.vue')['default']
-    HeaderSearch: typeof import('./src/components/HeaderSearch/index.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    Mallki: typeof import('./src/components/TextHoverEffect/Mallki.vue')['default']
-    PanThumb: typeof import('./src/components/PanThumb/index.vue')['default']
-    RightPanel: typeof import('./src/components/RightPanel/index.vue')['default']
-    Screenfull: typeof import('./src/components/Screenfull/index.vue')['default']
-    SizeSelect: typeof import('./src/components/SizeSelect/index.vue')['default']
-    SvgIcon: typeof import('./src/components/SvgIcon/index.vue')['default']
-    ThemePicker: typeof import('./src/components/ThemePicker/index.vue')['default']
+    ErrorLog: typeof import('./components/ErrorLog/index.vue')['default']
+    GithubCorner: typeof import('./components/GithubCorner/index.vue')['default']
+    Hamburger: typeof import('./components/Hamburger/index.vue')['default']
+    HeaderSearch: typeof import('./components/HeaderSearch/index.vue')['default']
+    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    Mallki: typeof import('./components/TextHoverEffect/Mallki.vue')['default']
+    PanThumb: typeof import('./components/PanThumb/index.vue')['default']
+    RightPanel: typeof import('./components/RightPanel/index.vue')['default']
+    Screenfull: typeof import('./components/Screenfull/index.vue')['default']
+    SizeSelect: typeof import('./components/SizeSelect/index.vue')['default']
+    SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
+    ThemePicker: typeof import('./components/ThemePicker/index.vue')['default']
   }
 }
 
