@@ -125,6 +125,19 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/pdf",
+    component: Layout,
+    redirect: "/pdf/index",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Pdf/index.vue"),
+        name: "PDF",
+        meta: { title: "PDF", icon: "pdf" },
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

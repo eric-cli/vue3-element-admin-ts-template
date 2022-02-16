@@ -8,6 +8,7 @@ import visualizer from "rollup-plugin-visualizer";
 import compressPlugin from "vite-plugin-compression";
 import { viteMockServe } from "vite-plugin-mock";
 import svgLoader from "./plugins/svg-loader";
+import WindiCSS from "vite-plugin-windicss";
 import { resolve } from "path";
 
 // https://vitejs.dev/config/
@@ -20,6 +21,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return {
     plugins: [
       vue(),
+      WindiCSS(),
       svgLoader("./src/icons/svg/"),
       viteMockServe({
         ignore: /^\_/, // 自动读取模拟.ts 文件时，请忽略指定格式的文件
@@ -56,6 +58,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             "@vueuse/core": [
               // named imports
               "useMouse", // import { useMouse } from '@vueuse/core',
+              "useStorage", // import { useStorage } from '@vueuse/core',
+              "useTitle", // import { useTitle } from '@vueuse/core',
               "Fn", // import { useMouse } from '@vueuse/core',
               "tryOnUnmounted", // import { tryOnUnmounted } from '@vueuse/core',
               "useThrottleFn", // import { useThrottleFn } from '@vueuse/core',
