@@ -53,6 +53,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     // hidden: true,
   },
   {
+    path: "/auth-redirect",
+    component: () => import("@/views/login/auth-redirect.vue"),
+    // hidden: true,
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",

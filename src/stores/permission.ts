@@ -50,8 +50,10 @@ const usePermissionStore = defineStore({
     generateRoutes(roles: string | string[]) {
       return new Promise((resolve) => {
         let accessedRoutes;
+        console.log(roles.includes("admin"));
+
         if (roles.includes("admin")) {
-          accessedRoutes = this.asyncRoutes || [];
+          accessedRoutes = asyncRoutes || [];
         } else {
           accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
         }
