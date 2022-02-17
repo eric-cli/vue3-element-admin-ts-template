@@ -10,6 +10,8 @@ const useTagsViewStore = defineStore({
   },
   actions: {
     addVisitedView(view: { path: any; meta: { title: any } }) {
+      console.log(111, view);
+
       if (this.visitedViews.some((v: { path: any }) => v.path === view.path))
         return;
       this.visitedViews.push(

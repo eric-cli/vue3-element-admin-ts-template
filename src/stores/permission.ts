@@ -28,8 +28,10 @@ export function filterAsyncRoutes(routes: any[], roles: any) {
   routes.forEach((route: any) => {
     const tmp = { ...route };
     if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
+      if (tmp.children && tmp.children.length) {
         tmp.children = filterAsyncRoutes(tmp.children, roles);
+      } else {
+        tmp.children = [];
       }
       res.push(tmp);
     }
@@ -50,7 +52,6 @@ const usePermissionStore = defineStore({
     generateRoutes(roles: string | string[]) {
       return new Promise((resolve) => {
         let accessedRoutes;
-        console.log(roles.includes("admin"));
 
         if (roles.includes("admin")) {
           accessedRoutes = asyncRoutes || [];

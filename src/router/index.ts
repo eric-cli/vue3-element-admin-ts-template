@@ -7,7 +7,6 @@ import Layout from "@/layout/index.vue";
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
  *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
  * alwaysShow: true               if set true, will always show the root menu
  *                                if not set alwaysShow, when item has more than one children route,
  *                                it will becomes nested mode, otherwise not show the root menu
@@ -21,6 +20,7 @@ import Layout from "@/layout/index.vue";
     affix: true                  if set true, the tag will affix in the tags-view
     breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
     activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+    hidden: true                   if set true, item will not show in the sidebar(default is false)
   }
  */
 
@@ -33,13 +33,13 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: "/redirect",
     component: Layout,
-    // hidden: true,
     children: [
       {
         path: "/redirect/:path(.*)",
         component: () => import("@/views/Redirect/index.vue"),
       },
     ],
+    meta: { hidden: true },
   },
   // {
   //   path: "/",
@@ -50,12 +50,12 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     path: "/login",
     name: "Login",
     component: () => import("@/views/Login/index.vue"),
-    // hidden: true,
+    meta: { hidden: true },
   },
   {
     path: "/auth-redirect",
     component: () => import("@/views/login/auth-redirect.vue"),
-    // hidden: true,
+    meta: { hidden: true },
   },
   {
     path: "/",
@@ -73,7 +73,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: "/documentation",
     component: Layout,
-    redirect: "/documentation/index",
+    // redirect: "/documentation/index",
     children: [
       {
         path: "index",
@@ -100,7 +100,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     path: "/profile",
     component: Layout,
     redirect: "/profile/index",
-    // hidden: true, TODO： 路由类型拓展
+    meta: { hidden: true },
     children: [
       {
         path: "index",
@@ -121,6 +121,8 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/icon",
     component: Layout,
+    redirect: "/icon/index",
+    meta: { title: "Icons", icon: "icon" },
     children: [
       {
         path: "index",
@@ -134,6 +136,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     path: "/pdf",
     component: Layout,
     redirect: "/pdf/index",
+    meta: { title: "PDF", icon: "pdf" },
     children: [
       {
         path: "index",

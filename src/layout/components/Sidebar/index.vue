@@ -12,12 +12,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <!-- <SidebarItem
+        <SidebarItem
           v-for="route in permissionRoutes"
           :key="route.path"
           :item="route"
           :base-path="route.path"
-        /> -->
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -38,7 +38,7 @@ const showLogo = computed(() => {
   return settingStore.sidebarLogo;
 });
 const permissionRoutes = computed(() => {
-  return permissionStore.routes;
+  return permissionStore.addRoutes;
 });
 const isCollapse = computed(() => {
   return !appStore.opened;
