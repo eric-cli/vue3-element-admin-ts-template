@@ -156,7 +156,6 @@ const logout = async () => {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
         height: 100%;
         position: relative;
 
