@@ -1,10 +1,10 @@
 <template>
   <el-card class="box-card-component" style="margin-left: 8px">
-    <div slot="header" class="box-card-header">
+    <template #header class="box-card-header">
       <img
         src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png"
       />
-    </div>
+    </template>
     <div style="position: relative">
       <PanThumb :image="userInfos.avatar" class="panThumb" />
       <Mallki class-name="mallki-text" text="vue-element-admin-ts" />
