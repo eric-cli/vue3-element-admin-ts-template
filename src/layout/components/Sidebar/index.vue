@@ -38,7 +38,7 @@ const showLogo = computed(() => {
   return settingStore.sidebarLogo;
 });
 const permissionRoutes = computed(() => {
-  return permissionStore.addRoutes;
+  return permissionStore.routes;
 });
 const isCollapse = computed(() => {
   return !appStore.opened;

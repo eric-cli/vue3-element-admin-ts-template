@@ -58,6 +58,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     meta: { hidden: true },
   },
   {
+    path: "/404",
+    component: () => import("@/views/ErrorPage/404.vue"),
+    meta: { hidden: true },
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",
@@ -120,7 +125,8 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         path: "index",
         name: "Icons",
         meta: { title: "Icons", icon: "icon", noCache: true },
-        component: () => import("@/views/Icons/index.vue"),
+        component: () =>
+          import(/* webpackChunkName: "icon" */ "@/views/Icons/index.vue"),
       },
     ],
   },
@@ -135,7 +141,6 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/pdf",
     component: Layout,
-    redirect: "/pdf/index",
     meta: { title: "PDF", icon: "pdf" },
     children: [
       {
@@ -146,6 +151,8 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下,  // 404 page must be placed at the end !!!
+  { path: "/:pathMatch(.*)*", redirect: "/404", meta: { hidden: true } },
 ];
 
 const router = createRouter({

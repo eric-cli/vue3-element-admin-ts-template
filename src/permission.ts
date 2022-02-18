@@ -3,6 +3,7 @@ import useUserStore from "@/stores/user";
 import usePermissionStore from "@/stores/permission";
 import NProgress from "nprogress"; // progress bar
 import "nprogress/nprogress.css"; // progress bar style
+import { RouteRecordRaw } from "vue-router";
 
 // import { getToken } from "@/utils/auth"; // get token from cookie
 
@@ -30,6 +31,7 @@ router.beforeEach(async (to, from, next) => {
       // determine whether the user has obtained his permission roles through getInfo
       const hasRoutes =
         permissionStore.addRoutes && permissionStore.addRoutes.length > 0;
+
       if (hasRoutes) {
         next();
       } else {
@@ -38,13 +40,16 @@ router.beforeEach(async (to, from, next) => {
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
 
           const { roles } = userStore;
-
           // generate accessible routes map based on roles
-          const accessRoutes = await permissionStore.generateRoutes(roles);
-          console.log(accessRoutes);
+          const accessRoutes: Array<RouteRecordRaw> = await permissionStore.generateRoutes(
+            roles
+          );
           // dynamically add accessible routes
-          router.addRoute(accessRoutes);
+          accessRoutes.forEach((item) => {
+            console.log(item);
 
+            router.addRoute(item);
+          });
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true });
