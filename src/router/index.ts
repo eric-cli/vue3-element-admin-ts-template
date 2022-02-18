@@ -115,6 +115,14 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+];
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+
+export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/icon",
     component: Layout,
@@ -130,14 +138,6 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
-];
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-
-export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/pdf",
     component: Layout,
@@ -150,6 +150,12 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         meta: { title: "PDF", icon: "pdf" },
       },
     ],
+  },
+  {
+    path: "/pdf/download",
+    component: () => import("@/views/Pdf/download.vue"),
+    name: "PdfDownload",
+    meta: { title: "PdfDownload", icon: "pdf", hidden: true },
   },
   // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下,  // 404 page must be placed at the end !!!
   { path: "/:pathMatch(.*)*", redirect: "/404", meta: { hidden: true } },

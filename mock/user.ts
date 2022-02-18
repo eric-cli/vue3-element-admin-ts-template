@@ -14,7 +14,8 @@ const user = Mock.mock({
   email: "@email",
   true_name: "@cname",
   created_at: "@datetime",
-  "role_name|1": [["admin"], ["editor"], ["admin", "editor"]],
+  // "role_name|1": [["admin"], ["editor"], ["admin", "editor"]],
+  "role_name|1": [["admin"], ["admin", "editor"]],
   avatar: Random.image("200x200", "#4A7BF7", "Eric Lee"),
   token: "@guid",
 });
