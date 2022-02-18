@@ -30,13 +30,14 @@
     </div>
 
     <div class="block">
-      <el-button type="primary" icon="el-icon-edit" />
-      <el-button type="primary" icon="el-icon-share" />
-      <el-button type="primary" icon="el-icon-delete" />
-      <el-button type="primary" icon="el-icon-search"> Search </el-button>
+      <el-button type="primary" :icon="Edit" />
+      <el-button type="primary" :icon="Share" />
+      <el-button type="primary" :icon="Delete" />
+      <el-button type="primary" :icon="Search"> Search </el-button>
       <el-button type="primary">
         Upload
-        <i class="el-icon-upload el-icon-right" />
+        <el-icon><Upload /></el-icon>
+        <el-icon><Right /></el-icon>
       </el-button>
     </div>
 
@@ -66,8 +67,18 @@
 </template>
 
 <script setup lang="ts">
+// TODO:切换主题
+import {
+  Search,
+  Edit,
+  Share,
+  Upload,
+  Right,
+  Delete,
+} from "@element-plus/icons-vue";
 import { toggleClass } from "@/utils";
 // import "@/assets/custom-theme/index.css"; // the theme changed version
+const theme = ref(false);
 const tags = ref([
   { name: "Tag One", type: "" },
   { name: "Tag Two", type: "info" },
