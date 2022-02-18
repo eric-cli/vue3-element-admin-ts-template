@@ -59,6 +59,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               // named imports
               "useMouse", // import { useMouse } from '@vueuse/core',
               "useStorage", // import { useStorage } from '@vueuse/core',
+              "useClipboard", // import { useClipboard } from '@vueuse/core',
               "useTitle", // import { useTitle } from '@vueuse/core',
               "Fn", // import { useMouse } from '@vueuse/core',
               "tryOnUnmounted", // import { tryOnUnmounted } from '@vueuse/core',
@@ -67,6 +68,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               "useFullscreen", // import { useFullscreen } from '@vueuse/core',
               // alias
               ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',
+            ],
+            "@element-plus/icons-vue": [
+              "Close", // import { useMouse } from '@element-plus/icons-vue',
             ],
             axios: [
               // default imports

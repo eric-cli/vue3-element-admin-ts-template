@@ -110,14 +110,6 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
-];
-
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-
-export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/icon",
     component: Layout,
@@ -126,12 +118,20 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         path: "index",
-        component: () => import("@/views/Icons/index.vue"),
         name: "Icons",
         meta: { title: "Icons", icon: "icon", noCache: true },
+        component: () => import("@/views/Icons/index.vue"),
       },
     ],
   },
+];
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+
+export const asyncRoutes: Array<RouteRecordRaw> = [
   {
     path: "/pdf",
     component: Layout,

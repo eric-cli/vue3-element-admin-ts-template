@@ -2,6 +2,7 @@
 // We suggest you to commit this file into source control
 declare global {
   const axios: typeof import('axios')['default']
+  const Close: typeof import('@element-plus/icons-vue')['Close']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -47,6 +48,7 @@ declare global {
   const tryOnUnmounted: typeof import('@vueuse/core')['tryOnUnmounted']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useClipboard: typeof import('@vueuse/core')['useClipboard']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDebounceFn: typeof import('@vueuse/core')['useDebounceFn']
