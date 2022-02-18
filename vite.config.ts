@@ -69,9 +69,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               // alias
               ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',
             ],
-            "@element-plus/icons-vue": [
-              "Close", // import { useMouse } from '@element-plus/icons-vue',
-            ],
+            // "@element-plus/icons-vue": [
+            //   "Close", // import { Close } from '@element-plus/icons-vue',
+            // ],
             axios: [
               // default imports
               ["default", "axios"], // import { default as axios } from 'axios',

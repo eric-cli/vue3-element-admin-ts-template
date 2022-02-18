@@ -2,7 +2,6 @@
 // We suggest you to commit this file into source control
 declare global {
   const axios: typeof import('axios')['default']
-  const Close: typeof import('@element-plus/icons-vue')['Close']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']

@@ -9,7 +9,7 @@
       />
       <label @dblclick="editing = true" v-text="todo.text" />
       <el-icon class="destroy" @click="deleteTodo(todo)" color="#af5b5e"
-        ><close
+        ><Close
       /></el-icon>
     </el-row>
     <input
@@ -25,6 +25,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Close } from "@element-plus/icons-vue";
 const vFocus = {
   beforeMount: (el, { value }, { context }) => {
     if (value) {
