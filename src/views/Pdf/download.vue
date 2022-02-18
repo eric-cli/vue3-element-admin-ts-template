@@ -21,11 +21,15 @@
   </div>
 </template>
 
-<script setup>
-const article = ref({});
-let fullscreenLoading = ref(true);
+<script setup lang="ts">
+let article = ref();
+
+onMounted(() => {
+  fetchData();
+});
+const fullscreenLoading = ref(true);
 const fetchData = () => {
-  import("./content.ts").then((data) => {
+  import("./content").then((data) => {
     console.log(data);
     const { title } = data.default;
     document.title = title;
@@ -38,9 +42,6 @@ const fetchData = () => {
     }, 3000);
   });
 };
-onMounted(() => {
-  fetchData();
-});
 </script>
 
 <style lang="scss" scoped>

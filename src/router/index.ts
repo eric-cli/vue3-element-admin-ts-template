@@ -157,6 +157,19 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     name: "PdfDownload",
     meta: { title: "PdfDownload", icon: "pdf", hidden: true },
   },
+
+  {
+    path: "/theme",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Theme/index.vue"),
+        name: "Theme",
+        meta: { title: "Theme", icon: "theme" },
+      },
+    ],
+  },
   // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下,  // 404 page must be placed at the end !!!
   { path: "/:pathMatch(.*)*", redirect: "/404", meta: { hidden: true } },
 ];

@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const message = ref("The webmaster said that you can not enter this page...");
 </script>
 
