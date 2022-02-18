@@ -13,8 +13,8 @@
         mode="vertical"
       >
         <SidebarItem
-          v-for="route in permissionRoutes"
-          :key="route.path"
+          v-for="(route, index) in permissionRoutes"
+          :key="route.path + index"
           :item="route"
           :base-path="route.path"
         />

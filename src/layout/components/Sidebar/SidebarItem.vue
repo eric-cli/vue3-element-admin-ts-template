@@ -1,29 +1,39 @@
 <template>
-  <!-- <div v-if="!item.meta || (item.meta && !item.meta.hidden)"> -->
-  <!-- TODO:"处理hidden" -->
-  <div>
-    <!-- <template
+  <div v-if="!item.meta || (item.meta && !item.meta.hidden)">
+    <template
       v-if="
-        hasOneShowingChild(item.children || [], item) &&
+        hasOneShowingChild(item.children, item) &&
         (!onlyOneChild.children || onlyOneChild.noShowingChildren) &&
         !item.alwaysShow
       "
     >
-      <AppLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item
           :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
         >
-          <Item
+          <item
             :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
             :title="onlyOneChild.meta.title"
           />
         </el-menu-item>
-      </AppLink>
-    </template> -->
-    <template v-if="item.children && item.children.length">
+      </app-link>
+    </template>
+
+    <el-sub-menu
+      v-else
+      ref="subMenu"
+      :index="resolvePath(item.path)"
+      popper-append-to-body
+    >
+      <template slot="title">
+        <item
+          v-if="item.meta"
+          :icon="item.meta && item.meta.icon"
+          :title="item.meta.title"
+        />
+      </template>
       <sidebar-item
-        :data-child="item.children && item.children.length"
         v-for="child in item.children"
         :key="child.path"
         :is-nest="true"
@@ -31,36 +41,13 @@
         :base-path="resolvePath(child.path)"
         class="nest-menu"
       />
-    </template>
-    <el-sub-menu
-      ref="subMenu"
-      :index="resolvePath(item.path)"
-      popper-append-to-body
-      v-else
-    >
-      <template #title>
-        <Item
-          v-if="item.meta"
-          :icon="item.meta && item.meta.icon"
-          :title="item.meta.title + (item.children && item.children.length)"
-        />
-      </template>
-      <AppLink :to="resolvePath(item.path)">
-        <el-menu-item :class="{ 'submenu-title-noDropdown': !isNest }"
-          >123
-          <Item
-            :icon="item.meta.icon || (item.meta && item.meta.icon)"
-            :title="item.meta.title"
-          />
-        </el-menu-item>
-      </AppLink>
     </el-sub-menu>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { isExternal } from "@/utils/validate";
-// import path from "path";
+import path from "path-browserify";
 import Item from "./Item.vue";
 import AppLink from "./Link.vue";
 // TODO:fix
@@ -88,8 +75,8 @@ const resolvePath = (routePath) => {
   if (isExternal(props.basePath)) {
     return props.basePath;
   }
-  // return path.resolve(props.basePath, routePath) props.basePath+routePath;
-  return props.basePath + "/" + routePath;
+  return path.resolve(props.basePath, routePath);
+  // return props.basePath + "/" + routePath;
 };
 const hasOneShowingChild = (children = [], parent) => {
   console.log(children);
