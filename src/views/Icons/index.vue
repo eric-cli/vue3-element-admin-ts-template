@@ -13,7 +13,7 @@
           <div
             v-for="item of svgIcons"
             :key="item"
-            @click="handleClipboard(generateIconCode(item), $event)"
+            @click="handleClipboard(generateIconCode(item))"
           >
             <el-tooltip placement="top">
               <template #content>
@@ -32,7 +32,7 @@
           <div
             v-for="item of elementIcons"
             :key="item"
-            @click="handleClipboard(generateElementIconCode(item.name), $event)"
+            @click="handleClipboard(generateElementIconCode(item.name))"
           >
             <el-tooltip placement="top">
               <template #content>
@@ -62,8 +62,8 @@ const generateIconCode = (symbol) => {
 const generateElementIconCode = (symbol) => {
   return `<el-icon><${symbol} /></el-icon>`;
 };
-const handleClipboard = (text, event) => {
-  clipboard(text, event);
+const handleClipboard = (text) => {
+  clipboard(text);
 };
 </script>
 

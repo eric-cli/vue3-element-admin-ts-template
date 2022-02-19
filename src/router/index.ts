@@ -170,6 +170,18 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/clipboard",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Clipboard/index.vue"),
+        name: "ClipboardDemo",
+        meta: { title: "Clipboard", icon: "clipboard" },
+      },
+    ],
+  },
   // 将匹配所有内容并将其放在 `$route.params.pathMatch` 下,  // 404 page must be placed at the end !!!
   { path: "/:pathMatch(.*)*", redirect: "/404", meta: { hidden: true } },
 ];

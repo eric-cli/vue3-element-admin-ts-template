@@ -60,6 +60,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               "useMouse", // import { useMouse } from '@vueuse/core',
               "useStorage", // import { useStorage } from '@vueuse/core',
               "useClipboard", // import { useClipboard } from '@vueuse/core',
+              "useEventListener", // import { useEventListener } from '@vueuse/core',
               "useTitle", // import { useTitle } from '@vueuse/core',
               "Fn", // import { useMouse } from '@vueuse/core',
               "tryOnUnmounted", // import { tryOnUnmounted } from '@vueuse/core',

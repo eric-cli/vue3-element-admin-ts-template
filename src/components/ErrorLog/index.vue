@@ -14,7 +14,7 @@
       <template #title>
         <span style="padding-right: 10px">Error Log</span>
         <el-button
-          size="mini"
+          size="small"
           type="primary"
           icon="el-icon-delete"
           @click="clearAll"

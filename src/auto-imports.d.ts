@@ -51,6 +51,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDebounceFn: typeof import('@vueuse/core')['useDebounceFn']
+  const useEventListener: typeof import('@vueuse/core')['useEventListener']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useMouse: typeof import('@vueuse/core')['useMouse']
   const useMyFetch: typeof import('@vueuse/core')['useFetch']

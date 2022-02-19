@@ -1,6 +1,4 @@
-import { useClipboard } from "@vueuse/core";
-
-const { text, isSupported, copy } = useClipboard();
+const { isSupported, copy } = useClipboard();
 
 function clipboardSuccess() {
   ElMessage({
@@ -17,7 +15,9 @@ function clipboardError() {
   });
 }
 
-export default function handleClipboard(text, event) {
+export default function handleClipboard(text) {
+  console.log(text);
+
   if (!isSupported) {
     ElMessage({
       message: "浏览器不支持，请更换浏览器后重试",
