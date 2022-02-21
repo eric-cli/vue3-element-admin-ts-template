@@ -139,6 +139,22 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/zip",
+    component: Layout,
+    redirect: "/zip/download",
+    // alwaysShow: true,
+    name: "Zip",
+    meta: { title: "Zip", icon: "zip", alwaysShow: true },
+    children: [
+      {
+        path: "download",
+        component: () => import("@/views/Zip/index.vue"),
+        name: "ExportZip",
+        meta: { title: "Export Zip" },
+      },
+    ],
+  },
+  {
     path: "/pdf",
     component: Layout,
     meta: { title: "PDF", icon: "pdf" },
@@ -179,6 +195,17 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         component: () => import("@/views/Clipboard/index.vue"),
         name: "ClipboardDemo",
         meta: { title: "Clipboard", icon: "clipboard" },
+      },
+    ],
+  },
+  {
+    path: "/external-link",
+    component: Layout,
+    children: [
+      {
+        redirect: "/",
+        path: "https://github.com/PanJiaChen/vue-element-admin",
+        meta: { title: "External Link", icon: "link" },
       },
     ],
   },
