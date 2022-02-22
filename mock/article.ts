@@ -6,7 +6,7 @@ const image_uri =
   "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3";
 
 const List = Mock.mock({
-  "items|100": [
+  "lists|100": [
     {
       id: "@increment",
       timestamp: +Mock.Random.date("T"),
@@ -42,7 +42,9 @@ export default [
         sort,
       } = config.query;
 
-      let mockList = List.filter((item) => {
+      let lists = List.lists;
+
+      let mockList = lists.filter((item) => {
         if (importance && item.importance !== +importance) return false;
         if (type && item.type !== type) return false;
         if (title && item.title.indexOf(title) < 0) return false;
@@ -56,12 +58,12 @@ export default [
       const pageList = mockList.filter(
         (item, index) => index < limit * page && index >= limit * (page - 1)
       );
-
       return {
-        code: 20000,
+        code: 1,
+        message: "请求成功",
         data: {
           total: mockList.length,
-          items: pageList,
+          lists: pageList,
         },
       };
     },
