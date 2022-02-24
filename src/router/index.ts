@@ -139,6 +139,41 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/example",
+    component: Layout,
+    redirect: "/example/list",
+    name: "Example",
+    meta: {
+      title: "Example",
+      icon: "el-icon-s-help",
+    },
+    children: [
+      {
+        path: "create",
+        component: () => import("@/views/Example/create.vue"),
+        name: "CreateArticle",
+        meta: { title: "Create Article", icon: "edit" },
+      },
+      {
+        path: "edit/:id(\\d+)",
+        component: () => import("@/views/Example/edit.vue"),
+        name: "EditArticle",
+        meta: {
+          title: "Edit Article",
+          noCache: true,
+          activeMenu: "/example/list",
+          hidden: true,
+        },
+      },
+      {
+        path: "list",
+        component: () => import("@/views/Example/list.vue"),
+        name: "ArticleList",
+        meta: { title: "Article List", icon: "list" },
+      },
+    ],
+  },
+  {
     path: "/tab",
     component: Layout,
     children: [
