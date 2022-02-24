@@ -2,11 +2,7 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
-        <img
-          class="pic-404__parent"
-          src="@/assets/404_images/404.png"
-          alt="404"
-        />
+        <img class="pic-404__parent" :src="Img404" alt="404" />
         <img
           class="pic-404__child left"
           src="@/assets/404_images/404_cloud.png"
@@ -47,6 +43,7 @@
 
 <script setup lang="ts">
 const message = ref("The webmaster said that you can not enter this page...");
+import Img404 from "@/assets/404_images/404.png";
 </script>
 
 <style lang="scss" scoped>

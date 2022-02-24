@@ -59,7 +59,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
   },
   {
     path: "/404",
-    component: () => import("@/views/ErrorPage/404.vue"),
+    component: () => import("@/views/ErrorPages/404.vue"),
     meta: { hidden: true },
   },
   {
@@ -135,6 +135,42 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
         meta: { title: "Icons", icon: "icon", noCache: true },
         component: () =>
           import(/* webpackChunkName: "icon" */ "@/views/Icons/index.vue"),
+      },
+    ],
+  },
+  {
+    path: "/error",
+    component: Layout,
+    redirect: "noRedirect",
+    name: "ErrorPages",
+    meta: {
+      title: "Error Pages",
+      icon: "404",
+    },
+    children: [
+      {
+        path: "401",
+        component: () => import("@/views/ErrorPages/401.vue"),
+        name: "Page401",
+        meta: { title: "401", noCache: true },
+      },
+      {
+        path: "404",
+        component: () => import("@/views/ErrorPages/404.vue"),
+        name: "Page404",
+        meta: { title: "404", noCache: true },
+      },
+    ],
+  },
+  {
+    path: "/error-log",
+    component: Layout,
+    children: [
+      {
+        path: "log",
+        component: () => import("@/views/ErrorLog/index.vue"),
+        name: "ErrorLog",
+        meta: { title: "Error Log", icon: "bug" },
       },
     ],
   },
