@@ -1,18 +1,14 @@
 <template>
   <div style="display: inline-block">
-    <label class="radio-label" style="padding-left: 0">Filename: </label>
-    <el-input
-      v-model="filename"
-      placeholder="Please enter the file name (default excel-list)"
-      style="width: 345px"
-      :prefix-icon="Document"
-      clearable
-    />
+    <label class="radio-label">Cell Auto-Width: </label>
+    <el-radio-group v-model="autoWidth">
+      <el-radio :label="true" border> True </el-radio>
+      <el-radio :label="false" border> False </el-radio>
+    </el-radio-group>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Document } from "@element-plus/icons-vue";
 const props = defineProps({
   modelValue: {
     type: String,
@@ -21,7 +17,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue"]);
 
-const filename = computed({
+const autoWidth = computed({
   get() {
     return props.modelValue;
   },

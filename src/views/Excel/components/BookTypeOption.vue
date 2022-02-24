@@ -1,18 +1,20 @@
 <template>
   <div style="display: inline-block">
-    <label class="radio-label" style="padding-left: 0">Filename: </label>
-    <el-input
-      v-model="filename"
-      placeholder="Please enter the file name (default excel-list)"
-      style="width: 345px"
-      :prefix-icon="Document"
-      clearable
-    />
+    <label class="radio-label">Book Type: </label>
+    <el-select v-model="bookType" style="width: 120px">
+      <el-option
+        v-for="item in options"
+        :key="item"
+        :label="item"
+        :value="item"
+      />
+    </el-select>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Document } from "@element-plus/icons-vue";
+const options = ref(["xlsx", "csv", "txt"]);
 const props = defineProps({
   modelValue: {
     type: String,
@@ -21,7 +23,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:modelValue"]);
 
-const filename = computed({
+const bookType = computed({
   get() {
     return props.modelValue;
   },

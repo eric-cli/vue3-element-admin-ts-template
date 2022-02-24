@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    <el-row>
+    <el-row class="mb-20px" align="middle">
       <FilenameOption v-model="filename" />
       <AutoWidthOption v-model="autoWidth" />
       <BookTypeOption v-model="bookType" />
       <el-button
         :loading="downloadLoading"
-        style="margin: 0 0 20px 20px"
+        style="margin-left: 20px"
         type="primary"
         :icon="Document"
         @click="handleDownload"
@@ -113,11 +113,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-.radio-label {
-  font-size: 14px;
-  color: #606266;
-  line-height: 40px;
-  padding: 0 12px 0 30px;
-}
-</style>
+<style lang="scss" scoped></style>
