@@ -13,3 +13,31 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 #### unref
 
 如果参数是一个 ref，则返回内部值，否则返回参数本身。这是 val = isRef(val) ? val.value : val 的语法糖函数。
+
+watch 监听 ref(0)类似值时
+
+```
+watch(
+ activeName,
+ (val) => {
+ console.log(val);
+ router.push(`${route.path}?tab=${val}`);
+ },
+ { immediate: true }
+);
+
+```
+
+watch 监听 computed 类似值时
+
+```
+watch(
+ ()=>activeName,
+ (val) => {
+ console.log(val);
+ router.push(`${route.path}?tab=${val}`);
+ },
+ { immediate: true }
+);
+
+```

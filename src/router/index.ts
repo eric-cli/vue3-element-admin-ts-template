@@ -139,6 +139,18 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/tab",
+    component: Layout,
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/Tab/index.vue"),
+        name: "Tab",
+        meta: { title: "Tab", icon: "tab" },
+      },
+    ],
+  },
+  {
     path: "/error",
     component: Layout,
     redirect: "noRedirect",
