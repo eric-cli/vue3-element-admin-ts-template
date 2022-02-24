@@ -11,8 +11,6 @@ declare module 'vue' {
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -21,7 +19,6 @@ declare module 'vue' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElProgress: typeof import('element-plus/es')['ElProgress']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
@@ -41,6 +38,7 @@ declare module 'vue' {
     SizeSelect: typeof import('./components/SizeSelect/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
     ThemePicker: typeof import('./components/ThemePicker/index.vue')['default']
+    UploadExcel: typeof import('./components/UploadExcel/index.vue')['default']
   }
 }
 

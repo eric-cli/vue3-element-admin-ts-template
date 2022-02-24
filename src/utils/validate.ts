@@ -44,3 +44,11 @@ export function isArray(arg: any) {
 export function isFunction(val: unknown): val is Function {
   return typeof val === "function";
 }
+
+/**
+ * @param {file} any
+ * @returns {Boolean}
+ */
+export function isExcel(file: any) {
+  return /\.(xlsx|xls|csv)$/.test(file.name);
+}
