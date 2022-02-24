@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <i :class="[icon, 'sub-el-icon']" v-if="elIcon" />
-    <svg-icon :icon-class="icon" v-else />
-    <span>{{ title }}</span>
-  </div>
+  <i :class="[icon, 'sub-el-icon']" v-if="elIcon" />
+  <svg-icon :icon-class="icon" v-else />
+  <span>{{ title }}</span>
 </template>
 
 <script lang="ts" setup>
