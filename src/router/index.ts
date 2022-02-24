@@ -139,6 +139,42 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     ],
   },
   {
+    path: "/excel",
+    component: Layout,
+    redirect: "/excel/export-excel",
+    name: "Excel",
+    meta: {
+      title: "Excel",
+      icon: "excel",
+    },
+    children: [
+      {
+        path: "export-excel",
+        component: () => import("@/views/Excel/ExportExcel.vue"),
+        name: "ExportExcel",
+        meta: { title: "Export Excel" },
+      },
+      {
+        path: "export-selected-excel",
+        component: () => import("@/views/Excel/SelectExcel.vue"),
+        name: "SelectExcel",
+        meta: { title: "Export Selected" },
+      },
+      {
+        path: "export-merge-header",
+        component: () => import("@/views/Excel/MergeHeader.vue"),
+        name: "MergeHeader",
+        meta: { title: "Merge Header" },
+      },
+      {
+        path: "upload-excel",
+        component: () => import("@/views/Excel/UploadExcel.vue"),
+        name: "UploadExcel",
+        meta: { title: "Upload Excel" },
+      },
+    ],
+  },
+  {
     path: "/zip",
     component: Layout,
     redirect: "/zip/download",

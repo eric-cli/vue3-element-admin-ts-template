@@ -24,6 +24,8 @@
 </template>
 
 <script lang="ts" setup>
+// TODO： scss变量引入
+// TODO： 多二级情况下一级不展示问题
 // import variable from "@/styles/element/variables.scss";
 import Logo from "./Logo.vue";
 import SidebarItem from "./SidebarItem.vue";
