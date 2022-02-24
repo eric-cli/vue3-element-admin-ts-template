@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div>
+    <el-row>
       <FilenameOption v-model="filename" />
       <AutoWidthOption v-model="autoWidth" />
       <BookTypeOption v-model="bookType" />
@@ -20,7 +20,7 @@
       >
         <el-tag type="info">Documentation</el-tag>
       </a>
-    </div>
+    </el-row>
 
     <el-table
       v-loading="listLoading"
@@ -61,6 +61,9 @@
 </template>
 
 <script setup lang="ts">
+import FilenameOption from "./components/FilenameOption.vue";
+import AutoWidthOption from "./components/AutoWidthOption.vue";
+import BookTypeOption from "./components/BookTypeOption.vue";
 import { Document } from "@element-plus/icons-vue";
 import { parseTime } from "@/utils";
 import { fetchList } from "@/apis/article";
