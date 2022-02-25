@@ -10,6 +10,7 @@ declare global {
   const effectScope: typeof import('vue')['effectScope']
   const EffectScope: typeof import('vue')['EffectScope']
   const ElMessage: typeof import('element-plus/es')['ElMessage']
+  const ElNotification: typeof import('element-plus/es')['ElNotification']
   const Fn: typeof import('@vueuse/core')['Fn']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']

@@ -7,3 +7,11 @@ export function transactionList(query: any = {}) {
     params: query,
   });
 }
+
+export function searchUser(name) {
+  return request({
+    url: "/api/search/user",
+    method: "get",
+    params: { name },
+  });
+}

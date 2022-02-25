@@ -7,3 +7,11 @@ export function fetchList(query = {}) {
     params: query,
   });
 }
+
+export function fetchArticle(id) {
+  return request({
+    url: "/api/article/detail",
+    method: "get",
+    params: { id },
+  });
+}
