@@ -12,7 +12,7 @@ NProgress.configure({ showSpinner: false }); // NProgress Configuration
 const whiteList = ["/login", "/auth-redirect"]; // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
-  console.log(to);
+  // console.log(to);
 
   // start progress bar
   NProgress.start();
@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
           );
           // dynamically add accessible routes
           accessRoutes.forEach((item) => {
-            console.log(item);
+            // console.log(item);
 
             router.addRoute(item);
           });

@@ -59,7 +59,7 @@ const usePermissionStore = defineStore({
           accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
         }
         this.setRoutes(accessedRoutes);
-        console.log(accessedRoutes);
+        // console.log(accessedRoutes);
 
         resolve(accessedRoutes);
       });

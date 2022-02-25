@@ -79,7 +79,7 @@ const resolvePath = (routePath) => {
   // return props.basePath + "/" + routePath;
 };
 const hasOneShowingChild = (children = [], parent) => {
-  console.log(children);
+  // console.log(children);
 
   const showingChildren = children.filter((item) => {
     if (item.meta && item.meta.hidden) {
