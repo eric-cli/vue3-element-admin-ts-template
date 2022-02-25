@@ -69,16 +69,18 @@
     <pagination
       v-show="total > 0"
       :total="total"
-      :page.sync="listQuery.page"
-      :limit.sync="listQuery.limit"
+      v-model:page="listQuery.page"
+      v-model:limit="listQuery.limit"
       @pagination="getList"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+// TODO 分页组件
 import { Edit } from "@element-plus/icons-vue";
 import { fetchList } from "@/apis/article";
+import Pagination from "@/components/Pagination/index.vue"; // Secondary package based on el-pagination
 import { parseTime } from "@/utils";
 const listQuery = ref({ page: 1, limit: 20 });
 const listLoading = ref(true);

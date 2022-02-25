@@ -67,6 +67,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               "useThrottleFn", // import { useThrottleFn } from '@vueuse/core',
               "useDebounceFn", // import { useDebounceFn } from '@vueuse/core',
               "useFullscreen", // import { useFullscreen } from '@vueuse/core',
+              "useScroll", // import { useScroll } from '@vueuse/core',
               // alias
               ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',
             ],
