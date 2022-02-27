@@ -27,6 +27,7 @@
     "pinia-plugin-persist": "^0.0.93",
     "rollup-plugin-visualizer": "^5.5.4",
     "sass": "^1.49.7",
+    "sortablejs": "^1.14.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-mock": "^2.9.6",
     "vue": "^3.2.25",
