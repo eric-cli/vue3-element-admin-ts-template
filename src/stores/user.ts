@@ -38,6 +38,29 @@ const useUserStore = defineStore({
         resolve();
       });
     },
+    // dynamically modify permissions
+    async changeRoles(role) {
+      const token = role + "-token";
+
+      // commit("SET_TOKEN", token);
+
+      // TODO: 路由修改
+      // setToken(token);
+
+      // const { roles } = await dispatch("getInfo");
+
+      // resetRouter();
+
+      // generate accessible routes map based on roles
+      // const accessRoutes = await dispatch("permission/generateRoutes", roles, {
+      // root: true,
+      // });
+      // dynamically add accessible routes
+      // router.addRoutes(accessRoutes);
+
+      // reset visited views and cached views
+      // dispatch("tagsView/delAllViews", null, { root: true });
+    },
   },
   // 开启数据缓存
   persist: {
