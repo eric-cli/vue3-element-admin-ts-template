@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import { pathToRegexp } from "path-to-regexp";
+import { compile } from "path-to-regexp";
 // TODO 代码优化
-let levelList = ref([]);
+let levelList: any = ref([]);
 const route = useRoute();
 const router = useRouter();
 const isDashboard = (route) => {
@@ -28,7 +28,9 @@ const isDashboard = (route) => {
 };
 const getBreadcrumb = () => {
   // only show routes with meta.title
-  let matched = route.matched.filter((item) => item.meta && item.meta.title);
+  let matched: any = route.matched.filter(
+    (item) => item.meta && item.meta.title
+  );
   const first = matched[0];
 
   if (!isDashboard(first)) {
@@ -37,15 +39,15 @@ const getBreadcrumb = () => {
     );
   }
 
-  levelList = matched.filter(
+  levelList.value = matched.filter(
     (item) => item.meta && item.meta.title && item.meta.breadcrumb !== false
   );
 };
 
-const pathCompile = () => {
+const pathCompile = (path) => {
   // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
   const { params } = route;
-  var toPath = pathToRegexp.compile(path);
+  const toPath: any = compile(path);
   return toPath(params);
 };
 
@@ -60,11 +62,13 @@ const handleLink = (item) => {
 watch(
   () => route,
   (route) => {
-    console.log(route);
     if (route.path.startsWith("/redirect/")) {
       return;
     }
-    this.getBreadcrumb();
+    getBreadcrumb();
+  },
+  {
+    deep: true,
   }
 );
 onBeforeMount(() => {
