@@ -13,23 +13,23 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  user: {
-    type: Object,
-    default: () => {
-      return {};
-    },
-  },
-});
+  const props = defineProps({
+    user: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  })
 
-// TODO: 完整的表单更新信息，加校验;
-const submit = () => {
-  ElMessage({
-    message: "User information has been updated successfully",
-    type: "success",
-    duration: 5 * 1000,
-  });
-};
+  // TODO: 完整的表单更新信息，加校验;
+  const submit = () => {
+    ElMessage({
+      message: "User information has been updated successfully",
+      type: "success",
+      duration: 5 * 1000
+    })
+  }
 </script>
 
 <style lang="scss" scoped></style>

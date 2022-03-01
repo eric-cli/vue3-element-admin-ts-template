@@ -16,27 +16,27 @@
 </template>
 
 <script setup lang="ts">
-let props = defineProps({
-  isActive: {
-    type: Boolean,
-    default: false,
-  },
-});
-const emit = defineEmits(["toggleClick"]);
-const toggleClick = () => {
-  emit("toggleClick");
-};
+  let props = defineProps({
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  })
+  const emit = defineEmits(["toggleClick"])
+  const toggleClick = () => {
+    emit("toggleClick")
+  }
 </script>
 
 <style lang="scss" scoped>
-.hamburger {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
-}
+  .hamburger {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
 
-.hamburger.is-active {
-  transform: rotate(180deg);
-}
+  .hamburger.is-active {
+    transform: rotate(180deg);
+  }
 </style>

@@ -3,13 +3,9 @@
     <div class="clearfix">
       <pan-thumb :image="userInfos.avatar" style="float: left">
         Your roles:
-        <span v-for="item in roles" :key="item" class="pan-info-roles">{{
-          item
-        }}</span>
+        <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
       </pan-thumb>
-      <github-corner
-        style="position: absolute; top: 0px; border: 0; right: 0"
-      />
+      <github-corner style="position: absolute; top: 0px; border: 0; right: 0" />
       <div class="info-container">
         <span class="display_name">{{ userInfos.true_name }}</span>
         <span style="font-size: 20px; padding-top: 20px; display: inline-block"
@@ -24,48 +20,47 @@
 </template>
 
 <script setup lang="ts">
-const emptyGif =
-  "https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3";
-import useUserStore from "@/stores/user";
-import GithubCorner from "@/components/GithubCorner/index.vue";
-const userStore = useUserStore();
-const roles = computed(() => {
-  return userStore.roles;
-});
-const userInfos = computed(() => {
-  return userStore.userInfos;
-});
+  const emptyGif = "https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3"
+  import useUserStore from "@/stores/user"
+  import GithubCorner from "@/components/GithubCorner/index.vue"
+  const userStore = useUserStore()
+  const roles = computed(() => {
+    return userStore.roles
+  })
+  const userInfos = computed(() => {
+    return userStore.userInfos
+  })
 </script>
 
 <style lang="scss" scoped>
-.emptyGif {
-  display: block;
-  width: 45%;
-  margin: 0 auto;
-}
-
-.dashboard-editor-container {
-  background-color: #e3e3e3;
-  min-height: 100vh;
-  padding: 50px 60px 0px;
-  .pan-info-roles {
-    font-size: 12px;
-    font-weight: 700;
-    color: #333;
+  .emptyGif {
     display: block;
+    width: 45%;
+    margin: 0 auto;
   }
-  .info-container {
-    position: relative;
-    margin-left: 190px;
-    height: 150px;
-    line-height: 200px;
-    .display_name {
-      font-size: 48px;
-      line-height: 48px;
-      color: #212121;
-      position: absolute;
-      top: 25px;
+
+  .dashboard-editor-container {
+    background-color: #e3e3e3;
+    min-height: 100vh;
+    padding: 50px 60px 0px;
+    .pan-info-roles {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+      display: block;
+    }
+    .info-container {
+      position: relative;
+      margin-left: 190px;
+      height: 150px;
+      line-height: 200px;
+      .display_name {
+        font-size: 48px;
+        line-height: 48px;
+        color: #212121;
+        position: absolute;
+        top: 25px;
+      }
     }
   }
-}
 </style>

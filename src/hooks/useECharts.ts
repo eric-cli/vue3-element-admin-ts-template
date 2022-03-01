@@ -1,108 +1,108 @@
-import type { EChartsOption } from "echarts";
-import type { Ref } from "vue";
-import { useTimeoutFn } from "@/hooks/useTimeout";
-import { useEventListener } from "@/hooks/useEventListener";
-import echarts from "@/utils/echarts";
+import type { EChartsOption } from "echarts"
+import type { Ref } from "vue"
+import { useTimeoutFn } from "@/hooks/useTimeout"
+import { useEventListener } from "@/hooks/useEventListener"
+import echarts from "@/utils/echarts"
 
 export function useECharts(
   elRef: Ref<HTMLDivElement>,
   theme: "light" | "dark" | "default" = "default"
 ) {
   const getDarkMode = computed(() => {
-    return theme;
-  });
+    return theme
+  })
   const resize = () => {
-    chartInstance?.resize();
-  };
-  let chartInstance: echarts.ECharts | null = null;
-  let resizeFn: Fn = resize;
-  const cacheOptions = ref({}) as Ref<EChartsOption>;
-  let removeResizeFn: Fn = () => {};
+    chartInstance?.resize()
+  }
+  let chartInstance: echarts.ECharts | null = null
+  let resizeFn: Fn = resize
+  const cacheOptions = ref({}) as Ref<EChartsOption>
+  let removeResizeFn: Fn = () => {}
 
-  resizeFn = useDebounceFn(resize, 200);
+  resizeFn = useDebounceFn(resize, 200)
 
   const getOptions = computed(() => {
     return {
       backgroundColor: "transparent",
-      ...cacheOptions.value,
-    } as EChartsOption;
-  });
+      ...cacheOptions.value
+    } as EChartsOption
+  })
 
   const initCharts = () => {
-    const el = unref(elRef);
+    const el = unref(elRef)
     if (!el || !unref(el)) {
-      return;
+      return
     }
-    chartInstance = echarts.init(el);
+    chartInstance = echarts.init(el)
 
     const { removeEvent } = useEventListener({
       el: window,
       name: "resize",
-      listener: resizeFn,
-    });
-    removeResizeFn = removeEvent;
+      listener: resizeFn
+    })
+    removeResizeFn = removeEvent
 
     if (el.offsetHeight === 0) {
       useTimeoutFn(() => {
-        resizeFn();
-      }, 30);
+        resizeFn()
+      }, 30)
     }
-  };
+  }
 
   const setOptions = (options: EChartsOption, clear = true) => {
-    cacheOptions.value = options;
+    cacheOptions.value = options
 
     if (unref(elRef)?.offsetHeight === 0) {
       useTimeoutFn(() => {
-        setOptions(unref(getOptions));
-      }, 30);
-      return;
+        setOptions(unref(getOptions))
+      }, 30)
+      return
     }
 
     nextTick(() => {
       useTimeoutFn(() => {
         if (!chartInstance) {
-          initCharts();
+          initCharts()
 
-          if (!chartInstance) return;
+          if (!chartInstance) return
         }
 
-        clear && chartInstance?.clear();
-        chartInstance?.setOption(unref(getOptions));
-      }, 30);
-    });
-  };
+        clear && chartInstance?.clear()
+        chartInstance?.setOption(unref(getOptions))
+      }, 30)
+    })
+  }
 
   watch(
     () => getDarkMode.value,
     () => {
       if (chartInstance) {
-        chartInstance.dispose();
-        initCharts();
-        setOptions(cacheOptions.value);
+        chartInstance.dispose()
+        initCharts()
+        setOptions(cacheOptions.value)
       }
     }
-  );
+  )
 
   // 组件卸载前销毁echarts
   tryOnUnmounted(() => {
-    if (!chartInstance) return;
-    removeResizeFn();
-    chartInstance.dispose();
-    chartInstance = null;
-  });
+    if (!chartInstance) return
+    removeResizeFn()
+    chartInstance.dispose()
+    chartInstance = null
+  })
 
   const getInstance = (): echarts.ECharts | null => {
     if (!chartInstance) {
-      initCharts();
+      initCharts()
     }
-    return chartInstance;
-  };
+    return chartInstance
+  }
 
   return {
     setOptions,
     resize,
     echarts,
-    getInstance,
-  };
+    getInstance
+  }
 }

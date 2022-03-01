@@ -1,13 +1,13 @@
-import Mock, { Random } from "mockjs";
+import Mock, { Random } from "mockjs"
 
 const NameList = Mock.mock({
   "items|100": [
     {
       id: "@id",
-      name: "@first",
-    },
-  ],
-});
+      name: "@first"
+    }
+  ]
+})
 const TransactionList = Mock.mock({
   "lists|20": [
     {
@@ -15,10 +15,10 @@ const TransactionList = Mock.mock({
       timestamp: +Random.date("T"),
       username: "@name()",
       price: "@float(1000, 15000, 0, 2)",
-      "status|1": ["success", "pending"],
-    },
-  ],
-});
+      "status|1": ["success", "pending"]
+    }
+  ]
+})
 
 export default [
   // username search
@@ -26,17 +26,17 @@ export default [
     url: "/api/search/user",
     method: "get",
     response: (config: { query: { name: any } }) => {
-      const { name } = config.query;
+      const { name } = config.query
       const mockNameList = NameList.filter((item: { name: string }) => {
-        const lowerCaseName = item.name.toLowerCase();
-        return !(name && lowerCaseName.indexOf(name.toLowerCase()) < 0);
-      });
+        const lowerCaseName = item.name.toLowerCase()
+        return !(name && lowerCaseName.indexOf(name.toLowerCase()) < 0)
+      })
       return {
         code: 1,
         message: "请求成功",
-        data: mockNameList,
-      };
-    },
+        data: mockNameList
+      }
+    }
   },
 
   // transaction list
@@ -49,9 +49,9 @@ export default [
         message: "请求成功",
         data: {
           total: 20,
-          lists: TransactionList.lists,
-        },
-      };
-    },
-  },
-];
+          lists: TransactionList.lists
+        }
+      }
+    }
+  }
+]

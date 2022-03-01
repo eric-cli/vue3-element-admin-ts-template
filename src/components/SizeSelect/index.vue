@@ -19,25 +19,25 @@
 </template>
 
 <script lang="ts" setup>
-import useAppStore from "@/stores/app";
-const appStore = useAppStore();
-const sizeOptions = [
-  { label: "Large", value: "large" },
-  { label: "Default", value: "default" },
-  { label: "Small", value: "small" },
-];
-const size = computed(() => {
-  return appStore.size;
-});
+  import useAppStore from "@/stores/app"
+  const appStore = useAppStore()
+  const sizeOptions = [
+    { label: "Large", value: "large" },
+    { label: "Default", value: "default" },
+    { label: "Small", value: "small" }
+  ]
+  const size = computed(() => {
+    return appStore.size
+  })
 
-const handleSetSize = (size) => {
-  appStore.setSize(size);
-  // this.refreshView();
-  ElMessage({
-    message: "Switch Size Success",
-    type: "success",
-  });
-};
+  const handleSetSize = (size) => {
+    appStore.setSize(size)
+    // this.refreshView();
+    ElMessage({
+      message: "Switch Size Success",
+      type: "success"
+    })
+  }
 </script>
 
 <style lang="scss" scoped></style>

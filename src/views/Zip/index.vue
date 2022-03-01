@@ -54,38 +54,38 @@
 </template>
 
 <script setup lang="ts">
-import { Document } from "@element-plus/icons-vue";
-import { fetchList } from "@/apis/article";
-let list = ref([]);
-let listLoading = ref(true);
-let downloadLoading = ref(false);
-let filename = ref("");
+  import { Document } from "@element-plus/icons-vue"
+  import { fetchList } from "@/apis/article"
+  let list = ref([])
+  let listLoading = ref(true)
+  let downloadLoading = ref(false)
+  let filename = ref("")
 
-const fetchData = async () => {
-  listLoading.value = true;
-  const { data } = await fetchList();
-  list.value = data.lists;
-  listLoading.value = false;
-};
+  const fetchData = async () => {
+    listLoading.value = true
+    const { data } = await fetchList()
+    list.value = data.lists
+    listLoading.value = false
+  }
 
-const formatJson = (filterVal, jsonData) => {
-  return jsonData.map((v) => filterVal.map((j) => v[j]));
-};
+  const formatJson = (filterVal, jsonData) => {
+    return jsonData.map((v) => filterVal.map((j) => v[j]))
+  }
 
-const handleDownload = () => {
-  downloadLoading.value = true;
-  import("@/vendor/Export2Zip").then((zip) => {
-    const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
-    const filterVal = ["id", "title", "author", "pageviews", "display_time"];
-    const data = formatJson(filterVal, list.value);
-    zip.export_txt_to_zip(tHeader, data, filename, filename);
-    downloadLoading.value = false;
-  });
-};
+  const handleDownload = () => {
+    downloadLoading.value = true
+    import("@/vendor/Export2Zip").then((zip) => {
+      const tHeader = ["Id", "Title", "Author", "Readings", "Date"]
+      const filterVal = ["id", "title", "author", "pageviews", "display_time"]
+      const data = formatJson(filterVal, list.value)
+      zip.export_txt_to_zip(tHeader, data, filename, filename)
+      downloadLoading.value = false
+    })
+  }
 
-onMounted(() => {
-  fetchData();
-});
+  onMounted(() => {
+    fetchData()
+  })
 </script>
 
 <style lang="scss" scoped></style>

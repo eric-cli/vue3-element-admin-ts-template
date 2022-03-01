@@ -8,22 +8,22 @@
 </template>
 
 <script setup lang="ts">
-import useUserStore from "@/stores/user";
-const userStore = useUserStore();
-const roles = computed(() => {
-  return userStore.roles;
-});
-const emit = defineEmits(["change"]);
-const switchRoles = computed({
-  get() {
-    return userStore.roles[0];
-  },
-  set(val) {
-    userStore.changeRoles(val).then(() => {
-      emit("change");
-    });
-  },
-});
+  import useUserStore from "@/stores/user"
+  const userStore = useUserStore()
+  const roles = computed(() => {
+    return userStore.roles
+  })
+  const emit = defineEmits(["change"])
+  const switchRoles = computed({
+    get() {
+      return userStore.roles[0]
+    },
+    set(val) {
+      userStore.changeRoles(val).then(() => {
+        emit("change")
+      })
+    }
+  })
 </script>
 
 <style lang="scss" scoped></style>

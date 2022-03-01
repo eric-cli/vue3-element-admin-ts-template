@@ -65,62 +65,62 @@
 </template>
 
 <script setup lang="ts">
-import { fetchList } from "@/apis/article";
-import type { ElTable } from "element-plus";
-import { Document } from "@element-plus/icons-vue";
-import { parseTime } from "@/utils";
-let list = ref([]);
-let listLoading = ref(true);
-let downloadLoading = ref(false);
-let filename = ref("");
-let multipleSelection = ref([]);
-const multipleTable = ref<InstanceType<typeof ElTable>>();
-const fetchData = () => {
-  listLoading.value = true;
-  fetchList().then((res) => {
-    list.value = res.data.lists;
-    listLoading.value = false;
-  });
-};
-const formatJson = (filterVal, jsonData) => {
-  return jsonData.map((v) =>
-    filterVal.map((j) => {
-      if (j === "timestamp") {
-        return parseTime(v[j]);
-      } else {
-        return v[j];
-      }
+  import { fetchList } from "@/apis/article"
+  import type { ElTable } from "element-plus"
+  import { Document } from "@element-plus/icons-vue"
+  import { parseTime } from "@/utils"
+  let list = ref([])
+  let listLoading = ref(true)
+  let downloadLoading = ref(false)
+  let filename = ref("")
+  let multipleSelection = ref([])
+  const multipleTable = ref<InstanceType<typeof ElTable>>()
+  const fetchData = () => {
+    listLoading.value = true
+    fetchList().then((res) => {
+      list.value = res.data.lists
+      listLoading.value = false
     })
-  );
-};
-const handleSelectionChange = (val) => {
-  multipleSelection.value = val;
-};
-const handleDownload = () => {
-  if (multipleSelection.value.length) {
-    downloadLoading.value = true;
-    import("@/vendor/Export2Excel").then((excel) => {
-      const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
-      const filterVal = ["id", "title", "author", "pageviews", "display_time"];
-      const data = formatJson(filterVal, multipleSelection.value);
-      excel.export_json_to_excel({
-        header: tHeader,
-        data,
-        filename: filename.value,
-      });
-      multipleTable.value!.clearSelection();
-      downloadLoading.value = false;
-    });
-  } else {
-    ElMessage({
-      message: "Please select at least one item",
-      type: "warning",
-    });
   }
-};
-onMounted(() => {
-  fetchData();
-});
+  const formatJson = (filterVal, jsonData) => {
+    return jsonData.map((v) =>
+      filterVal.map((j) => {
+        if (j === "timestamp") {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      })
+    )
+  }
+  const handleSelectionChange = (val) => {
+    multipleSelection.value = val
+  }
+  const handleDownload = () => {
+    if (multipleSelection.value.length) {
+      downloadLoading.value = true
+      import("@/vendor/Export2Excel").then((excel) => {
+        const tHeader = ["Id", "Title", "Author", "Readings", "Date"]
+        const filterVal = ["id", "title", "author", "pageviews", "display_time"]
+        const data = formatJson(filterVal, multipleSelection.value)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: filename.value
+        })
+        multipleTable.value!.clearSelection()
+        downloadLoading.value = false
+      })
+    } else {
+      ElMessage({
+        message: "Please select at least one item",
+        type: "warning"
+      })
+    }
+  }
+  onMounted(() => {
+    fetchData()
+  })
 </script>
 
 <style lang="scss" scoped></style>

@@ -4,4 +4,4 @@
  */
 
 // 动画时间
-export const animationDuration = 6000;
+export const animationDuration = 6000

@@ -1,23 +1,23 @@
-import { UserConfigExport, ConfigEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import ElementPlus from "unplugin-element-plus/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
-import visualizer from "rollup-plugin-visualizer";
-import compressPlugin from "vite-plugin-compression";
-import { viteMockServe } from "vite-plugin-mock";
-import svgLoader from "./plugins/svg-loader";
-import WindiCSS from "vite-plugin-windicss";
-import { resolve } from "path";
+import { UserConfigExport, ConfigEnv } from "vite"
+import vue from "@vitejs/plugin-vue"
+import AutoImport from "unplugin-auto-import/vite"
+import Components from "unplugin-vue-components/vite"
+import ElementPlus from "unplugin-element-plus/vite"
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
+import visualizer from "rollup-plugin-visualizer"
+import compressPlugin from "vite-plugin-compression"
+import { viteMockServe } from "vite-plugin-mock"
+import svgLoader from "./plugins/svg-loader"
+import WindiCSS from "vite-plugin-windicss"
+import { resolve } from "path"
 
 // https://vitejs.dev/config/
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
-  console.log(command, mode);
+  console.log(command, mode)
 
   // 根据项目配置。可以配置在.env文件
-  let prodMock = false;
+  let prodMock = false
   return {
     plugins: [
       vue(),
@@ -38,7 +38,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             import { setupProdMockServer } from '../mock/_createProductionServer';
       
             setupProdMockServer();
-            `,
+            `
       }),
       AutoImport({
         // targets to transform
@@ -46,7 +46,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
           /\.vue$/,
           /\.vue\?vue/, // .vue
-          /\.md$/, // .md
+          /\.md$/ // .md
         ],
         // global imports to register
         imports: [
@@ -69,38 +69,38 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               "useFullscreen", // import { useFullscreen } from '@vueuse/core',
               "useScroll", // import { useScroll } from '@vueuse/core',
               // alias
-              ["useFetch", "useMyFetch"], // import { useFetch as useMyFetch } from '@vueuse/core',
+              ["useFetch", "useMyFetch"] // import { useFetch as useMyFetch } from '@vueuse/core',
             ],
             // "@element-plus/icons-vue": [
             //   "Close", // import { Close } from '@element-plus/icons-vue',
             // ],
             axios: [
               // default imports
-              ["default", "axios"], // import { default as axios } from 'axios',
-            ],
+              ["default", "axios"] // import { default as axios } from 'axios',
+            ]
             // "[package-name]": [
             //   "[import-names]",
             //   // alias
             //   ["[from]", "[alias]"],
             // ],
-          },
+          }
         ],
         dts: "src/auto-imports.d.ts",
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver()]
       }),
       Components({
         resolvers: [
           ElementPlusResolver({
-            importStyle: "sass",
-          }),
+            importStyle: "sass"
+          })
         ],
-        dts: "src/components.d.ts",
+        dts: "src/components.d.ts"
       }),
       visualizer({
         filename: "./node_modules/.cache/visualizer/stats.html",
         open: true,
         gzipSize: true,
-        brotliSize: true,
+        brotliSize: true
       }),
       compressPlugin({
         ext: ".gz",
@@ -108,9 +108,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         verbose: true,
         disable: false,
         threshold: 10240,
-        algorithm: "gzip",
+        algorithm: "gzip"
       }),
-      ElementPlus(),
+      ElementPlus()
     ],
     base: "./", // 设置打包路径
     server: {
@@ -119,7 +119,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       port: 9527, // 类型： number 指定服务器端口;
       open: true, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       cors: true, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
-      host: "0.0.0.0", // 支持从IP启动访问
+      host: "0.0.0.0" // 支持从IP启动访问
 
       // 设置代理，根据我们项目实际情况配置
       // proxy: {
@@ -134,23 +134,23 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
     // 配置别名
     resolve: {
       alias: {
-        "@": resolve(__dirname, "src"),
-      },
+        "@": resolve(__dirname, "src")
+      }
     },
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/styles/element/index.scss" as *;',
-        },
-      },
+          additionalData: '@use "@/styles/element/index.scss" as *;'
+        }
+      }
     },
     build: {
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true,
-        },
-      },
-    },
-  };
-};
+          drop_debugger: true
+        }
+      }
+    }
+  }
+}

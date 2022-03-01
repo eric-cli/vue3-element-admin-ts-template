@@ -56,44 +56,44 @@
 </template>
 
 <script setup lang="ts">
-import { fetchList } from "@/apis/article";
-import { parseTime } from "@/utils";
-const props = defineProps({
-  type: {
-    type: String,
-    default: "CN",
-  },
-});
-const list = ref([]);
-const loading = ref(false);
-const listQuery = ref({
-  page: 1,
-  limit: 5,
-  type: props.type,
-  sort: "+id",
-});
-const emits = defineEmits(["create"]);
-const getList = () => {
-  loading.value = true;
-  emits("create"); // for test
-  fetchList(listQuery.value).then((res) => {
-    list.value = res.data.lists;
-    loading.value = false;
-  });
-};
+  import { fetchList } from "@/apis/article"
+  import { parseTime } from "@/utils"
+  const props = defineProps({
+    type: {
+      type: String,
+      default: "CN"
+    }
+  })
+  const list = ref([])
+  const loading = ref(false)
+  const listQuery = ref({
+    page: 1,
+    limit: 5,
+    type: props.type,
+    sort: "+id"
+  })
+  const emits = defineEmits(["create"])
+  const getList = () => {
+    loading.value = true
+    emits("create") // for test
+    fetchList(listQuery.value).then((res) => {
+      list.value = res.data.lists
+      loading.value = false
+    })
+  }
 
-const statusFilter = (status) => {
-  const statusMap = {
-    published: "success",
-    draft: "info",
-    deleted: "danger",
-  };
-  return statusMap[status];
-};
+  const statusFilter = (status) => {
+    const statusMap = {
+      published: "success",
+      draft: "info",
+      deleted: "danger"
+    }
+    return statusMap[status]
+  }
 
-onMounted(() => {
-  getList();
-});
+  onMounted(() => {
+    getList()
+  })
 </script>
 
 <style lang="scss" scoped></style>

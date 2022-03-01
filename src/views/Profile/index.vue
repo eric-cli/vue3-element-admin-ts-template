@@ -27,16 +27,16 @@
 </template>
 
 <script lang="ts" setup>
-import Account from "./components/Account.vue";
-import Activity from "./components/Activity.vue";
-import Timeline from "./components/Timeline.vue";
-import UserCard from "./components/UserCard.vue";
-import useUserStore from "@/stores/user";
-const userStore = useUserStore();
-const user = computed(() => {
-  return userStore.userInfos;
-});
-const activeTab = ref("activity");
+  import Account from "./components/Account.vue"
+  import Activity from "./components/Activity.vue"
+  import Timeline from "./components/Timeline.vue"
+  import UserCard from "./components/UserCard.vue"
+  import useUserStore from "@/stores/user"
+  const userStore = useUserStore()
+  const user = computed(() => {
+    return userStore.userInfos
+  })
+  const activeTab = ref("activity")
 </script>
 
 <style lang="scss" scoped></style>

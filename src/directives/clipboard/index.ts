@@ -3,25 +3,25 @@
  * Used for clipboard
  * @Example v-clipboard="text"
  */
-import type { DirectiveBinding } from "vue";
-import handleClipboard from "@/utils/clipboard";
+import type { DirectiveBinding } from "vue"
+import handleClipboard from "@/utils/clipboard"
 
 export const setupClipboardDirective = (app) => {
   app.directive("Clipboard", {
     // 指令具有一组生命周期钩子：
     // 当指令第一次绑定到元素并且在挂载父组件之前调用
     mounted(el: HTMLElement, binding: DirectiveBinding) {
-      console.log(binding);
+      console.log(binding)
       const cancel = () => {
-        console.log("mounted");
+        console.log("mounted")
 
         if (!binding.value) {
-          ElMessage.warn("没有需要复制的目标内容");
-          return;
+          ElMessage.warn("没有需要复制的目标内容")
+          return
         }
-        handleClipboard(binding.value);
-      };
-      el.addEventListener("click", cancel);
+        handleClipboard(binding.value)
+      }
+      el.addEventListener("click", cancel)
     },
     // updated(el, binding) {
     // TODO // 添加绑定表单情况下，binding.value 情况处理
@@ -49,8 +49,8 @@ export const setupClipboardDirective = (app) => {
     //   console.log("卸载调用了");
     // },
     unmounted(el: HTMLElement) {
-      el.removeEventListener("click", () => {});
-      console.log("卸载调用了");
-    },
-  });
-};
+      el.removeEventListener("click", () => {})
+      console.log("卸载调用了")
+    }
+  })
+}

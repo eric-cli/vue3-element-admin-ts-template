@@ -1,11 +1,11 @@
-import Mock, { Random } from "mockjs";
+import Mock, { Random } from "mockjs"
 // 拓展mockjs
 Mock.Random.extend({
   phone() {
-    let phonePrefixs = ["188", "158", "138"]; // 自己写前缀哈
-    return this.pick(phonePrefixs) + Mock.mock(/\d{8}/); //Number()
-  },
-});
+    let phonePrefixs = ["188", "158", "138"] // 自己写前缀哈
+    return this.pick(phonePrefixs) + Mock.mock(/\d{8}/) //Number()
+  }
+})
 
 const user = Mock.mock({
   id: "@id",
@@ -17,8 +17,8 @@ const user = Mock.mock({
   // "role_name|1": [["admin"], ["editor"], ["admin", "editor"]],
   "role_name|1": [["admin"], ["admin", "editor"]],
   avatar: Random.image("200x200", "#4A7BF7", "Eric Lee"),
-  token: "@guid",
-});
+  token: "@guid"
+})
 
 const data = Mock.mock({
   "items|30": [
@@ -29,10 +29,10 @@ const data = Mock.mock({
       true_name: "@name",
       created_at: "@datetime",
       role_name: "@name",
-      avatar: Random.image("200x100", "#4A7BF7", "Hello"),
-    },
-  ],
-});
+      avatar: Random.image("200x100", "#4A7BF7", "Hello")
+    }
+  ]
+})
 
 export default [
   {
@@ -42,8 +42,8 @@ export default [
       return {
         code: 1,
         message: "请求成功",
-        data: user,
-      };
-    },
-  },
-];
+        data: user
+      }
+    }
+  }
+]

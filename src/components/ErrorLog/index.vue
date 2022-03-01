@@ -13,11 +13,7 @@
     <el-dialog v-model="dialogTableVisible" width="80%" append-to-body>
       <template #title>
         <span style="padding-right: 10px">Error Log</span>
-        <el-button
-          size="small"
-          type="primary"
-          icon="el-icon-delete"
-          @click="clearAll"
+        <el-button size="small" type="primary" icon="el-icon-delete" @click="clearAll"
           >Clear All</el-button
         >
       </template>
@@ -32,18 +28,12 @@
             </div>
             <br />
             <div>
-              <span class="message-title" style="padding-right: 10px"
-                >Info:
-              </span>
-              <el-tag type="warning">
-                {{ row.vm.$vnode.tag }} error in {{ row.info }}
-              </el-tag>
+              <span class="message-title" style="padding-right: 10px">Info: </span>
+              <el-tag type="warning"> {{ row.vm.$vnode.tag }} error in {{ row.info }} </el-tag>
             </div>
             <br />
             <div>
-              <span class="message-title" style="padding-right: 16px"
-                >Url:
-              </span>
+              <span class="message-title" style="padding-right: 16px">Url: </span>
               <el-tag type="success">
                 {{ row.url }}
               </el-tag>
@@ -61,16 +51,16 @@
 </template>
 
 <script lang="ts" setup>
-const dialogTableVisible = ref(false);
-import useAppStore from "@/stores/app";
-const appStore = useAppStore();
-const errorLogs = computed(() => {
-  return appStore.logs;
-});
-const clearAll = () => {
-  dialogTableVisible.value = false;
-  appStore.clearErrorLog();
-};
+  const dialogTableVisible = ref(false)
+  import useAppStore from "@/stores/app"
+  const appStore = useAppStore()
+  const errorLogs = computed(() => {
+    return appStore.logs
+  })
+  const clearAll = () => {
+    dialogTableVisible.value = false
+    appStore.clearErrorLog()
+  }
 </script>
 
 <style lang="scss" scoped></style>

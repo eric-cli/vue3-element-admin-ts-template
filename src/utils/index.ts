@@ -4,18 +4,17 @@
  */
 export function toggleClass(element, className) {
   if (!element || !className) {
-    return;
+    return
   }
-  let classString = element.className;
-  const nameIndex = classString.indexOf(className);
+  let classString = element.className
+  const nameIndex = classString.indexOf(className)
   if (nameIndex === -1) {
-    classString += "" + className;
+    classString += "" + className
   } else {
     classString =
-      classString.substr(0, nameIndex) +
-      classString.substr(nameIndex + className.length);
+      classString.substr(0, nameIndex) + classString.substr(nameIndex + className.length)
   }
-  element.className = classString;
+  element.className = classString
 }
 
 /**
@@ -26,28 +25,28 @@ export function toggleClass(element, className) {
  */
 export function parseTime(time, cFormat = "{y}-{m}-{d} {h}:{i}:{s}") {
   if (arguments.length === 0 || !time) {
-    return null;
+    return null
   }
-  const format = cFormat;
-  let date;
+  const format = cFormat
+  let date
   if (typeof time === "object") {
-    date = time;
+    date = time
   } else {
     if (typeof time === "string") {
       if (/^[0-9]+$/.test(time)) {
         // support "1548221490638"
-        time = parseInt(time);
+        time = parseInt(time)
       } else {
         // support safari
         // https://stackoverflow.com/questions/4310953/invalid-date-in-safari
-        time = time.replace(new RegExp(/-/gm), "/");
+        time = time.replace(new RegExp(/-/gm), "/")
       }
     }
 
     if (typeof time === "number" && time.toString().length === 10) {
-      time = time * 1000;
+      time = time * 1000
     }
-    date = new Date(time);
+    date = new Date(time)
   }
   const formatObj = {
     y: date.getFullYear(),
@@ -56,15 +55,15 @@ export function parseTime(time, cFormat = "{y}-{m}-{d} {h}:{i}:{s}") {
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay(),
-  };
+    a: date.getDay()
+  }
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
-    const value = formatObj[key];
+    const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
     if (key === "a") {
-      return ["日", "一", "二", "三", "四", "五", "六"][value];
+      return ["日", "一", "二", "三", "四", "五", "六"][value]
     }
-    return value.toString().padStart(2, "0");
-  });
-  return time_str;
+    return value.toString().padStart(2, "0")
+  })
+  return time_str
 }

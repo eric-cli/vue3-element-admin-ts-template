@@ -8,17 +8,17 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  icon: {
-    type: String,
-    default: "",
-  },
-  title: {
-    type: String,
-    default: "",
-  },
-});
-const elIcon = computed(() => props.icon.includes("el-icon"));
+  const props = defineProps({
+    icon: {
+      type: String,
+      default: ""
+    },
+    title: {
+      type: String,
+      default: ""
+    }
+  })
+  const elIcon = computed(() => props.icon.includes("el-icon"))
 </script>
 
 <style lang="scss" scoped></style>

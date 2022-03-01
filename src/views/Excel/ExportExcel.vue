@@ -61,56 +61,56 @@
 </template>
 
 <script setup lang="ts">
-import FilenameOption from "./components/FilenameOption.vue";
-import AutoWidthOption from "./components/AutoWidthOption.vue";
-import BookTypeOption from "./components/BookTypeOption.vue";
-import { Document } from "@element-plus/icons-vue";
-import { parseTime } from "@/utils";
-import { fetchList } from "@/apis/article";
-let list = ref([]);
-let listLoading = ref(true);
-let downloadLoading = ref(false);
-let filename = ref("");
-let autoWidth = ref(true);
-let bookType = ref("xlsx");
-const fetchData = () => {
-  listLoading.value = true;
-  fetchList().then((res) => {
-    list.value = res.data.lists;
-    listLoading.value = false;
-  });
-};
-const formatJson = (filterVal, jsonData) => {
-  return jsonData.map((v) =>
-    filterVal.map((j) => {
-      if (j === "timestamp") {
-        return parseTime(v[j]);
-      } else {
-        return v[j];
-      }
+  import FilenameOption from "./components/FilenameOption.vue"
+  import AutoWidthOption from "./components/AutoWidthOption.vue"
+  import BookTypeOption from "./components/BookTypeOption.vue"
+  import { Document } from "@element-plus/icons-vue"
+  import { parseTime } from "@/utils"
+  import { fetchList } from "@/apis/article"
+  let list = ref([])
+  let listLoading = ref(true)
+  let downloadLoading = ref(false)
+  let filename = ref("")
+  let autoWidth = ref(true)
+  let bookType = ref("xlsx")
+  const fetchData = () => {
+    listLoading.value = true
+    fetchList().then((res) => {
+      list.value = res.data.lists
+      listLoading.value = false
     })
-  );
-};
-const handleDownload = () => {
-  downloadLoading.value = true;
-  import("@/vendor/Export2Excel").then((excel) => {
-    const tHeader = ["Id", "Title", "Author", "Readings", "Date"];
-    const filterVal = ["id", "title", "author", "pageviews", "display_time"];
-    const data = formatJson(filterVal, list.value);
-    excel.export_json_to_excel({
-      header: tHeader,
-      data,
-      filename: filename.value,
-      autoWidth: autoWidth.value,
-      bookType: bookType.value,
-    });
-    downloadLoading.value = false;
-  });
-};
+  }
+  const formatJson = (filterVal, jsonData) => {
+    return jsonData.map((v) =>
+      filterVal.map((j) => {
+        if (j === "timestamp") {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      })
+    )
+  }
+  const handleDownload = () => {
+    downloadLoading.value = true
+    import("@/vendor/Export2Excel").then((excel) => {
+      const tHeader = ["Id", "Title", "Author", "Readings", "Date"]
+      const filterVal = ["id", "title", "author", "pageviews", "display_time"]
+      const data = formatJson(filterVal, list.value)
+      excel.export_json_to_excel({
+        header: tHeader,
+        data,
+        filename: filename.value,
+        autoWidth: autoWidth.value,
+        bookType: bookType.value
+      })
+      downloadLoading.value = false
+    })
+  }
 
-onMounted(() => {
-  fetchData();
-});
+  onMounted(() => {
+    fetchData()
+  })
 </script>
 
 <style lang="scss" scoped></style>

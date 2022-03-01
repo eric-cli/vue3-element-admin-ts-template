@@ -1,9 +1,8 @@
-import Mock, { Random } from "mockjs";
+import Mock, { Random } from "mockjs"
 
 const baseContent =
-  '<p>I am testing data, I am testing data.</p><p><img src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>';
-const image_uri =
-  "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3";
+  '<p>I am testing data, I am testing data.</p><p><img src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>'
+const image_uri = "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3"
 
 const List = Mock.mock({
   "lists|100": [
@@ -23,65 +22,58 @@ const List = Mock.mock({
       comment_disabled: true,
       pageviews: "@integer(300, 5000)",
       image_uri,
-      platforms: ["a-platform"],
-    },
-  ],
-});
+      platforms: ["a-platform"]
+    }
+  ]
+})
 
 export default [
   {
     url: "/api/article/list",
     type: "get",
     response: (config) => {
-      const {
-        importance,
-        type,
-        title,
-        page = 1,
-        limit = 20,
-        sort,
-      } = config.query;
+      const { importance, type, title, page = 1, limit = 20, sort } = config.query
 
-      let lists = List.lists;
+      let lists = List.lists
 
       let mockList = lists.filter((item) => {
-        if (importance && item.importance !== +importance) return false;
-        if (type && item.type !== type) return false;
-        if (title && item.title.indexOf(title) < 0) return false;
-        return true;
-      });
+        if (importance && item.importance !== +importance) return false
+        if (type && item.type !== type) return false
+        if (title && item.title.indexOf(title) < 0) return false
+        return true
+      })
 
       if (sort === "-id") {
-        mockList = mockList.reverse();
+        mockList = mockList.reverse()
       }
 
       const pageList = mockList.filter(
         (item, index) => index < limit * page && index >= limit * (page - 1)
-      );
+      )
       return {
         code: 1,
         message: "请求成功",
         data: {
           total: mockList.length,
-          lists: pageList,
-        },
-      };
-    },
+          lists: pageList
+        }
+      }
+    }
   },
   {
     url: "/api/article/detail",
     type: "get",
     response: (config) => {
-      const { id } = config.query;
+      const { id } = config.query
       for (const article of List) {
         if (article.id === +id) {
           return {
             code: 20000,
-            data: article,
-          };
+            data: article
+          }
         }
       }
-    },
+    }
   },
 
   {
@@ -95,11 +87,11 @@ export default [
             { key: "PC", pv: 1024 },
             { key: "mobile", pv: 1024 },
             { key: "ios", pv: 1024 },
-            { key: "android", pv: 1024 },
-          ],
-        },
-      };
-    },
+            { key: "android", pv: 1024 }
+          ]
+        }
+      }
+    }
   },
 
   {
@@ -108,9 +100,9 @@ export default [
     response: (_) => {
       return {
         code: 20000,
-        data: "success",
-      };
-    },
+        data: "success"
+      }
+    }
   },
 
   {
@@ -119,8 +111,8 @@ export default [
     response: (_) => {
       return {
         code: 20000,
-        data: "success",
-      };
-    },
-  },
-];
+        data: "success"
+      }
+    }
+  }
+]

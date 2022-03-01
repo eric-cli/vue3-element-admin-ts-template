@@ -5,11 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import SwitchRoles from "./components/SwitchRoles.vue";
-const router = useRouter();
-const handleRolesChange = () => {
-  router.push({ path: "/permission/index?" + +new Date() });
-};
+  import SwitchRoles from "./components/SwitchRoles.vue"
+  const router = useRouter()
+  const handleRolesChange = () => {
+    router.push({ path: "/permission/index?" + +new Date() })
+  }
 </script>
 
 <style lang="scss" scoped></style>

@@ -3,11 +3,11 @@
  * @param {String} string
  */
 export function uppercaseFirst(roles: string[]) {
-  let role = "admin";
+  let role = "admin"
   if (!roles.includes("admin")) {
-    role = "editor";
+    role = "editor"
   }
-  return role.charAt(0).toUpperCase() + role.slice(1);
+  return role.charAt(0).toUpperCase() + role.slice(1)
 }
 
 /**
@@ -15,7 +15,5 @@ export function uppercaseFirst(roles: string[]) {
  * @param {number} num
  */
 export function toThousandFilter(num: string | number) {
-  return (+num || 0)
-    .toString()
-    .replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ","));
+  return (+num || 0).toString().replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ","))
 }

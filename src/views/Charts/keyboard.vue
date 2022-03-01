@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import Chart from "@/components/Charts/Keyboard.vue";
+  import Chart from "@/components/Charts/Keyboard.vue"
 </script>
 
 <style lang="scss" scoped>
-.chart-container {
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 84px);
-}
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 84px);
+  }
 </style>

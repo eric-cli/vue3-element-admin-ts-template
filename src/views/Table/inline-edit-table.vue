@@ -76,13 +76,7 @@
           >
             Ok
           </el-button>
-          <el-button
-            v-else
-            type="primary"
-            size="small"
-            :icon="Edit"
-            @click="row.edit = !row.edit"
-          >
+          <el-button v-else type="primary" size="small" :icon="Edit" @click="row.edit = !row.edit">
             Edit
           </el-button>
         </template>
@@ -92,63 +86,63 @@
 </template>
 
 <script setup lang="ts">
-import { Refresh, Edit, CircleCheck } from "@element-plus/icons-vue";
-import { fetchList } from "@/apis/article";
-import { parseTime } from "@/utils";
-const statusFilter = (status) => {
-  const statusMap = {
-    published: "success",
-    draft: "info",
-    deleted: "danger",
-  };
-  return statusMap[status];
-};
-const list = ref([]);
-const listLoading = ref(true);
-const listQuery = ref({
-  page: 1,
-  limit: 10,
-});
-const getList = async () => {
-  listLoading.value = true;
-  const { data } = await fetchList(listQuery.value);
-  const items = data.lists;
-  list.value = items.map((v) => {
-    // this.$set(v, "edit", false); // https://vuejs.org/v2/guide/reactivity.html
-    v.edit = false;
-    v.originalTitle = v.title; //  will be used when user click the cancel botton
-    return v;
-  });
-  listLoading.value = false;
-};
-const cancelEdit = (row) => {
-  row.title = row.originalTitle;
-  row.edit = false;
-  ElMessage({
-    message: "The title has been restored to the original value",
-    type: "warning",
-  });
-};
-const confirmEdit = (row) => {
-  row.edit = false;
-  row.originalTitle = row.title;
-  ElMessage({
-    message: "The title has been edited",
-    type: "success",
-  });
-};
-onMounted(() => {
-  getList();
-});
+  import { Refresh, Edit, CircleCheck } from "@element-plus/icons-vue"
+  import { fetchList } from "@/apis/article"
+  import { parseTime } from "@/utils"
+  const statusFilter = (status) => {
+    const statusMap = {
+      published: "success",
+      draft: "info",
+      deleted: "danger"
+    }
+    return statusMap[status]
+  }
+  const list = ref([])
+  const listLoading = ref(true)
+  const listQuery = ref({
+    page: 1,
+    limit: 10
+  })
+  const getList = async () => {
+    listLoading.value = true
+    const { data } = await fetchList(listQuery.value)
+    const items = data.lists
+    list.value = items.map((v) => {
+      // this.$set(v, "edit", false); // https://vuejs.org/v2/guide/reactivity.html
+      v.edit = false
+      v.originalTitle = v.title //  will be used when user click the cancel botton
+      return v
+    })
+    listLoading.value = false
+  }
+  const cancelEdit = (row) => {
+    row.title = row.originalTitle
+    row.edit = false
+    ElMessage({
+      message: "The title has been restored to the original value",
+      type: "warning"
+    })
+  }
+  const confirmEdit = (row) => {
+    row.edit = false
+    row.originalTitle = row.title
+    ElMessage({
+      message: "The title has been edited",
+      type: "success"
+    })
+  }
+  onMounted(() => {
+    getList()
+  })
 </script>
 
 <style lang="scss" scoped>
-.edit-input {
-  padding-right: 100px;
-}
-.cancel-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
+  .edit-input {
+    padding-right: 100px;
+  }
+  .cancel-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
 </style>

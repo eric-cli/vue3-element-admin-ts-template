@@ -58,9 +58,7 @@
       <el-table-column align="center" label="Actions" width="120">
         <template #default="{ row }">
           <router-link :to="'/example/edit/' + row.id">
-            <el-button type="primary" size="small" :icon="Edit">
-              Edit
-            </el-button>
+            <el-button type="primary" size="small" :icon="Edit"> Edit </el-button>
           </router-link>
         </template>
       </el-table-column>
@@ -77,43 +75,43 @@
 </template>
 
 <script setup lang="ts">
-// TODO 分页组件
-import { Edit } from "@element-plus/icons-vue";
-import { fetchList } from "@/apis/article";
-import Pagination from "@/components/Pagination/index.vue"; // Secondary package based on el-pagination
-import { parseTime } from "@/utils";
-const listQuery = ref({ page: 1, limit: 20 });
-const listLoading = ref(true);
-const total = ref(0);
-const list = ref([]);
-const getList = () => {
-  listLoading.value = true;
-  fetchList(listQuery.value).then((res) => {
-    list.value = res.data.lists;
-    total.value = res.data.total;
-    listLoading.value = false;
-  });
-};
-const statusFilter = (status) => {
-  const statusMap = {
-    published: "success",
-    draft: "info",
-    deleted: "danger",
-  };
-  return statusMap[status];
-};
-onMounted(() => {
-  getList();
-});
+  // TODO 分页组件
+  import { Edit } from "@element-plus/icons-vue"
+  import { fetchList } from "@/apis/article"
+  import Pagination from "@/components/Pagination/index.vue" // Secondary package based on el-pagination
+  import { parseTime } from "@/utils"
+  const listQuery = ref({ page: 1, limit: 20 })
+  const listLoading = ref(true)
+  const total = ref(0)
+  const list = ref([])
+  const getList = () => {
+    listLoading.value = true
+    fetchList(listQuery.value).then((res) => {
+      list.value = res.data.lists
+      total.value = res.data.total
+      listLoading.value = false
+    })
+  }
+  const statusFilter = (status) => {
+    const statusMap = {
+      published: "success",
+      draft: "info",
+      deleted: "danger"
+    }
+    return statusMap[status]
+  }
+  onMounted(() => {
+    getList()
+  })
 </script>
 
 <style lang="scss" scoped>
-.edit-input {
-  padding-right: 100px;
-}
-.cancel-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
+  .edit-input {
+    padding-right: 100px;
+  }
+  .cancel-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
 </style>

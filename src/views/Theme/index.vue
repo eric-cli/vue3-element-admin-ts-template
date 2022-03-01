@@ -14,9 +14,8 @@
         <span class="field-label">Change Theme : </span>
         <el-switch v-model="theme" />
         <aside style="margin-top: 15px">
-          Tips: It is different from the theme-pick on the navbar is two
-          different skinning methods, each with different application scenarios.
-          Refer to the documentation for details.
+          Tips: It is different from the theme-pick on the navbar is two different skinning methods,
+          each with different application scenarios. Refer to the documentation for details.
         </aside>
       </div>
     </el-card>
@@ -42,12 +41,7 @@
     </div>
 
     <div class="block">
-      <el-tag
-        v-for="tag in tags"
-        :key="tag.type"
-        :type="tag.type"
-        class="tag-item"
-      >
+      <el-tag v-for="tag in tags" :key="tag.type" :type="tag.type" class="tag-item">
         {{ tag.name }}
       </el-tag>
     </div>
@@ -67,44 +61,37 @@
 </template>
 
 <script setup lang="ts">
-// TODO:切换主题
-import {
-  Search,
-  Edit,
-  Share,
-  Upload,
-  Right,
-  Delete,
-} from "@element-plus/icons-vue";
-import { toggleClass } from "@/utils";
-// import "@/assets/custom-theme/index.css"; // the theme changed version
-const theme = ref(false);
-const tags = ref([
-  { name: "Tag One", type: "" },
-  { name: "Tag Two", type: "info" },
-  { name: "Tag Three", type: "success" },
-  { name: "Tag Four", type: "warning" },
-  { name: "Tag Five", type: "danger" },
-]);
-const slideValue = ref(50);
-const radio = ref(3);
+  // TODO:切换主题
+  import { Search, Edit, Share, Upload, Right, Delete } from "@element-plus/icons-vue"
+  import { toggleClass } from "@/utils"
+  // import "@/assets/custom-theme/index.css"; // the theme changed version
+  const theme = ref(false)
+  const tags = ref([
+    { name: "Tag One", type: "" },
+    { name: "Tag Two", type: "info" },
+    { name: "Tag Three", type: "success" },
+    { name: "Tag Four", type: "warning" },
+    { name: "Tag Five", type: "danger" }
+  ])
+  const slideValue = ref(50)
+  const radio = ref(3)
 </script>
 
 <style lang="scss" scoped>
-.field-label {
-  vertical-align: middle;
-}
-.box-card {
-  width: 400px;
-  max-width: 100%;
-  margin: 20px auto;
-}
+  .field-label {
+    vertical-align: middle;
+  }
+  .box-card {
+    width: 400px;
+    max-width: 100%;
+    margin: 20px auto;
+  }
 
-.block {
-  padding: 30px 24px;
-}
+  .block {
+    padding: 30px 24px;
+  }
 
-.tag-item {
-  margin-right: 15px;
-}
+  .tag-item {
+    margin-right: 15px;
+  }
 </style>

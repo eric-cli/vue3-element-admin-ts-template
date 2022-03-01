@@ -15,12 +15,7 @@
         style="width: 90px"
         class="filter-item"
       >
-        <el-option
-          v-for="item in importanceOptions"
-          :key="item"
-          :label="item"
-          :value="item"
-        />
+        <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
       </el-select>
       <el-select
         v-model="listQuery.type"
@@ -116,9 +111,7 @@
       </el-table-column>
       <el-table-column label="Title" min-width="150px">
         <template #default="{ row }">
-          <span class="link-type" @click="handleUpdate(row)">{{
-            row.title
-          }}</span>
+          <span class="link-type" @click="handleUpdate(row)">{{ row.title }}</span>
           <el-tag>{{ typeFilter(row.type) }}</el-tag>
         </template>
       </el-table-column>
@@ -127,12 +120,7 @@
           <span>{{ row.author }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        v-if="showReviewer"
-        label="Reviewer"
-        width="110px"
-        align="center"
-      >
+      <el-table-column v-if="showReviewer" label="Reviewer" width="110px" align="center">
         <template #default="{ row }">
           <span style="color: red">{{ row.reviewer }}</span>
         </template>
@@ -151,12 +139,9 @@
       </el-table-column>
       <el-table-column label="Readings" align="center" width="95">
         <template #default="{ row }">
-          <span
-            v-if="row.pageviews"
-            class="link-type"
-            @click="handleFetchPv(row.pageviews)"
-            >{{ row.pageviews }}</span
-          >
+          <span v-if="row.pageviews" class="link-type" @click="handleFetchPv(row.pageviews)">{{
+            row.pageviews
+          }}</span>
           <span v-else>0</span>
         </template>
       </el-table-column>
@@ -174,9 +159,7 @@
         class-name="small-padding fixed-width"
       >
         <template #default="{ row, $index }">
-          <el-button type="primary" size="small" @click="handleUpdate(row)">
-            Edit
-          </el-button>
+          <el-button type="primary" size="small" @click="handleUpdate(row)"> Edit </el-button>
           <el-button
             v-if="row.status != 'published'"
             size="small"
@@ -222,11 +205,7 @@
         style="width: 400px; margin-left: 50px"
       >
         <el-form-item label="Type" prop="type">
-          <el-select
-            v-model="temp.type"
-            class="filter-item"
-            placeholder="Please select"
-          >
+          <el-select v-model="temp.type" class="filter-item" placeholder="Please select">
             <el-option
               v-for="item in calendarTypeOptions"
               :key="item.key"
@@ -246,17 +225,8 @@
           <el-input v-model="temp.title" />
         </el-form-item>
         <el-form-item label="Status">
-          <el-select
-            v-model="temp.status"
-            class="filter-item"
-            placeholder="Please select"
-          >
-            <el-option
-              v-for="item in statusOptions"
-              :key="item"
-              :label="item"
-              :value="item"
-            />
+          <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
+            <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item" />
           </el-select>
         </el-form-item>
         <el-form-item label="Imp">
@@ -278,267 +248,251 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false"> Cancel </el-button>
-        <el-button
-          type="primary"
-          @click="dialogStatus === 'create' ? createData() : updateData()"
-        >
+        <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
           Confirm
         </el-button>
       </div>
     </el-dialog>
 
     <el-dialog v-model="dialogPvVisible" title="Reading statistics">
-      <el-table
-        :data="pvData"
-        border
-        fit
-        highlight-current-row
-        style="width: 100%"
-      >
+      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
         <el-table-column prop="key" label="Channel" />
         <el-table-column prop="pv" label="Pv" />
       </el-table>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false"
-          >Confirm</el-button
-        >
+        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import {
-  fetchList,
-  fetchPv,
-  createArticle,
-  updateArticle,
-} from "@/apis/article";
-import { parseTime } from "@/utils";
-import type { ElForm } from "element-plus";
+  import { fetchList, fetchPv, createArticle, updateArticle } from "@/apis/article"
+  import { parseTime } from "@/utils"
+  import type { ElForm } from "element-plus"
 
-type FormInstance = InstanceType<typeof ElForm>;
-const dataForm = ref<FormInstance>();
-const calendarTypeOptions = ref([
-  { key: "CN", display_name: "China" },
-  { key: "US", display_name: "USA" },
-  { key: "JP", display_name: "Japan" },
-  { key: "EU", display_name: "Eurozone" },
-]);
-const tableKey = ref(0);
-const list = ref([]);
-const total = ref(0);
-const listLoading = ref(true);
-const listQuery = ref({
-  page: 1,
-  limit: 20,
-  importance: "",
-  title: "",
-  type: "",
-  sort: "+id",
-});
-const importanceOptions = ref([1, 2, 3]);
-const sortOptions = ref([
-  { label: "ID Ascending", key: "+id" },
-  { label: "ID Descending", key: "-id" },
-]);
-const statusOptions = ref(["published", "draft", "deleted"]);
-const showReviewer = ref(false);
-const temp = ref({
-  id: undefined,
-  importance: 1,
-  remark: "",
-  timestamp: new Date(),
-  title: "",
-  type: "",
-  status: "published",
-});
-const dialogFormVisible = ref(false);
-const dialogPvVisible = ref(false);
-const downloadLoading = ref(false);
-const dialogStatus = ref("");
-const pvData = ref([]);
-const textMap = ref({ update: "Edit", create: "Create" });
-const rules = ref({
-  type: [{ required: true, message: "type is required", trigger: "change" }],
-  timestamp: [
-    {
-      type: "date",
-      required: true,
-      message: "timestamp is required",
-      trigger: "change",
-    },
-  ],
-  title: [{ required: true, message: "title is required", trigger: "blur" }],
-});
-// arr to obj, such as { CN : "China", US : "USA" }
-const calendarTypeKeyValue = calendarTypeOptions.value.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name;
-  return acc;
-}, {});
-
-const statusFilter = (status) => {
-  const statusMap = {
-    published: "success",
-    draft: "info",
-    deleted: "danger",
-  };
-  return statusMap[status];
-};
-
-const typeFilter = (type) => {
-  return calendarTypeKeyValue[type];
-};
-
-const getList = () => {
-  listLoading.value = true;
-  fetchList(listQuery.value).then((res) => {
-    list.value = res.data.lists;
-    total.value = res.data.total;
-
-    // Just to simulate the time of the request
-    setTimeout(() => {
-      listLoading.value = false;
-    }, 1.5 * 1000);
-  });
-};
-const handleFilter = () => {
-  listQuery.value.page = 1;
-  getList();
-};
-const handleModifyStatus = (row, status) => {
-  ElMessage({
-    message: "操作Success",
-    type: "success",
-  });
-  row.status = status;
-};
-const sortByID = (order) => {
-  if (order === "ascending") {
-    listQuery.value.sort = "+id";
-  } else {
-    listQuery.value.sort = "-id";
-  }
-  handleFilter();
-};
-const resetTemp = () => {
-  temp.value = {
+  type FormInstance = InstanceType<typeof ElForm>
+  const dataForm = ref<FormInstance>()
+  const calendarTypeOptions = ref([
+    { key: "CN", display_name: "China" },
+    { key: "US", display_name: "USA" },
+    { key: "JP", display_name: "Japan" },
+    { key: "EU", display_name: "Eurozone" }
+  ])
+  const tableKey = ref(0)
+  const list = ref([])
+  const total = ref(0)
+  const listLoading = ref(true)
+  const listQuery = ref({
+    page: 1,
+    limit: 20,
+    importance: "",
+    title: "",
+    type: "",
+    sort: "+id"
+  })
+  const importanceOptions = ref([1, 2, 3])
+  const sortOptions = ref([
+    { label: "ID Ascending", key: "+id" },
+    { label: "ID Descending", key: "-id" }
+  ])
+  const statusOptions = ref(["published", "draft", "deleted"])
+  const showReviewer = ref(false)
+  const temp = ref({
     id: undefined,
     importance: 1,
     remark: "",
     timestamp: new Date(),
     title: "",
-    status: "published",
     type: "",
-  };
-};
-const handleCreate = () => {
-  resetTemp();
-  dialogStatus.value = "create";
-  dialogFormVisible.value = true;
-  nextTick(() => {
-    dataForm.value?.clearValidate();
-  });
-};
-const createData = () => {
-  dataForm.value?.validate((valid) => {
-    if (valid) {
-      temp.value.id = parseInt(Math.random() * 100) + 1024; // mock a id
-      temp.value.author = "vue-element-admin";
-      createArticle(temp.value).then(() => {
-        list.value.unshift(temp.value);
-        dialogFormVisible.value = false;
-        ElNotification({
-          title: "Success",
-          message: "Created Successfully",
-          type: "success",
-          duration: 2000,
-        });
-      });
+    status: "published"
+  })
+  const dialogFormVisible = ref(false)
+  const dialogPvVisible = ref(false)
+  const downloadLoading = ref(false)
+  const dialogStatus = ref("")
+  const pvData = ref([])
+  const textMap = ref({ update: "Edit", create: "Create" })
+  const rules = ref({
+    type: [{ required: true, message: "type is required", trigger: "change" }],
+    timestamp: [
+      {
+        type: "date",
+        required: true,
+        message: "timestamp is required",
+        trigger: "change"
+      }
+    ],
+    title: [{ required: true, message: "title is required", trigger: "blur" }]
+  })
+  // arr to obj, such as { CN : "China", US : "USA" }
+  const calendarTypeKeyValue = calendarTypeOptions.value.reduce((acc, cur) => {
+    acc[cur.key] = cur.display_name
+    return acc
+  }, {})
+
+  const statusFilter = (status) => {
+    const statusMap = {
+      published: "success",
+      draft: "info",
+      deleted: "danger"
     }
-  });
-};
-const handleUpdate = (row) => {
-  temp.value = Object.assign({}, row); // copy obj
-  temp.value.timestamp = new Date(temp.value.timestamp);
-  dialogStatus.value = "update";
-  dialogFormVisible.value = true;
-  nextTick(() => {
-    dataForm.value?.clearValidate();
-  });
-};
-const updateData = () => {
-  dataForm.value?.validate((valid) => {
-    if (valid) {
-      const tempData = Object.assign({}, temp.value);
-      tempData.timestamp = +new Date(tempData.timestamp); // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-      updateArticle(tempData).then(() => {
-        const index = list.value.findIndex((v) => v.id === temp.value.id);
-        list.value.splice(index, 1, temp.value);
-        dialogFormVisible.value = false;
-        ElNotification({
-          title: "Success",
-          message: "Update Successfully",
-          type: "success",
-          duration: 2000,
-        });
-      });
+    return statusMap[status]
+  }
+
+  const typeFilter = (type) => {
+    return calendarTypeKeyValue[type]
+  }
+
+  const getList = () => {
+    listLoading.value = true
+    fetchList(listQuery.value).then((res) => {
+      list.value = res.data.lists
+      total.value = res.data.total
+
+      // Just to simulate the time of the request
+      setTimeout(() => {
+        listLoading.value = false
+      }, 1.5 * 1000)
+    })
+  }
+  const handleFilter = () => {
+    listQuery.value.page = 1
+    getList()
+  }
+  const handleModifyStatus = (row, status) => {
+    ElMessage({
+      message: "操作Success",
+      type: "success"
+    })
+    row.status = status
+  }
+  const sortByID = (order) => {
+    if (order === "ascending") {
+      listQuery.value.sort = "+id"
+    } else {
+      listQuery.value.sort = "-id"
     }
-  });
-};
-const handleDelete = (row, index) => {
-  ElNotification({
-    title: "Success",
-    message: "Delete Successfully",
-    type: "success",
-    duration: 2000,
-  });
-  list.value.splice(index, 1);
-};
-const handleFetchPv = (pv) => {
-  fetchPv(pv).then((response) => {
-    pvData.value = response.data.pvData;
-    dialogPvVisible.value = true;
-  });
-};
-const formatJson = (filterVal) => {
-  return list.value.map((v) =>
-    filterVal.map((j) => {
-      if (j === "timestamp") {
-        return parseTime(v[j]);
-      } else {
-        return v[j];
+    handleFilter()
+  }
+  const resetTemp = () => {
+    temp.value = {
+      id: undefined,
+      importance: 1,
+      remark: "",
+      timestamp: new Date(),
+      title: "",
+      status: "published",
+      type: ""
+    }
+  }
+  const handleCreate = () => {
+    resetTemp()
+    dialogStatus.value = "create"
+    dialogFormVisible.value = true
+    nextTick(() => {
+      dataForm.value?.clearValidate()
+    })
+  }
+  const createData = () => {
+    dataForm.value?.validate((valid) => {
+      if (valid) {
+        temp.value.id = parseInt(Math.random() * 100) + 1024 // mock a id
+        temp.value.author = "vue-element-admin"
+        createArticle(temp.value).then(() => {
+          list.value.unshift(temp.value)
+          dialogFormVisible.value = false
+          ElNotification({
+            title: "Success",
+            message: "Created Successfully",
+            type: "success",
+            duration: 2000
+          })
+        })
       }
     })
-  );
-};
-const handleDownload = () => {
-  downloadLoading.value = true;
-  import("@/vendor/Export2Excel").then((excel) => {
-    const tHeader = ["timestamp", "title", "type", "importance", "status"];
-    const filterVal = ["timestamp", "title", "type", "importance", "status"];
-    const data = formatJson(filterVal);
-    excel.export_json_to_excel({
-      header: tHeader,
-      data,
-      filename: "table-list",
-    });
-    downloadLoading.value = false;
-  });
-};
-const getSortClass = (key) => {
-  const sort = listQuery.value.sort;
-  return sort === `+${key}` ? "ascending" : "descending";
-};
-const sortChange = (data) => {
-  const { prop, order } = data;
-  if (prop === "id") {
-    sortByID(order);
   }
-};
-onMounted(() => {
-  getList();
-});
+  const handleUpdate = (row) => {
+    temp.value = Object.assign({}, row) // copy obj
+    temp.value.timestamp = new Date(temp.value.timestamp)
+    dialogStatus.value = "update"
+    dialogFormVisible.value = true
+    nextTick(() => {
+      dataForm.value?.clearValidate()
+    })
+  }
+  const updateData = () => {
+    dataForm.value?.validate((valid) => {
+      if (valid) {
+        const tempData = Object.assign({}, temp.value)
+        tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+        updateArticle(tempData).then(() => {
+          const index = list.value.findIndex((v) => v.id === temp.value.id)
+          list.value.splice(index, 1, temp.value)
+          dialogFormVisible.value = false
+          ElNotification({
+            title: "Success",
+            message: "Update Successfully",
+            type: "success",
+            duration: 2000
+          })
+        })
+      }
+    })
+  }
+  const handleDelete = (row, index) => {
+    ElNotification({
+      title: "Success",
+      message: "Delete Successfully",
+      type: "success",
+      duration: 2000
+    })
+    list.value.splice(index, 1)
+  }
+  const handleFetchPv = (pv) => {
+    fetchPv(pv).then((response) => {
+      pvData.value = response.data.pvData
+      dialogPvVisible.value = true
+    })
+  }
+  const formatJson = (filterVal) => {
+    return list.value.map((v) =>
+      filterVal.map((j) => {
+        if (j === "timestamp") {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      })
+    )
+  }
+  const handleDownload = () => {
+    downloadLoading.value = true
+    import("@/vendor/Export2Excel").then((excel) => {
+      const tHeader = ["timestamp", "title", "type", "importance", "status"]
+      const filterVal = ["timestamp", "title", "type", "importance", "status"]
+      const data = formatJson(filterVal)
+      excel.export_json_to_excel({
+        header: tHeader,
+        data,
+        filename: "table-list"
+      })
+      downloadLoading.value = false
+    })
+  }
+  const getSortClass = (key) => {
+    const sort = listQuery.value.sort
+    return sort === `+${key}` ? "ascending" : "descending"
+  }
+  const sortChange = (data) => {
+    const { prop, order } = data
+    if (prop === "id") {
+      sortByID(order)
+    }
+  }
+  onMounted(() => {
+    getList()
+  })
 </script>
 
 <style lang="scss" scoped></style>

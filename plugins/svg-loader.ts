@@ -1,56 +1,53 @@
-import { readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync } from "fs"
 
-let idPerfix = "";
-const svgTitle = /<svg([^>+].*?)>/;
-const clearHeightWidth = /(width|height)="([^>+].*?)"/g;
+let idPerfix = ""
+const svgTitle = /<svg([^>+].*?)>/
+const clearHeightWidth = /(width|height)="([^>+].*?)"/g
 
-const hasViewBox = /(viewBox="[^>+].*?")/g;
+const hasViewBox = /(viewBox="[^>+].*?")/g
 
-const clearReturn = /(\r)|(\n)/g;
+const clearReturn = /(\r)|(\n)/g
 // TODO 此处使用 import.meta.glob('./icons/svg/*.svg')这种功能处理
 function findSvgFile(dir) {
-  const svgRes = [];
+  const svgRes = []
   const dirents = readdirSync(dir, {
-    withFileTypes: true,
-  });
+    withFileTypes: true
+  })
   dirents.forEach((dirent) => {
     if (dirent.isDirectory()) {
-      svgRes.push(...findSvgFile(`${dir + dirent.name}/`));
+      svgRes.push(...findSvgFile(`${dir + dirent.name}/`))
     } else {
       const svg = readFileSync(dir + dirent.name)
         .toString()
         .replace(clearReturn, "")
         .replace(svgTitle, ($1, $2) => {
-          let width = 0;
-          let height = 0;
+          let width = 0
+          let height = 0
           let content = $2.replace(clearHeightWidth, (s1, s2, s3) => {
             if (s2 === "width") {
-              width = s3;
+              width = s3
             } else if (s2 === "height") {
-              height = s3;
+              height = s3
             }
-            return "";
-          });
+            return ""
+          })
           if (!hasViewBox.test($2)) {
-            content += `viewBox="0 0 ${width} ${height}"`;
+            content += `viewBox="0 0 ${width} ${height}"`
           }
-          return `<symbol id="${idPerfix}-${dirent.name.replace(
-            ".svg",
-            ""
-          )}" ${content}>`;
+          return `<symbol id="${idPerfix}-${dirent.name.replace(".svg", "")}" ${content}>`
         })
-        .replace("</svg>", "</symbol>");
-      svgRes.push(svg);
+        .replace("</svg>", "</symbol>")
+      svgRes.push(svg)
     }
-  });
-  return svgRes;
+  })
+  return svgRes
 }
 const svgLoader = (path, perfix = "icon") => {
   if (path === "") {
-    return false;
+    return false
   }
-  idPerfix = perfix;
-  const res = findSvgFile(path);
+  idPerfix = perfix
+  const res = findSvgFile(path)
   // const res = []
   return {
     name: "svg-transform",
@@ -63,9 +60,9 @@ const svgLoader = (path, perfix = "icon") => {
                 ${res.join("")}
               </svg>
           `
-      );
-    },
-  };
-};
+      )
+    }
+  }
+}
 
-export default svgLoader;
+export default svgLoader

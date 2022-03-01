@@ -1,5 +1,5 @@
 // typings.d.ts or router.ts
-import "vue-router";
+import "vue-router"
 
 declare module "vue-router" {
   // * alwaysShow: true               if set true, will always show the root menu
@@ -7,8 +7,8 @@ declare module "vue-router" {
   // breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
   interface RouteMeta {
     // 是可选的
-    hidden?: boolean;
-    alwaysShow?: boolean;
-    breadcrumb?: boolean;
+    hidden?: boolean
+    alwaysShow?: boolean
+    breadcrumb?: boolean
   }
 }

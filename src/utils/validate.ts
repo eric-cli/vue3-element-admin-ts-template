@@ -3,7 +3,7 @@
  * @returns {Boolean}
  */
 export function isExternal(path: string) {
-  return /^(https?:|mailto:|tel:)/.test(path);
+  return /^(https?:|mailto:|tel:)/.test(path)
 }
 
 /**
@@ -11,8 +11,8 @@ export function isExternal(path: string) {
  * @returns {Boolean}
  */
 export function validUsername(str: string) {
-  const validMap = ["admin", "editor"];
-  return validMap.indexOf(str.trim()) >= 0;
+  const validMap = ["admin", "editor"]
+  return validMap.indexOf(str.trim()) >= 0
 }
 
 /**
@@ -21,9 +21,9 @@ export function validUsername(str: string) {
  */
 export function isString(str: any) {
   if (typeof str === "string" || str instanceof String) {
-    return true;
+    return true
   }
-  return false;
+  return false
 }
 
 /**
@@ -32,9 +32,9 @@ export function isString(str: any) {
  */
 export function isArray(arg: any) {
   if (typeof Array.isArray === "undefined") {
-    return Object.prototype.toString.call(arg) === "[object Array]";
+    return Object.prototype.toString.call(arg) === "[object Array]"
   }
-  return Array.isArray(arg);
+  return Array.isArray(arg)
 }
 
 /**
@@ -42,7 +42,7 @@ export function isArray(arg: any) {
  * @returns {Boolean}
  */
 export function isFunction(val: unknown): val is Function {
-  return typeof val === "function";
+  return typeof val === "function"
 }
 
 /**
@@ -50,7 +50,7 @@ export function isFunction(val: unknown): val is Function {
  * @returns {Boolean}
  */
 export function isExcel(file: any) {
-  return /\.(xlsx|xls|csv)$/.test(file.name);
+  return /\.(xlsx|xls|csv)$/.test(file.name)
 }
 
 /**
@@ -58,6 +58,7 @@ export function isExcel(file: any) {
  * @returns {Boolean}
  */
 export function validURL(url) {
-  const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
-  return reg.test(url);
+  const reg =
+    /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
+  return reg.test(url)
 }

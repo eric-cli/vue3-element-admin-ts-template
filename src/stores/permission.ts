@@ -1,19 +1,16 @@
-import { defineStore } from "pinia";
-import { constantRoutes, asyncRoutes } from "@/router";
+import { defineStore } from "pinia"
+import { constantRoutes, asyncRoutes } from "@/router"
 
 /**
  * Use meta.role to determine if the current user has permission
  * @param roles
  * @param route
  */
-function hasPermission(
-  roles: any[],
-  route: { meta: { roles: string | any[] } }
-) {
+function hasPermission(roles: any[], route: { meta: { roles: string | any[] } }) {
   if (route.meta && route.meta.roles) {
-    return roles.some((role: any) => route.meta.roles.includes(role));
+    return roles.some((role: any) => route.meta.roles.includes(role))
   } else {
-    return true;
+    return true
   }
 }
 
@@ -23,21 +20,21 @@ function hasPermission(
  * @param roles
  */
 export function filterAsyncRoutes(routes: any[], roles: any) {
-  const res: any[] = [];
+  const res: any[] = []
 
   routes.forEach((route: any) => {
-    const tmp = { ...route };
+    const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
       if (tmp.children && tmp.children.length) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles);
+        tmp.children = filterAsyncRoutes(tmp.children, roles)
       } else {
-        tmp.children = [];
+        tmp.children = []
       }
-      res.push(tmp);
+      res.push(tmp)
     }
-  });
+  })
 
-  return res;
+  return res
 }
 
 const usePermissionStore = defineStore({
@@ -45,30 +42,30 @@ const usePermissionStore = defineStore({
   state: () => {
     return {
       routes: [],
-      addRoutes: [],
-    };
+      addRoutes: []
+    }
   },
   actions: {
     generateRoutes(roles: string | string[]) {
       return new Promise((resolve) => {
-        let accessedRoutes;
+        let accessedRoutes
 
         if (roles.includes("admin")) {
-          accessedRoutes = asyncRoutes || [];
+          accessedRoutes = asyncRoutes || []
         } else {
-          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
         }
-        this.setRoutes(accessedRoutes);
+        this.setRoutes(accessedRoutes)
         // console.log(accessedRoutes);
 
-        resolve(accessedRoutes);
-      });
+        resolve(accessedRoutes)
+      })
     },
     setRoutes(routes: any) {
-      this.addRoutes = routes;
-      this.routes = constantRoutes.concat(routes);
-    },
-  },
-});
+      this.addRoutes = routes
+      this.routes = constantRoutes.concat(routes)
+    }
+  }
+})
 
-export default usePermissionStore;
+export default usePermissionStore

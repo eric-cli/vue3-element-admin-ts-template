@@ -51,52 +51,52 @@
 </template>
 
 <script lang="ts" setup>
-// TODO: add element-icon
-import clipboard from "@/utils/clipboard";
-import svgIcons from "./svg-icons";
-import elementIcons from "./element-icons";
-import EleIcons from "./EleIcons.vue";
-const generateIconCode = (symbol) => {
-  return `<svg-icon icon-class="${symbol}" />`;
-};
-const generateElementIconCode = (symbol) => {
-  return `<el-icon><${symbol} /></el-icon>`;
-};
-const handleClipboard = (text) => {
-  clipboard(text);
-};
+  // TODO: add element-icon
+  import clipboard from "@/utils/clipboard"
+  import svgIcons from "./svg-icons"
+  import elementIcons from "./element-icons"
+  import EleIcons from "./EleIcons.vue"
+  const generateIconCode = (symbol) => {
+    return `<svg-icon icon-class="${symbol}" />`
+  }
+  const generateElementIconCode = (symbol) => {
+    return `<el-icon><${symbol} /></el-icon>`
+  }
+  const handleClipboard = (text) => {
+    clipboard(text)
+  }
 </script>
 
 <style lang="scss" scoped>
-.icons-container {
-  margin: 10px 20px 0;
-  overflow: hidden;
+  .icons-container {
+    margin: 10px 20px 0;
+    overflow: hidden;
 
-  .grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  }
+    .grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
 
-  .icon-item {
-    margin: 20px;
-    height: 85px;
-    text-align: center;
-    width: 100px;
-    float: left;
-    font-size: 30px;
-    color: #24292e;
-    cursor: pointer;
-  }
+    .icon-item {
+      margin: 20px;
+      height: 85px;
+      text-align: center;
+      width: 100px;
+      float: left;
+      font-size: 30px;
+      color: #24292e;
+      cursor: pointer;
+    }
 
-  span {
-    display: block;
-    font-size: 16px;
-    margin-top: 10px;
-  }
+    span {
+      display: block;
+      font-size: 16px;
+      margin-top: 10px;
+    }
 
-  .disabled {
-    pointer-events: none;
+    .disabled {
+      pointer-events: none;
+    }
   }
-}
 </style>

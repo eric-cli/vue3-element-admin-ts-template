@@ -1,48 +1,48 @@
-import { isFunction } from "@/utils/validate";
+import { isFunction } from "@/utils/validate"
 
 export function useTimeouRef(wait: number) {
-  const readyRef = ref(false);
+  const readyRef = ref(false)
 
-  let timer: TimeoutHandle;
+  let timer: TimeoutHandle
 
   const stop = (): void => {
-    readyRef.value = false;
-    timer && window.clearTimeout(timer);
-  };
+    readyRef.value = false
+    timer && window.clearTimeout(timer)
+  }
 
   const start = (): void => {
-    stop();
+    stop()
     timer = setTimeout(() => {
-      readyRef.value = true;
-    }, wait);
-  };
+      readyRef.value = true
+    }, wait)
+  }
 
-  start();
+  start()
 
-  tryOnUnmounted(stop);
+  tryOnUnmounted(stop)
 
-  return { readyRef, stop, start };
+  return { readyRef, stop, start }
 }
 
 export function useTimeoutFn(handle: Fn, wait: number, native = false) {
   if (!isFunction(handle)) {
-    throw new Error("handle is not a function");
+    throw new Error("handle is not a function")
   }
 
-  const { readyRef, stop, start } = useTimeouRef(wait);
+  const { readyRef, stop, start } = useTimeouRef(wait)
 
   if (native) {
-    handle();
+    handle()
   } else {
     watch(
       readyRef,
       (maturity) => {
-        maturity && handle();
+        maturity && handle()
       },
       {
-        immediate: false,
+        immediate: false
       }
-    );
+    )
   }
-  return { readyRef, stop, start };
+  return { readyRef, stop, start }
 }

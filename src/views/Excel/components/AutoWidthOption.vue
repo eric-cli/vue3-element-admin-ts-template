@@ -9,29 +9,29 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: "",
-  },
-});
-const emit = defineEmits(["update:modelValue"]);
+  const props = defineProps({
+    modelValue: {
+      type: String,
+      default: ""
+    }
+  })
+  const emit = defineEmits(["update:modelValue"])
 
-const autoWidth = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(val) {
-    emit("update:modelValue", val);
-  },
-});
+  const autoWidth = computed({
+    get() {
+      return props.modelValue
+    },
+    set(val) {
+      emit("update:modelValue", val)
+    }
+  })
 </script>
 
 <style lang="scss" scoped>
-.radio-label {
-  font-size: 14px;
-  color: #606266;
-  line-height: 40px;
-  padding: 0 12px 0 30px;
-}
+  .radio-label {
+    font-size: 14px;
+    color: #606266;
+    line-height: 40px;
+    padding: 0 12px 0 30px;
+  }
 </style>

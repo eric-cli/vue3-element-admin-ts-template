@@ -51,52 +51,52 @@
 </template>
 
 <script setup lang="ts">
-import { Document } from "@element-plus/icons-vue";
-import { fetchList } from "@/apis/article";
-import type { ElTable } from "element-plus";
-import { parseTime } from "@/utils";
-const multipleTable = ref<InstanceType<typeof ElTable>>();
-let list = ref([]);
-let listLoading = ref(true);
-let downloadLoading = ref(false);
-const fetchData = () => {
-  listLoading.value = true;
-  fetchList().then((res) => {
-    list.value = res.data.lists;
-    listLoading.value = false;
-  });
-};
-const formatJson = (filterVal, jsonData) => {
-  return jsonData.map((v) =>
-    filterVal.map((j) => {
-      if (j === "timestamp") {
-        return parseTime(v[j]);
-      } else {
-        return v[j];
-      }
+  import { Document } from "@element-plus/icons-vue"
+  import { fetchList } from "@/apis/article"
+  import type { ElTable } from "element-plus"
+  import { parseTime } from "@/utils"
+  const multipleTable = ref<InstanceType<typeof ElTable>>()
+  let list = ref([])
+  let listLoading = ref(true)
+  let downloadLoading = ref(false)
+  const fetchData = () => {
+    listLoading.value = true
+    fetchList().then((res) => {
+      list.value = res.data.lists
+      listLoading.value = false
     })
-  );
-};
-const handleDownload = () => {
-  downloadLoading.value = true;
-  import("@/vendor/Export2Excel").then((excel) => {
-    const multiHeader: any = [["Id", "Main Information", "", "", "Date"]];
-    const header: any = ["", "Title", "Author", "Readings", ""];
-    const filterVal = ["id", "title", "author", "pageviews", "display_time"];
-    const data: any = formatJson(filterVal, list.value);
-    const merges: any = ["A1:A2", "B1:D1", "E1:E2"];
-    excel.export_json_to_excel({
-      multiHeader,
-      header,
-      merges,
-      data,
-    });
-    downloadLoading.value = false;
-  });
-};
-onMounted(() => {
-  fetchData();
-});
+  }
+  const formatJson = (filterVal, jsonData) => {
+    return jsonData.map((v) =>
+      filterVal.map((j) => {
+        if (j === "timestamp") {
+          return parseTime(v[j])
+        } else {
+          return v[j]
+        }
+      })
+    )
+  }
+  const handleDownload = () => {
+    downloadLoading.value = true
+    import("@/vendor/Export2Excel").then((excel) => {
+      const multiHeader: any = [["Id", "Main Information", "", "", "Date"]]
+      const header: any = ["", "Title", "Author", "Readings", ""]
+      const filterVal = ["id", "title", "author", "pageviews", "display_time"]
+      const data: any = formatJson(filterVal, list.value)
+      const merges: any = ["A1:A2", "B1:D1", "E1:E2"]
+      excel.export_json_to_excel({
+        multiHeader,
+        header,
+        merges,
+        data
+      })
+      downloadLoading.value = false
+    })
+  }
+  onMounted(() => {
+    fetchData()
+  })
 </script>
 
 <style lang="scss" scoped></style>
