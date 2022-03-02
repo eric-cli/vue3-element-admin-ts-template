@@ -192,7 +192,7 @@ export const asyncRoutes: Array<RouteRecordRaw> = [
     name: "Example",
     meta: {
       title: "Example",
-      icon: "el-icon-s-help"
+      icon: "el-icon-Help"
     },
     children: [
       {
