@@ -3,7 +3,7 @@
   "useTabs": false,
   "vueIndentScriptAndStyle": true,
   "jsxSingleQuote": false,
-  "jsxBracketSameLine": true,
+  "jsxBracketSameLine": false,
   "printWidth": 100,
   "singleQuote": false,
   "trailingComma": "none",
