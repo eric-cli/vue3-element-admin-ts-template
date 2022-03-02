@@ -19,10 +19,10 @@
               <template #content>
                 {{ generateIconCode(item) }}
               </template>
-              <div class="icon-item">
+              <el-row class="icon-item" align="middle">
                 <svg-icon :icon-class="item" class-name="disabled" />
                 <span>{{ item }}</span>
-              </div>
+              </el-row>
             </el-tooltip>
           </div>
         </div>
@@ -38,10 +38,10 @@
               <template #content>
                 {{ generateElementIconCode(item.name) }}
               </template>
-              <div class="icon-item">
+              <el-row class="icon-item" align="middle">
                 <el-icon><EleIcons :icon="item.icon" /></el-icon>
                 <span>{{ item.name }}</span>
-              </div>
+              </el-row>
             </el-tooltip>
           </div>
         </div>
@@ -56,6 +56,7 @@
   import svgIcons from "./svg-icons"
   import elementIcons from "./element-icons"
   import EleIcons from "./EleIcons.vue"
+
   const generateIconCode = (symbol) => {
     return `<svg-icon icon-class="${symbol}" />`
   }
@@ -81,12 +82,11 @@
     .icon-item {
       margin: 20px;
       height: 85px;
-      text-align: center;
       width: 100px;
-      float: left;
       font-size: 30px;
       color: #24292e;
       cursor: pointer;
+      flex-direction: column;
     }
 
     span {

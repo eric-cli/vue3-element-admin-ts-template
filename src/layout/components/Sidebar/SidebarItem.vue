@@ -21,7 +21,7 @@
     </template>
 
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
-      <template slot="title">
+      <template #title>
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
       <sidebar-item
@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { isExternal } from "@/utils/validate"
   import path from "path-browserify"
+  import { isExternal } from "@/utils/validate"
   import Item from "./Item.vue"
   import AppLink from "./Link.vue"
   // TODO:fix
@@ -58,7 +58,7 @@
     }
   })
 
-  let onlyOneChild = ref(null)
+  const onlyOneChild = ref(null)
   const resolvePath = (routePath) => {
     if (isExternal(routePath)) {
       return routePath
@@ -69,17 +69,16 @@
     return path.resolve(props.basePath, routePath)
     // return props.basePath + "/" + routePath;
   }
-  const hasOneShowingChild = (children = [], parent) => {
+  const hasOneShowingChild = (children = [], parent = {}) => {
     // console.log(children);
 
     const showingChildren = children.filter((item) => {
       if (item.meta && item.meta.hidden) {
         return false
-      } else {
-        // Temp set(will be used if only has one showing child)
-        onlyOneChild.value = item
-        return true
       }
+      // Temp set(will be used if only has one showing child)
+      onlyOneChild.value = item
+      return true
     })
 
     // When there is only one child router, the child router is displayed by default

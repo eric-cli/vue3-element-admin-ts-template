@@ -21,7 +21,7 @@
               {
                 class: "sub-el-icon"
               },
-              h(resolveComponent(icon))
+              h(resolveComponent("help"))
             )
           )
         } else {

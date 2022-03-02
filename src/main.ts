@@ -1,11 +1,12 @@
 import { createApp } from "vue"
+import ElementPlus from "element-plus"
+import * as ElIcons from "@element-plus/icons-vue"
 import App from "./App.vue"
 import router from "./router"
 import store from "./stores"
 import "virtual:windi.css"
 import "normalize.css/normalize.css"
 
-import ElementPlus from "element-plus"
 import "element-plus/dist/index.css"
 import "./permission"
 
@@ -18,10 +19,16 @@ const app = createApp(App)
 // Register global directive
 setupGlobDirectives(app)
 
+Object.keys(ElIcons).forEach((key) => {
+  app.component(key, (ElIcons as any)[key])
+})
+// for (let key of Object.keys(ElIcons)) {
+
+// }
 errorLogs(app)
 // 注册icons组件
 // 引入icons组件
-app.component("svg-icon", SvgIcon) // svg component
+app.component("SvgIcon", SvgIcon) // svg component
 
 app.use(router)
 app.use(store)
