@@ -20,9 +20,10 @@
 </template>
 
 <script setup lang="ts">
-  const emptyGif = "https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3"
   import useUserStore from "@/stores/user"
   import GithubCorner from "@/components/GithubCorner/index.vue"
+
+  const emptyGif = "https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3"
   const userStore = useUserStore()
   const roles = computed(() => {
     return userStore.roles

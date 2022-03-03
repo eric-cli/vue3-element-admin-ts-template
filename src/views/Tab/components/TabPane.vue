@@ -58,6 +58,7 @@
 <script setup lang="ts">
   import { fetchList } from "@/apis/article"
   import { parseTime } from "@/utils"
+
   const props = defineProps({
     type: {
       type: String,

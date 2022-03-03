@@ -3,10 +3,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { animationDuration } from "../constant"
   import type { Ref } from "vue"
+  import { animationDuration } from "../constant"
   import echarts from "@/utils/echarts"
   import { useECharts } from "@/hooks/useECharts"
+
   const chartRef = ref<HTMLDivElement | null>(null)
   const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
   const props = defineProps({

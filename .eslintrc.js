@@ -38,6 +38,8 @@ module.exports = {
     "no-param-reassign": "off",
     "no-console": "off", // vite已配置打包清理console和debugger
     "no-shadow": "off",
+    "vue/no-v-html": "off",
+    "vue/v-on-event-hyphenation": "off",
     "@typescript-eslint/no-non-null-assertion": "off"
   },
   globals: {

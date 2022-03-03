@@ -66,9 +66,9 @@
 
     <pagination
       v-show="total > 0"
-      :total="total"
       v-model:page="listQuery.page"
       v-model:limit="listQuery.limit"
+      :total="total"
       @pagination="getList"
     />
   </div>
@@ -80,6 +80,7 @@
   import { fetchList } from "@/apis/article"
   import Pagination from "@/components/Pagination/index.vue" // Secondary package based on el-pagination
   import { parseTime } from "@/utils"
+
   const listQuery = ref({ page: 1, limit: 20 })
   const listLoading = ref(true)
   const total = ref(0)

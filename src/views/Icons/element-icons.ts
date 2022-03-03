@@ -1,17 +1,25 @@
+import * as Icons from "@element-plus/icons-vue"
+
 interface elementItems {
   name: string
   icon: any
 }
 
-let elementIcons: elementItems[] = []
+const elementIcons: elementItems[] = []
+// for (const [key, value] of Object.entries(Icons)) {
+//   console.log(key, value)
 
-import * as Icons from "@element-plus/icons-vue"
-for (let [key, value] of Object.entries(Icons)) {
+//   const items: elementItems = {
+//     name: key,
+//     icon: value
+//   }
+//   elementIcons.push(items)
+// }
+Object.entries(Icons).forEach((ele) => {
   const items: elementItems = {
-    name: key,
-    icon: value
+    name: ele[0],
+    icon: ele[1]
   }
   elementIcons.push(items)
-}
-
+})
 export default elementIcons

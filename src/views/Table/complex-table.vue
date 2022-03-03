@@ -6,7 +6,7 @@
         placeholder="Title"
         style="width: 200px"
         class="filter-item"
-        @keyup.enter.native="handleFilter"
+        @keyup.enter="handleFilter"
       />
       <el-select
         v-model="listQuery.importance"
@@ -189,13 +189,13 @@
 
     <pagination
       v-show="total > 0"
-      :total="total"
       v-model:page="listQuery.page"
       v-model:limit="listQuery.limit"
+      :total="total"
       @pagination="getList"
     />
 
-    <el-dialog :title="textMap[dialogStatus]" v-model="dialogFormVisible">
+    <el-dialog v-model="dialogFormVisible" :title="textMap[dialogStatus]">
       <el-form
         ref="dataForm"
         :rules="rules"
@@ -246,12 +246,12 @@
           />
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
+      <template #footer>
         <el-button @click="dialogFormVisible = false"> Cancel </el-button>
         <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
           Confirm
         </el-button>
-      </div>
+      </template>
     </el-dialog>
 
     <el-dialog v-model="dialogPvVisible" title="Reading statistics">
@@ -259,17 +259,17 @@
         <el-table-column prop="key" label="Channel" />
         <el-table-column prop="pv" label="Pv" />
       </el-table>
-      <span slot="footer" class="dialog-footer">
+      <template #footer>
         <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
-      </span>
+      </template>
     </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
+  import type { ElForm } from "element-plus"
   import { fetchList, fetchPv, createArticle, updateArticle } from "@/apis/article"
   import { parseTime } from "@/utils"
-  import type { ElForm } from "element-plus"
 
   type FormInstance = InstanceType<typeof ElForm>
   const dataForm = ref<FormInstance>()
@@ -298,7 +298,7 @@
   ])
   const statusOptions = ref(["published", "draft", "deleted"])
   const showReviewer = ref(false)
-  const temp = ref({
+  const temp: any = ref({
     id: undefined,
     importance: 1,
     remark: "",
@@ -397,7 +397,7 @@
   const createData = () => {
     dataForm.value?.validate((valid) => {
       if (valid) {
-        temp.value.id = parseInt(Math.random() * 100) + 1024 // mock a id
+        temp.value.id = parseInt(Math.random() * 100, 10) + 1024 // mock a id
         temp.value.author = "vue-element-admin"
         createArticle(temp.value).then(() => {
           list.value.unshift(temp.value)
@@ -413,7 +413,7 @@
     })
   }
   const handleUpdate = (row) => {
-    temp.value = Object.assign({}, row) // copy obj
+    temp.value = { ...row } // copy obj
     temp.value.timestamp = new Date(temp.value.timestamp)
     dialogStatus.value = "update"
     dialogFormVisible.value = true
@@ -424,7 +424,7 @@
   const updateData = () => {
     dataForm.value?.validate((valid) => {
       if (valid) {
-        const tempData = Object.assign({}, temp.value)
+        const tempData = { ...temp.value }
         tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
         updateArticle(tempData).then(() => {
           const index = list.value.findIndex((v) => v.id === temp.value.id)
@@ -460,9 +460,8 @@
       filterVal.map((j) => {
         if (j === "timestamp") {
           return parseTime(v[j])
-        } else {
-          return v[j]
         }
+        return v[j]
       })
     )
   }
@@ -481,7 +480,7 @@
     })
   }
   const getSortClass = (key) => {
-    const sort = listQuery.value.sort
+    const { sort } = listQuery.value
     return sort === `+${key}` ? "ascending" : "descending"
   }
   const sortChange = (data) => {

@@ -52,13 +52,14 @@
 
 <script setup lang="ts">
   import { Document } from "@element-plus/icons-vue"
-  import { fetchList } from "@/apis/article"
   import type { ElTable } from "element-plus"
+  import { fetchList } from "@/apis/article"
   import { parseTime } from "@/utils"
+
   const multipleTable = ref<InstanceType<typeof ElTable>>()
-  let list = ref([])
-  let listLoading = ref(true)
-  let downloadLoading = ref(false)
+  const list = ref([])
+  const listLoading = ref(true)
+  const downloadLoading = ref(false)
   const fetchData = () => {
     listLoading.value = true
     fetchList().then((res) => {
@@ -71,9 +72,8 @@
       filterVal.map((j) => {
         if (j === "timestamp") {
           return parseTime(v[j])
-        } else {
-          return v[j]
         }
+        return v[j]
       })
     )
   }

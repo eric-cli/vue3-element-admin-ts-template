@@ -8,7 +8,7 @@
         query
       } = route
       router.replace({
-        path: "/" + path,
+        path: `/${path}`,
         query
       })
     },

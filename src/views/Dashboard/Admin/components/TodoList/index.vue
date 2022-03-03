@@ -38,7 +38,7 @@
           }}</a>
         </li>
       </ul>
-      <button class="clear-completed" v-show="todos.length > remaining" @click="clearCompleted">
+      <button v-show="todos.length > remaining" class="clear-completed" @click="clearCompleted">
         Clear completed
       </button>
     </footer>
@@ -47,11 +47,12 @@
 
 <script lang="ts" setup>
   import Todo from "./Todo.vue"
+
   const STORAGE_KEY = "todos"
-  const pluralize = (n, w) => (n === 1 ? w : w + "s")
+  const pluralize = (n, w) => (n === 1 ? w : `${w}s`)
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1)
-  let visibility = ref("all")
-  let todos = ref([
+  const visibility = ref("all")
+  const todos = ref([
     { text: "star this repository", done: false },
     { text: "fork this repository", done: false },
     { text: "follow author", done: false },
@@ -61,7 +62,7 @@
     { text: "axios", done: true },
     { text: "webpack", done: true }
   ])
-  let filters = {
+  const filters = {
     all: (todos) => todos,
     active: (todos) => todos.filter((todo) => !todo.done),
     completed: (todos) => todos.filter((todo) => todo.done)

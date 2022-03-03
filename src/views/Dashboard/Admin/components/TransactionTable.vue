@@ -21,7 +21,8 @@
 <script lang="ts" setup>
   import { transactionList } from "@/apis/remote-search"
   import { toThousandFilter } from "@/filters"
-  let list = ref([])
+
+  const list = ref([])
   // TODO 使用reactive包裹时,直接list = res.data.lists.slice(0, 8) 会使list失去响应式
   const fetchData = () => {
     transactionList().then((res) => {

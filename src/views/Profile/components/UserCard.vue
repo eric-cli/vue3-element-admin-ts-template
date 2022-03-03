@@ -1,7 +1,9 @@
 <template>
   <el-card style="margin-bottom: 20px">
-    <template #header class="clearfix">
-      <span>About me</span>
+    <template #header>
+      <div class="clearfix">
+        <span>About me</span>
+      </div>
     </template>
 
     <div class="user-profile">
@@ -59,6 +61,7 @@
 <script lang="ts" setup>
   import PanThumb from "@/components/PanThumb/index.vue"
   import { uppercaseFirst } from "@/filters"
+
   const props = defineProps({
     user: {
       type: Object,

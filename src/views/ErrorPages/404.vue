@@ -25,8 +25,9 @@
 </template>
 
 <script setup lang="ts">
-  const message = ref("The webmaster said that you can not enter this page...")
   import Img404 from "@/assets/404_images/404.png"
+
+  const message = ref("The webmaster said that you can not enter this page...")
 </script>
 
 <style lang="scss" scoped>

@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
   import TabPane from "./components/TabPane.vue"
+
   const route = useRoute()
   const router = useRouter()
   const tabMapOptions = [
@@ -35,7 +36,7 @@
   const activeName: any = ref("CN")
   const createdTimes = ref(0)
   const showCreatedTimes = () => {
-    createdTimes.value = createdTimes.value + 1
+    createdTimes.value += 1
   }
   watch(
     activeName,
@@ -47,7 +48,7 @@
   )
   onMounted(() => {
     // init the default selected tab
-    const tab = route.query.tab
+    const { tab } = route.query
     if (tab) {
       activeName.value = tab
     }

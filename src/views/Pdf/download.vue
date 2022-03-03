@@ -22,12 +22,12 @@
 </template>
 
 <script setup lang="ts">
-  let article = ref()
-
-  onMounted(() => {
-    fetchData()
+  const article = ref({
+    content: "",
+    title: ""
   })
   const fullscreenLoading = ref(true)
+
   const fetchData = () => {
     import("./content").then((data) => {
       console.log(data)
@@ -42,6 +42,9 @@
       }, 3000)
     })
   }
+  onMounted(() => {
+    fetchData()
+  })
 </script>
 
 <style lang="scss" scoped>

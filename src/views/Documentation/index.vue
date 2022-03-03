@@ -36,6 +36,7 @@
 
 <script lang="ts" setup>
   import DropdownMenu from "@/components/DropdownMenu/index.vue"
+
   const articleList = [
     { title: "基础篇", href: "https://juejin.im/post/59097cd7a22b9d0065fb61d2" },
     {

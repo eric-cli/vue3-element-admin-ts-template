@@ -41,7 +41,7 @@
   const formThead = ref(defaultFormThead) // 默认表头 Default header
   watch(checkboxVal, (valArr) => {
     formThead.value = formTheadOptions.value.filter((i) => valArr.indexOf(i) >= 0)
-    key.value = key.value + 1 // 为了保证table 每次都会重渲 In order to ensure the table will be re-rendered each time
+    key.value += 1 // 为了保证table 每次都会重渲 In order to ensure the table will be re-rendered each time
   })
 </script>
 

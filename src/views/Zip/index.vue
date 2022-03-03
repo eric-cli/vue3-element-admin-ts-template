@@ -56,10 +56,11 @@
 <script setup lang="ts">
   import { Document } from "@element-plus/icons-vue"
   import { fetchList } from "@/apis/article"
-  let list = ref([])
-  let listLoading = ref(true)
-  let downloadLoading = ref(false)
-  let filename = ref("")
+
+  const list = ref([])
+  const listLoading = ref(true)
+  const downloadLoading = ref(false)
+  const filename = ref("")
 
   const fetchData = async () => {
     listLoading.value = true

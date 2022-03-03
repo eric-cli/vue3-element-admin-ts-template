@@ -6,6 +6,7 @@
   import type { Ref } from "vue"
   import echarts from "@/utils/echarts"
   import { useECharts } from "@/hooks/useECharts"
+
   const props = defineProps({
     className: {
       type: String,

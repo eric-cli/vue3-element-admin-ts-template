@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
   import UploadExcelComponent from "@/components/UploadExcel/index.vue"
+
   const tableData = ref([])
   const tableHeader = ref([])
   const beforeUpload = (file) => {

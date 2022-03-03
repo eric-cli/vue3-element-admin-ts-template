@@ -32,6 +32,7 @@
   import Timeline from "./components/Timeline.vue"
   import UserCard from "./components/UserCard.vue"
   import useUserStore from "@/stores/user"
+
   const userStore = useUserStore()
   const user = computed(() => {
     return userStore.userInfos

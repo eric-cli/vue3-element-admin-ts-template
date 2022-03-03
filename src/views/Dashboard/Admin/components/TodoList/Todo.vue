@@ -3,7 +3,7 @@
     <el-row class="view" align="middle" justify="space-between">
       <input :checked="todo.done" class="toggle" type="checkbox" @change="toggleTodo(todo)" />
       <label @dblclick="editing = true" v-text="todo.text" />
-      <el-icon class="destroy" @click="deleteTodo(todo)" color="#af5b5e"><Close /></el-icon>
+      <el-icon class="destroy" color="#af5b5e" @click="deleteTodo(todo)"><Close /></el-icon>
     </el-row>
     <input
       v-show="editing"
@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
   import { Close } from "@element-plus/icons-vue"
+
   const vFocus = {
     beforeMount: (el, { value }, { context }) => {
       if (value) {
@@ -31,7 +32,7 @@
   const props = defineProps({
     todo: {
       type: Object,
-      default: function () {
+      default() {
         return {}
       }
     }

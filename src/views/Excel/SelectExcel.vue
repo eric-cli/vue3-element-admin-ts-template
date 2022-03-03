@@ -23,9 +23,9 @@
       <el-tag type="info">Documentation</el-tag>
     </a>
     <el-table
-      class="mt-20px"
       ref="multipleTable"
       v-loading="listLoading"
+      class="mt-20px"
       :data="list"
       element-loading-text="拼命加载中"
       border
@@ -65,15 +65,16 @@
 </template>
 
 <script setup lang="ts">
-  import { fetchList } from "@/apis/article"
   import type { ElTable } from "element-plus"
   import { Document } from "@element-plus/icons-vue"
+  import { fetchList } from "@/apis/article"
   import { parseTime } from "@/utils"
-  let list = ref([])
-  let listLoading = ref(true)
-  let downloadLoading = ref(false)
-  let filename = ref("")
-  let multipleSelection = ref([])
+
+  const list = ref([])
+  const listLoading = ref(true)
+  const downloadLoading = ref(false)
+  const filename = ref("")
+  const multipleSelection = ref([])
   const multipleTable = ref<InstanceType<typeof ElTable>>()
   const fetchData = () => {
     listLoading.value = true
@@ -87,9 +88,8 @@
       filterVal.map((j) => {
         if (j === "timestamp") {
           return parseTime(v[j])
-        } else {
-          return v[j]
         }
+        return v[j]
       })
     )
   }

@@ -61,18 +61,19 @@
 </template>
 
 <script setup lang="ts">
+  import { Document } from "@element-plus/icons-vue"
   import FilenameOption from "./components/FilenameOption.vue"
   import AutoWidthOption from "./components/AutoWidthOption.vue"
   import BookTypeOption from "./components/BookTypeOption.vue"
-  import { Document } from "@element-plus/icons-vue"
   import { parseTime } from "@/utils"
   import { fetchList } from "@/apis/article"
-  let list = ref([])
-  let listLoading = ref(true)
-  let downloadLoading = ref(false)
-  let filename = ref("")
-  let autoWidth = ref(true)
-  let bookType = ref("xlsx")
+
+  const list = ref([])
+  const listLoading = ref(true)
+  const downloadLoading = ref(false)
+  const filename = ref("")
+  const autoWidth = ref(true)
+  const bookType = ref("xlsx")
   const fetchData = () => {
     listLoading.value = true
     fetchList().then((res) => {
@@ -85,9 +86,8 @@
       filterVal.map((j) => {
         if (j === "timestamp") {
           return parseTime(v[j])
-        } else {
-          return v[j]
         }
+        return v[j]
       })
     )
   }

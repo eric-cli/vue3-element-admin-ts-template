@@ -69,11 +69,12 @@
 </template>
 
 <script setup lang="ts">
+  import type { ElTable } from "element-plus"
+  import Sortable from "sortablejs"
   import { parseTime } from "@/utils"
   import { fetchList } from "@/apis/article"
-  import type { ElTable } from "element-plus"
   // https://www.npmjs.com/package/sortablejs
-  import Sortable from "sortablejs"
+
   const statusFilter = (status) => {
     const statusMap = {
       published: "success",
@@ -98,7 +99,7 @@
 
     sortable.value = Sortable.create(el, {
       ghostClass: "sortable-ghost", // Class name for the drop placeholder,
-      setData: function (dataTransfer) {
+      setData(dataTransfer) {
         // to avoid Firefox bug
         // Detail see : https://github.com/RubaXa/Sortable/issues/1012
         dataTransfer.setData("Text", "")

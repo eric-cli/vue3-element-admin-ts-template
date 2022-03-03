@@ -34,9 +34,9 @@
   // TODO 尝试引入assets下的gif失败
   // import errGif from "@/assets/401_images/401.gif";
   // const errGif = import.meta.glob("../../assets/401_images/401.gif");
-  const errGif = new URL("../../assets/401_images/401.gif", import.meta.url).href
-
   import { ArrowLeft } from "@element-plus/icons-vue"
+
+  const errGif = new URL("../../assets/401_images/401.gif", import.meta.url).href
   const route = useRoute()
   const router = useRouter()
   const ewizardClap = ref("https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646")
