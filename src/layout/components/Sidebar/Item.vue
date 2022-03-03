@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { formateElIcons } from "@/utils/"
+
   export default defineComponent({
     props: {
       icon: {
@@ -21,7 +23,7 @@
               {
                 class: "sub-el-icon"
               },
-              h(resolveComponent("help"))
+              h(resolveComponent(formateElIcons(icon)))
             )
           )
         } else {

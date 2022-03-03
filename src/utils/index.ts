@@ -9,7 +9,7 @@ export function toggleClass(element, className) {
   let classString = element.className
   const nameIndex = classString.indexOf(className)
   if (nameIndex === -1) {
-    classString += "" + className
+    classString += `${className}`
   } else {
     classString =
       classString.substr(0, nameIndex) + classString.substr(nameIndex + className.length)
@@ -35,16 +35,16 @@ export function parseTime(time, cFormat = "{y}-{m}-{d} {h}:{i}:{s}") {
     if (typeof time === "string") {
       if (/^[0-9]+$/.test(time)) {
         // support "1548221490638"
-        time = parseInt(time)
+        time = parseInt(time, 10)
       } else {
         // support safari
         // https://stackoverflow.com/questions/4310953/invalid-date-in-safari
-        time = time.replace(new RegExp(/-/gm), "/")
+        time = time.replace(/\-/g, "/")
       }
     }
 
     if (typeof time === "number" && time.toString().length === 10) {
-      time = time * 1000
+      time *= 1000
     }
     date = new Date(time)
   }
@@ -57,7 +57,7 @@ export function parseTime(time, cFormat = "{y}-{m}-{d} {h}:{i}:{s}") {
     s: date.getSeconds(),
     a: date.getDay()
   }
-  const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
+  const timeStr = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
     if (key === "a") {
@@ -65,5 +65,9 @@ export function parseTime(time, cFormat = "{y}-{m}-{d} {h}:{i}:{s}") {
     }
     return value.toString().padStart(2, "0")
   })
-  return time_str
+  return timeStr
+}
+
+export const formateElIcons = (str) => {
+  return str.replace("el-icon-", "")
 }
