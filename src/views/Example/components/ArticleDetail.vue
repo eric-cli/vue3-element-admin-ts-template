@@ -5,7 +5,12 @@
         <CommentDropdown v-model="form.comment_disabled" />
         <PlatformDropdown v-model="form.platforms" />
         <SourceUrlDropdown v-model="form.source_uri" />
-        <el-button v-loading="loading" style="margin-left: 10px" type="success" @click="submitForm">
+        <el-button
+          v-loading="loading"
+          style="margin-left: 10px"
+          type="success"
+          @click="submitForm(postForm)"
+        >
           Publish
         </el-button>
         <el-button v-loading="loading" type="warning" @click="draftForm"> Draft </el-button>
@@ -106,13 +111,14 @@
 
 <script setup lang="ts">
   // TODO
+  import type { ElForm } from "element-plus"
   import { fetchArticle } from "@/apis/article"
   import { searchUser } from "@/apis/remote-search"
-  import type { ElForm } from "element-plus"
   import { validURL } from "@/utils/validate"
+  import useTagsViewStore from "@/stores/tagsView"
+
   type FormInstance = InstanceType<typeof ElForm>
   const postForm = ref<FormInstance>()
-  import useTagsViewStore from "@/stores/tagsView"
   const tagsViewStore = useTagsViewStore()
   const defaultForm = {
     status: "draft",
@@ -135,16 +141,16 @@
     }
   })
 
-  const form = ref(Object.assign({}, defaultForm))
+  const form = ref({ ...defaultForm })
   const loading = ref(false)
   const userListOptions = ref([])
   const validateRequire = (rule, value, callback) => {
     if (value === "") {
       ElMessage({
-        message: rule.field + "为必传项",
+        message: `${rule.field}为必传项`,
         type: "error"
       })
-      callback(new Error(rule.field + "为必传项"))
+      callback(new Error(`${rule.field}为必传项`))
     } else {
       callback()
     }
@@ -229,9 +235,7 @@
   }
   const setTagsViewTitle = () => {
     const title = "Edit Article"
-    const route: any = Object.assign({}, tempRoute.value, {
-      title: `${title}-${form.value.id}`
-    })
+    const route: any = { ...tempRoute.value, title: `${title}-${form.value.id}` }
     tagsViewStore.updateVisitedView(route)
   }
   const setPageTitle = () => {
@@ -239,9 +243,9 @@
     useTitle(`${title} - ${form.value.id}`)
   }
 
-  const submitForm = () => {
-    console.log(form.value)
-    postForm.value?.validate((valid) => {
+  const submitForm = (formEl: FormInstance | undefined) => {
+    if (!formEl) return
+    formEl.validate((valid) => {
       if (valid) {
         loading.value = true
         ElNotification({
@@ -252,10 +256,10 @@
         })
         form.value.status = "published"
         loading.value = false
-      } else {
-        console.log("error submit!!")
-        return false
+        return true
       }
+      console.log("error submit!")
+      return false
     })
   }
   onMounted(() => {
@@ -268,7 +272,7 @@
     // Why need to make a copy of this.$route here?
     // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
-    tempRoute.value = Object.assign({}, route)
+    tempRoute.value = { ...route }
   })
 </script>
 
