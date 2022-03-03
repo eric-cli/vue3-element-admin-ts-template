@@ -42,9 +42,9 @@
             name="password"
             tabindex="2"
             autocomplete="off"
-            @keyup.native="checkCapslock"
+            @keyup="checkCapslock"
             @blur="capsTooltip = false"
-            @keyup.enter.native="submitForm"
+            @keyup.enter="submitForm"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -75,7 +75,7 @@
       </div>
     </el-form>
 
-    <el-dialog title="Or connect with" v-model="showDialog">
+    <el-dialog v-model="showDialog" title="Or connect with">
       Can not be simulated on local, so please combine you own business simulation! ! !
       <br />
       <br />
@@ -89,6 +89,7 @@
   import { validUsername } from "@/utils/validate"
   import SocialSignin from "./components/SocialSignin.vue"
   import useUserStore from "@/stores/user"
+
   type FormInstance = InstanceType<typeof ElForm>
   const loginFormRef = ref<FormInstance>()
   const userStore = useUserStore()
@@ -119,13 +120,13 @@
     username: "",
     password: ""
   })
-  let username = ref(null)
-  let password = ref(null)
-  let redirect = ref(null)
-  let otherQuery = ref({})
+  const username = ref(null)
+  const password = ref(null)
+  const redirect = ref(null)
+  const otherQuery = ref({})
   let capsTooltip = ref(false)
-  let loading = ref(false)
-  let showDialog = ref(false)
+  const loading = ref(false)
+  const showDialog = ref(false)
 
   const checkCapslock = (e) => {
     const { key } = e
@@ -139,7 +140,7 @@
       passwordType.value = "password"
     }
     nextTick(() => {
-      password.value.focus()
+      password.value!.focus()
     })
   }
   const getOtherQuery = (query) => {
@@ -173,10 +174,10 @@
 
             loading.value = false
           })
-      } else {
-        console.log("error submit!!")
-        return false
+        return true
       }
+      console.log("error submit!!")
+      return false
     })
   }
 
@@ -191,7 +192,7 @@
     () => route,
     (route) => {
       console.log(route)
-      const query = route.query
+      const { query } = route
       if (query) {
         redirect.value = query.redirect
         otherQuery.value = getOtherQuery(query)
@@ -201,9 +202,9 @@
 
   onMounted(() => {
     if (form.username === "") {
-      username.value.focus()
+      username.value!.focus()
     } else if (form.password === "") {
-      password.value.focus()
+      password.value!.focus()
     }
   })
 </script>
