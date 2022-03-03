@@ -19,16 +19,14 @@ const app = createApp(App)
 // Register global directive
 setupGlobDirectives(app)
 
-Object.keys(ElIcons).forEach((key) => {
-  app.component(key, (ElIcons as any)[key])
-})
-// for (let key of Object.keys(ElIcons)) {
-
-// }
 errorLogs(app)
 // 注册icons组件
 // 引入icons组件
 app.component("SvgIcon", SvgIcon) // svg component
+
+Object.keys(ElIcons).forEach((key) => {
+  app.component(key, (ElIcons as any)[key])
+})
 
 app.use(router)
 app.use(store)
