@@ -3,7 +3,7 @@
     <el-badge
       :is-dot="true"
       style="line-height: 25px; margin-top: -5px"
-      @click.native="dialogTableVisible = true"
+      @click="dialogTableVisible = true"
     >
       <el-button style="padding: 8px 10px" size="small" type="danger">
         <svg-icon icon-class="bug" />
@@ -51,8 +51,9 @@
 </template>
 
 <script lang="ts" setup>
-  const dialogTableVisible = ref(false)
   import useAppStore from "@/stores/app"
+
+  const dialogTableVisible = ref(false)
   const appStore = useAppStore()
   const errorLogs = computed(() => {
     return appStore.logs

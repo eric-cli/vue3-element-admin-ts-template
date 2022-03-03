@@ -9,9 +9,8 @@ import { constantRoutes, asyncRoutes } from "@/router"
 function hasPermission(roles: any[], route: { meta: { roles: string | any[] } }) {
   if (route.meta && route.meta.roles) {
     return roles.some((role: any) => route.meta.roles.includes(role))
-  } else {
-    return true
   }
+  return true
 }
 
 /**

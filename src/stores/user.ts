@@ -20,7 +20,7 @@ const useUserStore = defineStore({
     login(userInfo: { username: any; password: any }) {
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
-        login({ username: username.trim(), password: password })
+        login({ username: username.trim(), password })
           .then(({ data, data: { role_name: roles, token } }) => {
             this.userInfos = data
             this.roles = roles
@@ -40,7 +40,7 @@ const useUserStore = defineStore({
     },
     // dynamically modify permissions
     async changeRoles(role) {
-      const token = role + "-token"
+      const token = `${role}-token`
 
       // commit("SET_TOKEN", token);
 

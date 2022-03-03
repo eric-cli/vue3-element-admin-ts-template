@@ -1,9 +1,9 @@
+import NProgress from "nprogress" // progress bar
+import { RouteRecordRaw } from "vue-router"
 import router from "./router"
 import useUserStore from "@/stores/user"
 import usePermissionStore from "@/stores/permission"
-import NProgress from "nprogress" // progress bar
 import "nprogress/nprogress.css" // progress bar style
-import { RouteRecordRaw } from "vue-router"
 
 // import { getToken } from "@/utils/auth"; // get token from cookie
 
@@ -61,17 +61,13 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     }
+  } else if (whiteList.indexOf(to.path) !== -1) {
+    // in the free login whitelist, go directly
+    next()
   } else {
-    /* has no token*/
-
-    if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly
-      next()
-    } else {
-      // other pages that do not have permission to access are redirected to the login page.
-      next(`/login?redirect=${to.path}`)
-      NProgress.done()
-    }
+    // other pages that do not have permission to access are redirected to the login page.
+    next(`/login?redirect=${to.path}`)
+    NProgress.done()
   }
 })
 router.afterEach(() => {

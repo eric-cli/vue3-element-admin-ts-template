@@ -8,18 +8,17 @@
   import AdminDashboard from "./Admin/index.vue"
   import EditorDashboard from "./Editor/index.vue"
   import useUserStore from "@/stores/user"
+
   const userStore = useUserStore()
-  const roles = computed(() => {
+  const roles: any = computed(() => {
     return userStore.roles
   })
   const currentRole = computed(() => {
     if (roles.value.includes("admin")) {
       return AdminDashboard
-    } else {
-      return EditorDashboard
     }
+    return EditorDashboard
   })
-  5
 </script>
 
 <style lang="scss" scoped></style>

@@ -24,6 +24,7 @@
   import RightPanel from "@/components/RightPanel/index.vue"
   import useAppStore from "@/stores/app"
   import useSettingStore from "@/stores/settings"
+
   const appStore = useAppStore()
   const settingStore = useSettingStore()
   const device = computed(() => {

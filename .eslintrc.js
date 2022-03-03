@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     "no-undef": "off",
     "import/extensions": "off",
+    "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-useless-escape": "off",
@@ -34,7 +35,10 @@ module.exports = {
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/ban-ts-comment": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-console": "off", // vite已配置打包清理console和debugger
+    "no-shadow": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   globals: {
     defineProps: "readonly",

@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-  let props = defineProps({
+  const props = defineProps({
     isActive: {
       type: Boolean,
       default: false

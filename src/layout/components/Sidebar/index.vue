@@ -32,6 +32,7 @@
   import useSettingStore from "@/stores/settings"
   import useAppStore from "@/stores/app"
   import usePermissionStore from "@/stores/permission"
+
   const settingStore = useSettingStore()
   const appStore = useAppStore()
   const permissionStore = usePermissionStore()

@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
   import { isExternal } from "@/utils/validate"
-  import { computed, defineComponent } from "vue"
+
   const props = defineProps({
     iconClass: {
       type: String,

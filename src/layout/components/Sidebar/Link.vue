@@ -6,6 +6,7 @@
 
 <script lang="ts" setup>
   import { isExternal } from "@/utils/validate"
+
   const props = defineProps({
     to: {
       type: String,
@@ -27,7 +28,7 @@
       }
     }
     return {
-      to: to
+      to
     }
   }
 </script>

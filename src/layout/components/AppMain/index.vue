@@ -20,6 +20,7 @@
 <script setup lang="ts">
   // TODO: fix router-view
   import useTagsViewStore from "@/stores/tagsView"
+
   const tagsViewStore = useTagsViewStore()
   const route = useRoute()
   const cachedViews = computed(() => {

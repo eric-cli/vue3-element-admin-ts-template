@@ -7,6 +7,7 @@
   import echarts from "@/utils/echarts"
   import { useECharts } from "@/hooks/useECharts"
   import { animationDuration } from "../constant"
+
   const props = defineProps({
     className: {
       type: String,

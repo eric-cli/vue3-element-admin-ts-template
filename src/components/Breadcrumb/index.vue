@@ -16,7 +16,7 @@
 <script lang="ts" setup>
   import { compile } from "path-to-regexp"
   // TODO 代码优化
-  let levelList: any = ref([])
+  const levelList: any = ref([])
   const route = useRoute()
   const router = useRouter()
   const isDashboard = (route) => {

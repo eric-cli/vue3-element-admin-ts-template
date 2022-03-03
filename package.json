@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
+    "lint:no-fix": "eslint src --no-fix --ext .ts,.tsx,.vue,.js,.jsx"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^0.2.7",

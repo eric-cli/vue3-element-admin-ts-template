@@ -10,9 +10,9 @@
         message: "you browser can not work",
         type: "warning"
       })
-      return false
+    } else {
+      toggle()
     }
-    toggle()
   }
 </script>
 

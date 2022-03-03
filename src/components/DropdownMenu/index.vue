@@ -14,7 +14,7 @@
   const props = defineProps({
     items: {
       type: Array,
-      default: function () {
+      default() {
         return []
       }
     },
@@ -23,7 +23,7 @@
       default: "vue"
     }
   })
-  let isActive = ref(false)
+  const isActive = ref(false)
   const clickTitle = () => {
     isActive.value = !isActive.value
   }

@@ -20,6 +20,7 @@
 
 <script lang="ts" setup>
   import useAppStore from "@/stores/app"
+
   const appStore = useAppStore()
   const sizeOptions = [
     { label: "Large", value: "large" },

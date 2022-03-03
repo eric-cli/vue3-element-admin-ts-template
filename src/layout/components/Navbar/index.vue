@@ -42,7 +42,7 @@
             <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
               <el-dropdown-item>Docs</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click.native="logout">
+            <el-dropdown-item divided @click="logout">
               <span style="display: block">Log Out</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -53,19 +53,20 @@
 </template>
 
 <script setup lang="ts">
+  import { CaretBottom } from "@element-plus/icons-vue"
   import useAppStore from "@/stores/app"
   import useUserStore from "@/stores/user"
-  const appStore = useAppStore()
-  const userStore = useUserStore()
-  const router = useRouter()
-  const route = useRoute()
   import Hamburger from "@/components/Hamburger/index.vue"
   import Breadcrumb from "@/components/Breadcrumb/index.vue"
   import Search from "@/components/HeaderSearch/index.vue"
   import SizeSelect from "@/components/SizeSelect/index.vue"
   import Screenfull from "@/components/Screenfull/index.vue"
   import ErrorLog from "@/components/ErrorLog/index.vue"
-  import { CaretBottom } from "@element-plus/icons-vue"
+
+  const appStore = useAppStore()
+  const userStore = useUserStore()
+  const router = useRouter()
+  const route = useRoute()
 
   const opened = computed(() => {
     return appStore.opened
