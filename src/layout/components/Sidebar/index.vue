@@ -13,10 +13,10 @@
         mode="vertical"
       >
         <SidebarItem
-          v-for="(route, index) in permissionRoutes"
-          :key="route.path + index"
-          :item="route"
-          :base-path="route.path"
+          v-for="(item, index) in permissionRoutes"
+          :key="item.path + index"
+          :item="item"
+          :base-path="item.path"
         />
       </el-menu>
     </el-scrollbar>
@@ -40,7 +40,7 @@
   const showLogo = computed(() => {
     return settingStore.sidebarLogo
   })
-  const permissionRoutes = computed(() => {
+  const permissionRoutes: any = computed(() => {
     return permissionStore.routes
   })
   const isCollapse = computed(() => {

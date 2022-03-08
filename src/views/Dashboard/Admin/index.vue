@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <GithubCorner class="github-corner" />
 
-    <PanelGroup @handleSetLineChartData="handleSetLineChartData" />
+    <PanelGroup @handle-set-line-chart-data="handleSetLineChartData" />
 
     <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
       <LineChart :chart-data="lineChartData" />
@@ -62,6 +62,16 @@
 </template>
 
 <script setup lang="ts">
+  import GithubCorner from "@/components/GithubCorner/index.vue"
+  import PanelGroup from "./components/PanelGroup.vue"
+  import LineChart from "./components/LineChart.vue"
+  import PieChart from "./components/PieChart.vue"
+  import RaddarChart from "./components/RaddarChart.vue"
+  import BarChart from "./components/BarChart.vue"
+  import TransactionTable from "./components/TransactionTable.vue"
+  import TodoList from "./components/TodoList/index.vue"
+  import BoxCard from "./components/BoxCard.vue"
+
   const lineChartDatas = {
     newVisitis: {
       expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -80,17 +90,8 @@
       actualData: [120, 82, 91, 154, 162, 140, 130]
     }
   }
-  import GithubCorner from "@/components/GithubCorner/index.vue"
-  import PanelGroup from "./components/PanelGroup.vue"
-  import LineChart from "./components/LineChart.vue"
-  import PieChart from "./components/PieChart.vue"
-  import RaddarChart from "./components/RaddarChart.vue"
-  import BarChart from "./components/BarChart.vue"
-  import TransactionTable from "./components/TransactionTable.vue"
-  import TodoList from "./components/TodoList/index.vue"
-  import BoxCard from "./components/BoxCard.vue"
 
-  let lineChartData = ref(lineChartDatas.newVisitis)
+  const lineChartData = ref(lineChartDatas.newVisitis)
 
   const handleSetLineChartData = (type: "newVisitis" | "messages" | "purchases" | "shoppings") => {
     lineChartData.value = lineChartDatas[type]
