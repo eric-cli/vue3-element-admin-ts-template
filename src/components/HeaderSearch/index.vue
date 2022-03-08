@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ show: show }" class="header-search">
+  <el-row :class="{ show: show }" class="header-search" align="middle">
     <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
     <el-select
       ref="headerSearchSelect"
@@ -13,38 +13,57 @@
       @change="change"
     >
       <el-option
-        v-for="item in options"
+        v-for="item in optionsArray"
         :key="item.path"
         :value="item"
         :label="item.title.join(' > ')"
       />
     </el-select>
-  </div>
+  </el-row>
 </template>
 
-//
 <script setup lang="ts">
   // TODO: 搜索功能优化
   // fuse is a lightweight fuzzy-search module
   // make search results more in line with expectations
-  import Fuse from "fuse.js"
-  import path from "path"
-
+  import type { ElSelect } from "element-plus"
+  import Fuse from "fuse.js" // https://fusejs.io/getting-started/installation.html
+  import path from "path-browserify"
   import usePermissionStore from "@/stores/permission"
 
   const permissionStore = usePermissionStore()
   const search = ref("")
-  let options = reactive([])
-  let searchPool = reactive([])
+  const options = ref([])
+  const searchPool = ref([])
   const show = ref(false)
-  let fuse = ref(null)
+  const fuse = ref(null)
+  const router = useRouter()
   const routes = computed(() => {
     return permissionStore.routes
   })
+  const headerSearchSelect = ref<InstanceType<typeof ElSelect>>()
   // Filter out the routes that can be displayed in the sidebar
   // And generate the internationalized title
-
-  const generateRoutes = (routes, basePath = "/", prefixTitle = []) => {
+  const change = (val) => {
+    router.push(val.path)
+    search.value = ""
+    options.value = []
+    nextTick(() => {
+      show.value = false
+    })
+  }
+  const click = () => {
+    show.value = !show.value
+    if (show.value) {
+      headerSearchSelect.value!.focus()
+    }
+  }
+  const close = () => {
+    headerSearchSelect.value!.blur()
+    options.value = []
+    show.value = false
+  }
+  const generateRoutes = (routes = [], basePath = "/", prefixTitle = []) => {
     let res: any = []
 
     routes.forEach((router) => {
@@ -77,7 +96,7 @@
     return res
   }
   const initFuse = (list) => {
-    fuse = new Fuse(list, {
+    fuse.value = new Fuse(list, {
       shouldSort: true,
       threshold: 0.4,
       location: 0,
@@ -98,21 +117,44 @@
   }
   const querySearch = (query) => {
     if (query !== "") {
-      options = fuse.search(query)
+      options.value = fuse.value!.search(query)
     } else {
-      options = []
+      options.value = []
     }
   }
 
+  const optionsArray = computed(() => {
+    if (options.value.length) {
+      return options.value.map((ele) => {
+        return ele.item
+      })
+    }
+    return []
+  })
+
   onMounted(() => {
-    searchPool = generateRoutes(routes)
+    searchPool.value = generateRoutes(routes.value)
+  })
+  watch(
+    () => routes,
+    () => {
+      searchPool.value = generateRoutes(routes.value)
+    }
+  )
+  watch(searchPool, (value) => {
+    initFuse(value)
+  })
+  watch(show, (value) => {
+    if (value) {
+      document.body.addEventListener("click", close)
+    } else {
+      document.body.removeEventListener("click", close)
+    }
   })
 </script>
 
 <style lang="scss" scoped>
   .header-search {
-    font-size: 0 !important;
-
     .search-icon {
       cursor: pointer;
       font-size: 18px;

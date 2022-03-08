@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <el-row class="navbar" align="middle">
     <Hamburger
       id="hamburger-container"
       :is-active="opened"
@@ -7,10 +7,10 @@
       @toggleClick="toggleSideBar"
     />
     <Breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-    <div class="right-menu">
+    <el-row class="right-menu" align="middle">
       <template v-if="device !== 'mobile'">
         <!-- TODO: 添加search组件 -->
-        <!-- <Search id="header-search" class="right-menu-item" /> -->
+        <Search id="header-search" class="right-menu-item" />
 
         <ErrorLog class="errLog-container right-menu-item hover-effect" />
 
@@ -48,8 +48,8 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-    </div>
-  </div>
+    </el-row>
+  </el-row>
 </template>
 
 <script setup lang="ts">
@@ -121,7 +121,7 @@
     }
 
     .right-menu {
-      float: right;
+      margin-left: auto;
       height: 100%;
       line-height: 50px;
 
