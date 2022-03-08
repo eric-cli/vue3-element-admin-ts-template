@@ -25,6 +25,5 @@
     cursor: pointer;
     font-size: 18px;
     vertical-align: middle;
-    box-sizing: content-box;
   }
 </style>

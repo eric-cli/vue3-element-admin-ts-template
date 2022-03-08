@@ -16,20 +16,20 @@
         people hate it and argue for its demise, but others ignore the hate as they create awesome
         tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.
       </p>
-      <ul class="list-inline">
-        <li>
-          <span class="link-black text-sm">
-            <i class="el-icon-share" />
-            Share
-          </span>
-        </li>
-        <li>
-          <span class="link-black text-sm">
-            <svg-icon icon-class="like" />
-            Like
-          </span>
-        </li>
-      </ul>
+      <el-row class="list-inline" align="middle">
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Share />
+          </el-icon>
+          Share
+        </el-row>
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Star />
+          </el-icon>
+          Like
+        </el-row>
+      </el-row>
     </div>
     <div class="post">
       <div class="user-block">
@@ -47,20 +47,20 @@
         people hate it and argue for its demise, but others ignore the hate as they create awesome
         tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.
       </p>
-      <ul class="list-inline">
-        <li>
-          <span class="link-black text-sm">
-            <i class="el-icon-share" />
-            Share
-          </span>
-        </li>
-        <li>
-          <span class="link-black text-sm">
-            <svg-icon icon-class="like" />
-            Like
-          </span>
-        </li>
-      </ul>
+      <el-row class="list-inline" align="middle">
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Share />
+          </el-icon>
+          Share
+        </el-row>
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Star />
+          </el-icon>
+          Like
+        </el-row>
+      </el-row>
     </div>
     <div class="post">
       <div class="user-block">
@@ -80,19 +80,27 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <ul class="list-inline">
-        <li>
-          <span class="link-black text-sm"><i class="el-icon-share" /> Share</span>
-        </li>
-        <li>
-          <span class="link-black text-sm"> <svg-icon icon-class="like" /> Like</span>
-        </li>
-      </ul>
+      <el-row class="list-inline" align="middle">
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Share />
+          </el-icon>
+          Share
+        </el-row>
+        <el-row class="link-black text-sm" align="middle">
+          <el-icon>
+            <Star />
+          </el-icon>
+          Like
+        </el-row>
+      </el-row>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+  import { Share, Star } from "@element-plus/icons-vue"
+
   const carouselImages = [
     "https://wpimg.wallstcn.com/9679ffb0-9e0b-4451-9916-e21992218054.jpg",
     "https://wpimg.wallstcn.com/bcce3734-0837-4b9f-9261-351ef384f75a.jpg",
@@ -156,14 +164,18 @@
 
     .list-inline {
       padding-left: 0;
-      margin-left: -5px;
-      list-style: none;
+      height: 20px;
+      margin-top: 10px;
 
-      li {
-        display: inline-block;
+      .el-row {
         padding-right: 5px;
         padding-left: 5px;
-        font-size: 13px;
+        font-size: 14px;
+        height: 100%;
+      }
+
+      .el-icon {
+        margin-right: 6px;
       }
 
       .link-black {

@@ -23,7 +23,6 @@
 </template>
 
 <script setup lang="ts">
-  // TODO: 搜索功能优化
   // fuse is a lightweight fuzzy-search module
   // make search results more in line with expectations
   import type { ElSelect } from "element-plus"
