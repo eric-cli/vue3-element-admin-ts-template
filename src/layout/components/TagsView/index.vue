@@ -7,18 +7,19 @@
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        tag="span"
         class="tags-view-item"
-        @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-        @contextmenu.prevent.native="openMenu(tag, $event)"
+        @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+        @contextmenu.prevent="openMenu(tag, $event)"
       >
-        {{ tag.title }}
-        <el-icon
-          v-if="!isAffix(tag)"
-          class="el-icon-close"
-          @click.prevent.stop="closeSelectedTag(tag)"
-          ><Close
-        /></el-icon>
+        <span>
+          {{ tag.title }}
+          <el-icon
+            v-if="!isAffix(tag)"
+            class="el-icon-close"
+            @click.prevent.stop="closeSelectedTag(tag)"
+            ><Close
+          /></el-icon>
+        </span>
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{ left: left + 'px', top: top + 'px' }" class="contextmenu">
@@ -31,11 +32,12 @@
 </template>
 
 <script lang="ts" setup>
+  import { Close } from "@element-plus/icons-vue"
   import ScrollPane from "./ScrollPane.vue"
   import useTagsViewStore from "@/stores/tagsView"
   import usePermissionStore from "@/stores/permission"
+
   const { ctx } = getCurrentInstance()
-  import { Close } from "@element-plus/icons-vue"
   const tagsViewStore = useTagsViewStore()
   const permissionStore = usePermissionStore()
   const route = useRoute()
@@ -46,13 +48,13 @@
   const routes = computed(() => {
     return permissionStore.routes
   })
-  let visible = ref(false)
-  let left = ref(0)
-  let top = ref(0)
+  const visible = ref(false)
+  const left = ref(0)
+  const top = ref(0)
   let selectedTag = reactive({})
   let affixTags = reactive([])
-  let scrollPaneRef = ref(null)
-  let tagRefs = ref([])
+  const scrollPaneRef: any = ref<HTMLElement | null>(null)
+  const tagRefs = ref([])
   const setTagRef = (el) => {
     if (el) {
       tagRefs.push(el)
@@ -101,12 +103,12 @@
 
   const initTags = () => {
     affixTags = filterAffixTags(routes.value)
-    for (const tag of affixTags) {
+    affixTags.forEach((ele) => {
       // Must have tag name
-      if (tag.name) {
-        tagsViewStore.addVisitedView(tag)
+      if (ele.name) {
+        tagsViewStore.addVisitedView(ele)
       }
-    }
+    })
   }
 
   const addTags = () => {
@@ -120,16 +122,15 @@
   const moveToCurrentTag = () => {
     const tags = tagRefs.value
     nextTick(() => {
-      for (const tag of tags) {
+      tags.forEach((tag) => {
         if (tag.to.path === route.path) {
-          scrollPaneRef.value.moveToTarget(tag)
+          scrollPaneRef.value?.moveToTarget(tag)
           // when query is different then update
           if (tag.to.fullPath !== route.fullPath) {
             tagsViewStore.updateVisitedView(route)
           }
-          break
         }
-      }
+      })
     })
   }
 
@@ -138,10 +139,24 @@
       const { fullPath } = view
       nextTick(() => {
         router.replace({
-          path: "/redirect" + fullPath
+          path: `/redirect${fullPath}`
         })
       })
     })
+  }
+
+  const toLastView = (visitedViews, view) => {
+    const latestView = visitedViews.slice(-1)[0]
+    if (latestView) {
+      router.push(latestView.fullPath)
+    } else if (view.name === "Dashboard") {
+      // now the default is to redirect to the home page if there is no tags-view,
+      // you can adjust it according to your needs.
+      // to reload home page
+      router.replace({ path: `/redirect${view.fullPath}` })
+    } else {
+      router.push("/")
+    }
   }
 
   const closeSelectedTag = (view) => {
@@ -166,22 +181,6 @@
       }
       toLastView(visitedViews, view)
     })
-  }
-
-  const toLastView = (visitedViews, view) => {
-    const latestView = visitedViews.slice(-1)[0]
-    if (latestView) {
-      router.push(latestView.fullPath)
-    } else {
-      // now the default is to redirect to the home page if there is no tags-view,
-      // you can adjust it according to your needs.
-      if (view.name === "Dashboard") {
-        // to reload home page
-        router.replace({ path: "/redirect" + view.fullPath })
-      } else {
-        router.push("/")
-      }
-    }
   }
 
   const openMenu = (tag, e) => {
