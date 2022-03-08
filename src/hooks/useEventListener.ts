@@ -1,4 +1,5 @@
 import type { Ref } from "vue"
+
 export type RemoveEventFn = () => void
 
 export interface UseEventParams {

@@ -41,7 +41,11 @@ module.exports = {
     "no-shadow": "off",
     "vue/no-v-html": "off",
     "vue/v-on-event-hyphenation": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-unused-expressions": [
+      "error",
+      { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }
+    ]
   },
   globals: {
     defineProps: "readonly",
