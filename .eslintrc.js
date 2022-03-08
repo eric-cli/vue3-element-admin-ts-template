@@ -26,6 +26,7 @@ module.exports = {
   plugins: ["vue", "@typescript-eslint", "prettier"],
   rules: {
     "no-undef": "off",
+    "consistent-return": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",

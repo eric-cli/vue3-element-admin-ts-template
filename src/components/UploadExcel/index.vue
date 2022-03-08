@@ -23,12 +23,23 @@
 </template>
 
 <script setup lang="ts">
-  import { isExcel } from "@/utils/validate"
-  const excelUploadInput = ref<HTMLDivElement | null>(null)
   import * as XLSX from "xlsx"
+  import { isExcel } from "@/utils/validate"
+
+  const excelUploadInput = ref<HTMLDivElement | null>(null)
   const props = defineProps({
-    beforeUpload: Function,
-    onSuccess: Function
+    beforeUpload: {
+      type: Function,
+      default() {
+        return () => {}
+      }
+    },
+    onSuccess: {
+      type: Function,
+      default() {
+        return () => {}
+      }
+    }
   })
   const loading = ref(false)
   const excelData = ref({
@@ -38,7 +49,9 @@
   const generateData = ({ header, results }) => {
     excelData.value.header = header
     excelData.value.results = results
-    props.onSuccess && props.onSuccess(excelData.value)
+    if (props.onSuccess) {
+      props.onSuccess(excelData.value)
+    }
   }
 
   const handleDragover = (e) => {
@@ -56,11 +69,11 @@
     let C
     const R = range.s.r
     /* start in the first row */
-    for (C = range.s.c; C <= range.e.c; ++C) {
+    for (C = range.s.c; C <= range.e.c; C += 1) {
       /* walk every column in the range */
       const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]
       /* find the cell in the first row */
-      let hdr = "UNKNOWN " + C // <-- replace with your desired default
+      let hdr = `UNKNOWN ${C}` // <-- replace with your desired default
       if (cell && cell.t) hdr = XLSX.utils.format_cell(cell)
       headers.push(hdr)
     }
@@ -102,10 +115,10 @@
     e.stopPropagation()
     e.preventDefault()
     if (loading.value) return
-    const files = e.dataTransfer.files
+    const { files } = e.dataTransfer
     if (files.length !== 1) {
       ElMessage.error("Only support uploading one file!")
-      return
+      return false
     }
     const rawFile = files[0] // only use files[0]
 
@@ -118,7 +131,7 @@
     e.preventDefault()
   }
   const handleClick = (e) => {
-    const files = e.target.files
+    const { files } = e.target
     const rawFile = files[0] // only use files[0]
     if (!rawFile) return
     upload(rawFile)
