@@ -11,10 +11,10 @@ export function useECharts(
   const getDarkMode = computed(() => {
     return theme
   })
+  let chartInstance: echarts.ECharts | null = null
   const resize = () => {
     chartInstance?.resize()
   }
-  let chartInstance: echarts.ECharts | null = null
   let resizeFn: Fn = resize
   const cacheOptions = ref({}) as Ref<EChartsOption>
   let removeResizeFn: Fn = () => {}

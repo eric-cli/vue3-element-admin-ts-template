@@ -41,7 +41,7 @@ export function isArray(arg: any) {
  * @param {unknown} arg
  * @returns {Boolean}
  */
-export function isFunction(val: unknown): val is Function {
+export function isFunction(val: unknown): boolean {
   return typeof val === "function"
 }
 

@@ -1,4 +1,5 @@
 <template>
+  <div>123</div>
   <!-- <div
     :class="{ fullscreen: fullscreen }"
     class="tinymce-container"
