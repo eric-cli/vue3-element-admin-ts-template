@@ -4,7 +4,7 @@
     :vertical="false"
     :noresize="true"
     class="scroll-container"
-    @wheel.native.prevent="handleScroll"
+    @wheel.prevent="handleScroll"
     @scroll="scroll"
   >
     <slot />

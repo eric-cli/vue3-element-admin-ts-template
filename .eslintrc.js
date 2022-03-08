@@ -42,6 +42,7 @@ module.exports = {
     "vue/no-v-html": "off",
     "vue/v-on-event-hyphenation": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
+    "prefer-destructuring": "off",
     "no-unused-expressions": [
       "error",
       { allowShortCircuit: true, allowTernary: true, allowTaggedTemplates: true }
