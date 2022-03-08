@@ -31,11 +31,12 @@
   import path from "path"
 
   import usePermissionStore from "@/stores/permission"
+
   const permissionStore = usePermissionStore()
-  let search = ref("")
+  const search = ref("")
   let options = reactive([])
   let searchPool = reactive([])
-  let show = ref(false)
+  const show = ref(false)
   let fuse = ref(null)
   const routes = computed(() => {
     return permissionStore.routes
@@ -44,37 +45,35 @@
   // And generate the internationalized title
 
   const generateRoutes = (routes, basePath = "/", prefixTitle = []) => {
-    let res = []
+    let res: any = []
 
-    for (const router of routes) {
+    routes.forEach((router) => {
       // skip hidden router
-      if (router.hidden) {
-        continue
-      }
+      if (!(router.meta && router.meta.hidden)) {
+        const data: any = {
+          path: path.resolve(basePath, router.path),
+          title: [...prefixTitle]
+        }
 
-      const data = {
-        path: path.resolve(basePath, router.path),
-        title: [...prefixTitle]
-      }
+        if (router.meta && router.meta.title) {
+          data.title = [...data.title, router.meta.title]
 
-      if (router.meta && router.meta.title) {
-        data.title = [...data.title, router.meta.title]
+          if (router.redirect !== "noRedirect") {
+            // only push the routes with title
+            // special case: need to exclude parent router without redirect
+            res.push(data)
+          }
+        }
 
-        if (router.redirect !== "noRedirect") {
-          // only push the routes with title
-          // special case: need to exclude parent router without redirect
-          res.push(data)
+        // recursive child routes
+        if (router.children) {
+          const tempRoutes = generateRoutes(router.children, data.path, data.title)
+          if (tempRoutes.length >= 1) {
+            res = [...res, ...tempRoutes]
+          }
         }
       }
-
-      // recursive child routes
-      if (router.children) {
-        const tempRoutes = generateRoutes(router.children, data.path, data.title)
-        if (tempRoutes.length >= 1) {
-          res = [...res, ...tempRoutes]
-        }
-      }
-    }
+    })
     return res
   }
   const initFuse = (list) => {
