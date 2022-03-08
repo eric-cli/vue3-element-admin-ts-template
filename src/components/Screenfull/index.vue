@@ -1,9 +1,13 @@
 <template>
-  <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" @click="click" />
+  <svg-icon
+    class-name="search-icon"
+    :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+    @click="click"
+  />
 </template>
 
 <script lang="ts" setup>
-  const { isFullscreen, enter, exit, toggle, isSupported } = useFullscreen()
+  const { isFullscreen, toggle, isSupported } = useFullscreen()
   const click = () => {
     if (!isSupported) {
       ElMessage({
@@ -16,13 +20,11 @@
   }
 </script>
 
-<style scoped>
-  .screenfull-svg {
-    display: inline-block;
+<style scoped lang="scss">
+  .search-icon {
     cursor: pointer;
-    fill: #5a5e66;
-    width: 20px;
-    height: 20px;
-    vertical-align: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+    box-sizing: content-box;
   }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <el-dropdown @command="handleSetSize">
-    <div>
+    <el-row class="dropdown-top" align="middle">
       <svg-icon class-name="size-icon" icon-class="size" />
-    </div>
+    </el-row>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
@@ -32,6 +32,7 @@
   })
 
   const handleSetSize = (size) => {
+    // TODO: refreshView方法添加
     appStore.setSize(size)
     // this.refreshView();
     ElMessage({
@@ -41,4 +42,8 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .dropdown-top {
+    height: 100%;
+  }
+</style>

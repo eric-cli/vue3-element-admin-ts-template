@@ -9,9 +9,8 @@
     <Breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
     <el-row class="right-menu" align="middle">
       <template v-if="device !== 'mobile'">
-        <!-- TODO: 添加search组件 -->
         <Search id="header-search" class="right-menu-item" />
-
+        <!-- TODO: 优化ErrorLog组件 -->
         <ErrorLog class="errLog-container right-menu-item hover-effect" />
 
         <Screenfull id="screenfull" class="right-menu-item hover-effect" />
