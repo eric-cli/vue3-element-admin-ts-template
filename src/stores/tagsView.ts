@@ -13,11 +13,7 @@ const useTagsViewStore = defineStore({
       // console.log(111, view);
 
       if (this.visitedViews.some((v: { path: any }) => v.path === view.path)) return
-      this.visitedViews.push(
-        Object.assign({}, view, {
-          title: view.meta.title || "no-name"
-        })
-      )
+      this.visitedViews.push({ ...view, title: view.meta.title || "no-name" })
     },
     addCachedView(view: { name: any; meta: { noCache: any } }) {
       if (this.cachedViews.includes(view.name)) return
@@ -26,12 +22,11 @@ const useTagsViewStore = defineStore({
       }
     },
     updateVisitedView(view: { path: any }) {
-      for (let v of this.visitedViews) {
+      this.visitedViews.forEach((v) => {
         if (v.path === view.path) {
           v = Object.assign(v, view)
-          break
         }
-      }
+      })
     },
     delView(view: any) {
       return new Promise((resolve) => {
@@ -101,12 +96,12 @@ const useTagsViewStore = defineStore({
     },
     delVisitedView(view: { path: any }) {
       return new Promise((resolve) => {
-        for (const [i, v] of this.visitedViews.entries()) {
-          if (v.path === view.path) {
+        this.visitedViews.forEach((ele, i) => {
+          // TODO 错误验证
+          if (ele.path === view.path) {
             this.visitedViews.splice(i, 1)
-            break
           }
-        }
+        })
         resolve([...this.visitedViews])
       })
     },
