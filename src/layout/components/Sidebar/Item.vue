@@ -19,11 +19,13 @@
         if (icon.includes("el-icon")) {
           vnodes.push(
             h(
-              resolveComponent("el-icon"),
-              {
-                class: "sub-el-icon"
-              },
-              h(resolveComponent(formateElIcons(icon)))
+              h(resolveComponent(formateElIcons(icon)), {
+                class: "svg-icon",
+                style: {
+                  width: "1em",
+                  height: "1em"
+                }
+              })
             )
           )
         } else {

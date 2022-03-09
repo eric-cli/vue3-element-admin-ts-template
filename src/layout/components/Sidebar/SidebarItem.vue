@@ -41,7 +41,7 @@
   import { isExternal } from "@/utils/validate"
   import Item from "./Item.vue"
   import AppLink from "./Link.vue"
-  // TODO:fix
+
   const props = defineProps({
     // route object
     item: {

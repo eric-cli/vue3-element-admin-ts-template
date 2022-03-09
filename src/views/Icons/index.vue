@@ -51,7 +51,6 @@
 </template>
 
 <script lang="ts" setup>
-  // TODO: add element-icon
   import clipboard from "@/utils/clipboard"
   import svgIcons from "./svg-icons"
   import elementIcons from "./element-icons"
