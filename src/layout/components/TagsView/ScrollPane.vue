@@ -1,30 +1,33 @@
 <template>
   <el-scrollbar
     ref="scrollContainer"
-    :vertical="false"
     :noresize="true"
     class="scroll-container"
     @wheel.prevent="handleScroll"
-    @scroll="scroll"
+    @scroll="emitScroll"
   >
     <slot />
   </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
-  // TODO: check 功能是否开发完成
-
   const tagAndTagSpacing = 4 // tagAndTagSpacing
+  const left = ref(0)
   const emits = defineEmits(["scroll"])
   const { ctx } = getCurrentInstance()
   const scrollContainer = ref<InstanceType<typeof ElScrollbar>>()
-  const left = ref(0)
-  const scroll = () => {
+  const scrollWrapper = computed(() => {
+    return scrollContainer.value.$refs.wrap$
+  })
+  const emitScroll = () => {
     emits("scroll")
   }
   const handleScroll = (e) => {
+    // TODO: check 功能是否开发完成,滚动问题优化
+    console.log(e)
     const eventDelta = e.wheelDelta || -e.deltaY * 40
-    scrollContainer.value!.setScrollLeft(scrollContainer.value!.scrollLeft + eventDelta / 4)
+    // scrollContainer.value!.setScrollLeft(scrollWrapper.value!.scrollLeft + eventDelta / 4)
+    scrollWrapper.value!.scrollLeft = scrollWrapper.value!.scrollLeft + eventDelta / 4
   }
 
   const moveToTarget = (currentTag) => {
@@ -45,9 +48,9 @@
     }
 
     if (firstTag === currentTag) {
-      scrollContainer.value.scrollLeft = 0
+      scrollWrapper.value!.scrollLeft = 0
     } else if (lastTag === currentTag) {
-      scrollContainer.value.scrollLeft = scrollContainer.value.scrollWidth - $containerWidth
+      scrollWrapper.value!.scrollLeft = scrollWrapper.value!.scrollWidth - $containerWidth
     } else {
       // find preTag and nextTag
       const currentIndex = tagList.findIndex((item) => item === currentTag)
@@ -61,26 +64,35 @@
       // the tag's offsetLeft before of prevTag
       const beforePrevTagOffsetLeft = prevTag.$el.offsetLeft - tagAndTagSpacing
 
-      if (afterNextTagOffsetLeft > scrollContainer.value.scrollLeft + $containerWidth) {
-        scrollContainer.value.scrollLeft = afterNextTagOffsetLeft - $containerWidth
-      } else if (beforePrevTagOffsetLeft < scrollContainer.value.scrollLeft) {
-        scrollContainer.value.scrollLeft = beforePrevTagOffsetLeft
+      if (afterNextTagOffsetLeft > scrollWrapper.value!.scrollLeft + $containerWidth) {
+        scrollWrapper.value!.scrollLeft = afterNextTagOffsetLeft - $containerWidth
+      } else if (beforePrevTagOffsetLeft < scrollWrapper.value!.scrollLeft) {
+        scrollWrapper.value!.scrollLeft = beforePrevTagOffsetLeft
       }
     }
   }
+  // onMounted(() => {
+  //   scrollWrapper.value!.addEventListener("scroll", emitScroll, true)
+  // })
+  // onUnmounted(() => {
+  //   scrollWrapper.value!.removeEventListener("scroll", emitScroll, true)
+  // })
 </script>
 
 <style lang="scss" scoped>
   .scroll-container {
     white-space: nowrap;
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     width: 100%;
     :deep(.el-scrollbar__bar) {
       bottom: 0px;
     }
     :deep(.el-scrollbar__wrap) {
-      height: 49px;
+      height: 100%;
+    }
+    :deep(.el-scrollbar__view) {
+      height: 100%;
     }
   }
 </style>

@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+  import path from "path-browserify"
   import { Close } from "@element-plus/icons-vue"
   import ScrollPane from "./ScrollPane.vue"
   import useTagsViewStore from "@/stores/tagsView"
@@ -51,8 +52,8 @@
   const visible = ref(false)
   const left = ref(0)
   const top = ref(0)
-  let selectedTag = reactive({})
-  let affixTags = reactive([])
+  const selectedTag = ref({})
+  const affixTags = ref([])
   const scrollPaneRef: any = ref<HTMLElement | null>(null)
   const tagRefs = ref([])
   const setTagRef = (el) => {
@@ -68,6 +69,7 @@
     visible.value = false
   }
   const handleScroll = () => {
+    console.log(1111)
     closeMenu()
   }
   const isActive = (item: any) => {
@@ -82,11 +84,11 @@
     let tags: any = []
     routesArr.forEach((route: any) => {
       if (route.meta && route.meta.affix) {
-        // TODO path修改
-        // const tagPath = path.resolve(basePath, route.path);
+        const tagPath = path.resolve(basePath, route.path)
+
         tags.push({
-          fullPath: route.path,
-          path: route.path,
+          fullPath: tagPath,
+          path: tagPath,
           name: route.name,
           meta: { ...route.meta }
         })
@@ -102,8 +104,9 @@
   }
 
   const initTags = () => {
-    affixTags = filterAffixTags(routes.value)
-    affixTags.forEach((ele) => {
+    affixTags.value = filterAffixTags(routes.value)
+
+    affixTags.value!.forEach((ele) => {
       // Must have tag name
       if (ele.name) {
         tagsViewStore.addVisitedView(ele)
@@ -168,17 +171,23 @@
   }
 
   const closeOthersTags = () => {
-    router.push(selectedTag)
-    tagsViewStore.delOthersViews(selectedTag).then(() => {
+    router.push(selectedTag.value)
+    tagsViewStore.delOthersViews(selectedTag.value).then(() => {
       moveToCurrentTag()
     })
   }
 
   const closeAllTags = (view) => {
+    console.log(view)
+
     tagsViewStore.delAllViews().then(({ visitedViews }) => {
-      if (affixTags.some((tag) => tag.path === view.path)) {
+      console.log(visitedViews)
+
+      if (affixTags.value!.some((tag) => tag.path === view.path)) {
+        console.log(affixTags.value)
         return
-      }
+      } //  TODO:这段功能是一旦在固定签列表找到当前点击的，就不处理，但是我认为应该继续处理，就跳到这个页面。之后想到了在处理
+
       toLastView(visitedViews, view)
     })
   }
@@ -198,7 +207,7 @@
 
     top.value = e.clientY
     visible.value = true
-    selectedTag = tag
+    selectedTag.value = tag
   }
 
   onMounted(() => {
@@ -218,7 +227,6 @@
   watch(
     () => visible.value,
     (value) => {
-      console.log(value)
       if (value) {
         document.body.addEventListener("click", closeMenu)
       } else {

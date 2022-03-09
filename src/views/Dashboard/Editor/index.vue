@@ -5,7 +5,7 @@
         Your roles:
         <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
       </pan-thumb>
-      <github-corner style="position: absolute; top: 0px; border: 0; right: 0" />
+      <github-corner class="github-corner" />
       <div class="info-container">
         <span class="display_name">{{ userInfos.true_name }}</span>
         <span style="font-size: 20px; padding-top: 20px; display: inline-block"
@@ -44,6 +44,14 @@
     background-color: #e3e3e3;
     min-height: 100vh;
     padding: 50px 60px 0px;
+
+    .github-corner {
+      position: absolute;
+      top: 0px;
+      border: 0;
+      right: 0;
+      z-index: 2;
+    }
     .pan-info-roles {
       font-size: 12px;
       font-weight: 700;

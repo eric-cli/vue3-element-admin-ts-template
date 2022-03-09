@@ -109,6 +109,7 @@
       top: 0px;
       border: 0;
       right: 0;
+      z-index: 2;
     }
 
     .chart-wrapper {
