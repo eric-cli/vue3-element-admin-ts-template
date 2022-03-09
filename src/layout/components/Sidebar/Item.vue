@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { formateElIcons } from "@/utils/"
+  import { formateElIcons } from "@/utils"
 
   export default defineComponent({
     props: {

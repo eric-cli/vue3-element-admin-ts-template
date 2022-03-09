@@ -1,26 +1,78 @@
 <template>
-  <div ref="rightPanel" :class="{ show: show }" class="rightPanel-container">
-    <div class="rightPanel-background" />
-    <div class="rightPanel">
-      <div
-        class="handle-button"
-        :style="{ top: buttonTop + 'px', 'background-color': theme }"
-        @click="show = !show"
-      >
-        <i :class="show ? 'el-icon-close' : 'el-icon-setting'" />
-      </div>
-      <div class="rightPanel-items">
-        <slot />
-      </div>
-    </div>
-  </div>
+  <el-row
+    class="handle-button"
+    align="middle"
+    :style="{ top: buttonTop + 'px', 'background-color': theme }"
+    @click="show = !show"
+  >
+    <el-icon>
+      <Close v-if="show"></Close>
+      <Setting v-else></Setting>
+    </el-icon>
+  </el-row>
 </template>
 
 <script setup lang="ts">
+  import { Close, Setting } from "@element-plus/icons-vue"
   import { addClass, removeClass } from "@/utils"
+  import useSettingStore from "@/stores/settings"
 
+  const settingStore = useSettingStore()
+  const props = defineProps({
+    clickNotClose: {
+      default: false,
+      type: Boolean
+    },
+    buttonTop: {
+      default: 250,
+      type: Number
+    }
+  })
   const show = ref(false)
+  const rightPanel = ref(false)
+  const theme = computed(() => {
+    return settingStore.theme
+  })
+  // const insertToBody = () => {
+  //   const body: any = document.querySelector("body")
+  //   body.insertBefore(rightPanel.value, body.firstChild)
+  // }
+  // const closeSidebar = (evt) => {
+  //   const parent = evt.target.closest(".rightPanel")
+  //   if (!parent) {
+  //     show.value = false
+  //     window.removeEventListener("click", closeSidebar)
+  //   }
+  // }
+  // const addEventClick = () => {
+  //   window.addEventListener("click", closeSidebar)
+  // }
+  onMounted(() => {
+    // insertToBody()
+  })
+  onUnmounted(() => {
+    // rightPanel.value!.remove()
+  })
+  // watch(show, (value) => {
+  //   if (value && !props.clickNotClose) {
+  //     addEventClick()
+  //   }
+  //   if (value) {
+  //     // TODO: 类名添加
+  //     addClass(document.body, "showRightPanel")
+  //   } else {
+  //     removeClass(document.body, "showRightPanel")
+  //   }
+  // })
 </script>
+
+<style>
+  .showRightPanel {
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - 15px);
+  }
+</style>
 
 <style lang="scss" scoped>
   .rightPanel-background {
@@ -63,21 +115,18 @@
   }
 
   .handle-button {
+    position: fixed;
     width: 48px;
     height: 48px;
-    position: absolute;
-    left: -48px;
-    text-align: center;
+    right: 0;
+    top: 50%;
+    justify-content: center;
     font-size: 24px;
     border-radius: 6px 0 0 6px !important;
     z-index: 0;
     pointer-events: auto;
     cursor: pointer;
     color: #fff;
-    line-height: 48px;
-    i {
-      font-size: 24px;
-      line-height: 48px;
-    }
+    transition: translate(-50%, 0);
   }
 </style>

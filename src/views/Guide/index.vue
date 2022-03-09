@@ -16,7 +16,7 @@
   import "driver.js/dist/driver.min.css" // import driver.js css
   import steps from "./steps"
 
-  let driver = ref(null)
+  let driver: any = ref(null)
   onMounted(() => {
     driver = new Driver()
   })

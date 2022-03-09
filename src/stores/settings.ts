@@ -1,11 +1,14 @@
 import { defineStore } from "pinia"
 import settings from "@/settings"
+// import variables from "@/styles/element/element-variables.scss"
+// console.log(variables)
 
 const useSettingStore = defineStore({
   id: "settings",
   state: () => {
     return {
-      // theme: variables.theme,
+      // TODO: 用别的方式实现主题切换
+      theme: "#1890ff",
       showSettings: settings.showSettings,
       tagsView: settings.tagsView,
       fixedHeader: settings.fixedHeader,
