@@ -13,31 +13,38 @@
     <el-dialog v-model="dialogTableVisible" width="80%" append-to-body>
       <template #title>
         <span style="padding-right: 10px">Error Log</span>
-        <el-button size="small" type="primary" icon="el-icon-delete" @click="clearAll"
+        <el-button size="small" type="primary" :icon="Delete" @click="clearAll"
           >Clear All</el-button
         >
       </template>
       <el-table :data="errorLogs" border>
         <el-table-column label="Message">
           <template #default="{ row }">
-            <div>
+            <el-row align="middle">
               <span class="message-title">Msg:</span>
               <el-tag type="danger">
                 {{ row.err.message }}
               </el-tag>
-            </div>
-            <br />
-            <div>
+            </el-row>
+          </template>
+        </el-table-column>
+        <el-table-column label="Info">
+          <template #default="{ row }">
+            <el-row align="middle">
               <span class="message-title" style="padding-right: 10px">Info: </span>
-              <el-tag type="warning"> {{ row.vm.$vnode.tag }} error in {{ row.info }} </el-tag>
-            </div>
-            <br />
-            <div>
+              <!-- <el-tag type="warning"> {{ row.vm.$vnode.tag }} error in {{ row.info }} </el-tag> -->
+              <el-tag type="warning"> {{ row.vm }} error in {{ row.info }} </el-tag>
+            </el-row>
+          </template>
+        </el-table-column>
+        <el-table-column label="Url">
+          <template #default="{ row }">
+            <el-row align="middle">
               <span class="message-title" style="padding-right: 16px">Url: </span>
               <el-tag type="success">
                 {{ row.url }}
               </el-tag>
-            </div>
+            </el-row>
           </template>
         </el-table-column>
         <el-table-column label="Stack">
@@ -51,6 +58,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { Delete } from "@element-plus/icons-vue"
   import useAppStore from "@/stores/app"
 
   const dialogTableVisible = ref(false)
@@ -58,6 +66,8 @@
   const errorLogs = computed(() => {
     return appStore.logs
   })
+  console.log(errorLogs.value)
+
   const clearAll = () => {
     dialogTableVisible.value = false
     appStore.clearErrorLog()

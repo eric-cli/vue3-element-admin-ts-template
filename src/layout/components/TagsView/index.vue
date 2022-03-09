@@ -215,13 +215,10 @@
     addTags()
   })
   watch(
-    () => route,
+    () => route.fullPath,
     (value) => {
       addTags()
       moveToCurrentTag()
-    },
-    {
-      deep: true
     }
   )
   watch(
