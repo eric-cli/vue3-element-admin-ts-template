@@ -20,8 +20,12 @@
 
 <script lang="ts" setup>
   import useAppStore from "@/stores/app"
+  import useTagsViewStore from "@/stores/tagsView"
 
+  const tagsViewStore = useTagsViewStore()
   const appStore = useAppStore()
+  const route = useRoute()
+  const router = useRouter()
   const sizeOptions = [
     { label: "Large", value: "large" },
     { label: "Default", value: "default" },
@@ -31,10 +35,21 @@
     return appStore.size
   })
 
+  const refreshView = () => {
+    // In order to make the cached page re-rendered
+    tagsViewStore.delAllCachedViews()
+    const { fullPath } = route
+    nextTick(() => {
+      router.replace({
+        path: `/redirect${fullPath}`
+      })
+    })
+  }
+
   const handleSetSize = (size) => {
     // TODO: refreshView方法添加
     appStore.setSize(size)
-    // this.refreshView();
+    refreshView()
     ElMessage({
       message: "Switch Size Success",
       type: "success"
