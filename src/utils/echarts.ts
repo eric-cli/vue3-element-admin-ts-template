@@ -13,7 +13,9 @@ import {
   GridComponent,
   TooltipComponent,
   LegendComponent,
-  VisualMapComponent
+  VisualMapComponent,
+  TitleComponent,
+  DataZoomComponent
 } from "echarts/components"
 // 标签自动布局，全局过渡动画等特性
 import { LabelLayout, UniversalTransition } from "echarts/features"
@@ -22,13 +24,14 @@ import { CanvasRenderer } from "echarts/renderers"
 
 // 注册必须的组件
 echarts.use([
-  // TitleComponent,
+  TitleComponent,
   TooltipComponent,
   GridComponent,
   LegendComponent,
   VisualMapComponent,
   // DatasetComponent,
   // TransformComponent,
+  DataZoomComponent,
   RadarChart,
   LineChart,
   PieChart,
