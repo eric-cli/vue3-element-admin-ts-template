@@ -47,7 +47,6 @@
   }
 
   const handleSetSize = (size) => {
-    // TODO: refreshView方法添加
     appStore.setSize(size)
     refreshView()
     ElMessage({

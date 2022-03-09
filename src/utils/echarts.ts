@@ -9,7 +9,12 @@ import { BarChart, LineChart, PieChart, RadarChart } from "echarts/charts"
 // // DatasetComponent,
 // // TransformComponent,
 // "echarts/components";
-import { GridComponent, TooltipComponent, LegendComponent } from "echarts/components"
+import {
+  GridComponent,
+  TooltipComponent,
+  LegendComponent,
+  VisualMapComponent
+} from "echarts/components"
 // 标签自动布局，全局过渡动画等特性
 import { LabelLayout, UniversalTransition } from "echarts/features"
 // 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
@@ -21,6 +26,7 @@ echarts.use([
   TooltipComponent,
   GridComponent,
   LegendComponent,
+  VisualMapComponent,
   // DatasetComponent,
   // TransformComponent,
   RadarChart,
@@ -33,3 +39,54 @@ echarts.use([
 ])
 
 export default echarts
+
+export const generateMixed = (n, j) => {
+  const chars = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+  ]
+  const arr = []
+  for (let h = 0; h < j; h += 1) {
+    let res = ""
+    for (let i = 0; i < n; i += 1) {
+      const id = Math.ceil(Math.random() * 35)
+      res += chars[id]
+    }
+    arr.push(res)
+  }
+  return arr.join("-")
+}
