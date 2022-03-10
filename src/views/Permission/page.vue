@@ -9,7 +9,7 @@
 
   const router = useRouter()
   const handleRolesChange = () => {
-    router.push({ path: `/permission/index?${+new Date()}` })
+    router.push({ path: `/permission?${+new Date()}` })
   }
 </script>
 

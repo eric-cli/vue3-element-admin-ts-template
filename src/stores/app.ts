@@ -9,7 +9,8 @@ const useAppStore = defineStore({
         withoutAnimation: false
       },
       device: "desktop",
-      size: "default",
+      size: "small",
+      language: "en",
       logs: []
     }
   },
@@ -21,6 +22,10 @@ const useAppStore = defineStore({
   actions: {
     setSize(size: any) {
       this.size = size
+    },
+    setLanguage(language: string) {
+      console.log(language)
+      this.language = language
     },
     toggleSideBar() {
       this.sidebar.opened = !this.sidebar.opened
@@ -34,7 +39,7 @@ const useAppStore = defineStore({
       this.logs.push(log)
     },
     clearErrorLog() {
-      this.logs.splice(0) // splice 方法向/从数组添加/删除项目，并返回删除的项目。 如果设置为 0，则不会删除任何项目。
+      this.logs.splice(0) // splice 方法向/从数组添加/删除项目，并返回删除的项目。 如果第二个参数设置为 0，则不会删除任何项目。第一个设置为0，从0开始删除
     }
   },
   // 开启数据缓存
@@ -42,7 +47,7 @@ const useAppStore = defineStore({
     enabled: true,
     strategies: [
       {
-        paths: ["opened", "size"],
+        paths: ["sidebar", "size", "language"],
         storage: localStorage
       }
     ]

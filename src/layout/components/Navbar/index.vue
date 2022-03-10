@@ -18,6 +18,8 @@
         <el-tooltip content="Global Size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
+
+        <lang-select class="right-menu-item hover-effect" />
       </template>
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <el-row class="avatar-wrapper" align="middle">
@@ -61,6 +63,7 @@
   import SizeSelect from "@/components/SizeSelect/index.vue"
   import Screenfull from "@/components/Screenfull/index.vue"
   import ErrorLog from "@/components/ErrorLog/index.vue"
+  import LangSelect from "@/components/LangSelect/index.vue"
 
   const appStore = useAppStore()
   const userStore = useUserStore()

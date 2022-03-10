@@ -42,14 +42,14 @@ const useUserStore = defineStore({
     async changeRoles(role) {
       const token = `${role}-token`
 
-      // commit("SET_TOKEN", token);
+      this.token = token
 
       // TODO: 路由修改
       // setToken(token);
 
       // const { roles } = await dispatch("getInfo");
 
-      // resetRouter();
+      // resetRouter()
 
       // generate accessible routes map based on roles
       // const accessRoutes = await dispatch("permission/generateRoutes", roles, {

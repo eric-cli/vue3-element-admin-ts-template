@@ -1,13 +1,21 @@
 import { createApp } from "vue"
 import ElementPlus from "element-plus"
 import * as ElIcons from "@element-plus/icons-vue"
+
 import App from "./App.vue"
 import router from "./router"
 import store from "./stores"
 import "virtual:windi.css"
 import "normalize.css/normalize.css"
 
+// import ElementLocale from "element-plus/lib/locale"
+import i18n from "./lang/i18n"
+// console.log(ElementLocale)
+
+// ElementLocale.i18n((key, value) => i18n.global.t(key, value))
+
 import "element-plus/dist/index.css"
+
 import "./permission"
 
 import { setupGlobDirectives } from "./directives"
@@ -29,6 +37,7 @@ Object.keys(ElIcons).forEach((key) => {
 })
 
 app.use(router)
+app.use(i18n)
 app.use(store)
 app.use(ElementPlus, { zIndex: 3000 })
 app.mount("#app")
