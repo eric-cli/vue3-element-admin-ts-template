@@ -7,15 +7,14 @@
           target="_blank"
           href="https://panjiachen.github.io/vue-element-admin-site/guide/advanced/theme.html"
         >
-          Theme documentation
+          {{ $t("theme.documentation") }}
         </a>
       </template>
       <div class="box-item">
-        <span class="field-label">Change Theme : </span>
+        <span class="field-label">{{ $t("theme.change") }} : </span>
         <el-switch v-model="theme" />
         <aside style="margin-top: 15px">
-          Tips: It is different from the theme-pick on the navbar is two different skinning methods,
-          each with different application scenarios. Refer to the documentation for details.
+          {{ $t("theme.tips") }}
         </aside>
       </div>
     </el-card>
@@ -35,8 +34,7 @@
       <el-button type="primary" :icon="Search"> Search </el-button>
       <el-button type="primary">
         Upload
-        <el-icon><Upload /></el-icon>
-        <el-icon><Right /></el-icon>
+        <el-icon><UploadFilled /></el-icon>
       </el-button>
     </div>
 
@@ -62,7 +60,7 @@
 
 <script setup lang="ts">
   // TODO:切换主题
-  import { Search, Edit, Share, Upload, Right, Delete } from "@element-plus/icons-vue"
+  import { Search, Edit, Share, Upload, UploadFilled, Delete } from "@element-plus/icons-vue"
   import { toggleClass } from "@/utils"
   // import "@/assets/custom-theme/index.css"; // the theme changed version
   const theme = ref(false)

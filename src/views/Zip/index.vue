@@ -1,56 +1,59 @@
 <template>
   <el-row class="app-container">
-    <el-input
-      v-model="filename"
-      placeholder="Please enter the file name (default file)"
-      style="width: 300px"
-      prefix-icon="el-icon-document"
-    />
-    <el-button
-      :loading="downloadLoading"
-      style="margin-bottom: 20px"
-      type="primary"
-      :icon="Document"
-      @click="handleDownload"
+    <el-row class="mb-20px">
+      <el-input
+        v-model="filename"
+        placeholder="Please enter the file name (default file)"
+        style="width: 300px"
+        prefix-icon="el-icon-document"
+      />
+      <el-button
+        :loading="downloadLoading"
+        style="margin-left: 20px"
+        type="primary"
+        :icon="Document"
+        class="mb-20px ml-20px"
+        @click="handleDownload"
+      >
+        {{ $t("zip.export") }} Zip
+      </el-button>
+    </el-row>
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="拼命加载中"
+      border
+      fit
+      highlight-current-row
     >
-      Export Zip
-    </el-button>
+      <el-table-column align="center" label="ID" width="95">
+        <template #default="scope">
+          {{ scope.$index }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Title">
+        <template #default="{ row }">
+          {{ row.title }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Author" width="95" align="center">
+        <template #default="{ row }">
+          <el-tag>{{ row.author }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="Readings" width="115" align="center">
+        <template #default="{ row }">
+          {{ row.pageviews }}
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="Date" width="220">
+        <template #default="{ row }">
+          <i class="el-icon-time" />
+          <span>{{ row.display_time }}</span>
+        </template>
+      </el-table-column>
+    </el-table>
   </el-row>
-  <el-table
-    v-loading="listLoading"
-    :data="list"
-    element-loading-text="拼命加载中"
-    border
-    fit
-    highlight-current-row
-  >
-    <el-table-column align="center" label="ID" width="95">
-      <template #default="scope">
-        {{ scope.$index }}
-      </template>
-    </el-table-column>
-    <el-table-column label="Title">
-      <template #default="{ row }">
-        {{ row.title }}
-      </template>
-    </el-table-column>
-    <el-table-column label="Author" width="95" align="center">
-      <template #default="{ row }">
-        <el-tag>{{ row.author }}</el-tag>
-      </template>
-    </el-table-column>
-    <el-table-column label="Readings" width="115" align="center">
-      <template #default="{ row }">
-        {{ row.pageviews }}
-      </template>
-    </el-table-column>
-    <el-table-column align="center" label="Date" width="220">
-      <template #default="{ row }">
-        <i class="el-icon-time" />
-        <span>{{ row.display_time }}</span>
-      </template>
-    </el-table-column>
-  </el-table>
 </template>
 
 <script setup lang="ts">
