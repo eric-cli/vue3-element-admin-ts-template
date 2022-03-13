@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
+    <el-row class="filter-container" align="middle">
       <el-input
         v-model="listQuery.title"
-        placeholder="Title"
+        :placeholder="$t('table.title')"
         style="width: 200px"
         class="filter-item"
         @keyup.enter="handleFilter"
       />
       <el-select
         v-model="listQuery.importance"
-        placeholder="Imp"
+        :placeholder="$t('table.importance')"
         clearable
         style="width: 90px"
         class="filter-item"
@@ -19,7 +19,7 @@
       </el-select>
       <el-select
         v-model="listQuery.type"
-        placeholder="Type"
+        :placeholder="$t('table.type')"
         clearable
         class="filter-item"
         style="width: 130px"
@@ -33,6 +33,7 @@
       </el-select>
       <el-select
         v-model="listQuery.sort"
+        :placeholder="$t('table.sort')"
         style="width: 140px"
         class="filter-item"
         @change="handleFilter"
@@ -51,7 +52,7 @@
         icon="el-icon-search"
         @click="handleFilter"
       >
-        Search
+        {{ $t("table.search") }}
       </el-button>
       <el-button
         class="filter-item"
@@ -60,7 +61,7 @@
         icon="el-icon-edit"
         @click="handleCreate"
       >
-        Add
+        {{ $t("table.add") }}
       </el-button>
       <el-button
         v-waves
@@ -70,7 +71,7 @@
         icon="el-icon-download"
         @click="handleDownload"
       >
-        Export
+        {{ $t("table.export") }}
       </el-button>
       <el-checkbox
         v-model="showReviewer"
@@ -78,9 +79,9 @@
         style="margin-left: 15px"
         @change="tableKey = tableKey + 1"
       >
-        reviewer
+        {{ $t("table.reviewer") }}
       </el-checkbox>
-    </div>
+    </el-row>
 
     <el-table
       :key="tableKey"
@@ -249,7 +250,7 @@
       <template #footer>
         <el-button @click="dialogFormVisible = false"> Cancel </el-button>
         <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
-          Confirm
+          {{ $t("table.confirm") }}
         </el-button>
       </template>
     </el-dialog>
@@ -494,4 +495,12 @@
   })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .filter-container {
+    padding-bottom: 10px;
+
+    .filter-item {
+      margin-right: 10px;
+    }
+  }
+</style>
