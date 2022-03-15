@@ -5,7 +5,7 @@ const requireAll = (requireContext) => {
 
 const re = /(.*\/)+(.*)\.svg/
 
-const svgIcons = requireAll(modules).map((i) => {
+const svgIcons = requireAll(modules).map((i: any) => {
   return i.match(re)[2]
 })
 

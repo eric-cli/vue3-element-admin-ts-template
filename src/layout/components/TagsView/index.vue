@@ -43,7 +43,7 @@
   const permissionStore = usePermissionStore()
   const route = useRoute()
   const router = useRouter()
-  const visitedViews = computed(() => {
+  const visitedViews: any = computed(() => {
     return tagsViewStore.visitedViews
   })
   const routes = computed(() => {

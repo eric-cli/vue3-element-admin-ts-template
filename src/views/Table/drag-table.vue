@@ -94,7 +94,7 @@
   const listQuery = ref({ page: 1, limit: 10 })
   const sortable = ref(null)
   const dragTable = ref<InstanceType<typeof ElTable>>()
-  const oldList = ref([])
+  const oldList: any = ref([])
   const newList = ref([])
 
   const setSort = () => {

@@ -47,3 +47,8 @@ npm i vite-plugin-vue-setup-extend -D
 
 可以直接在script标签上定义name。
 ```
+
+```
+https://www.npmjs.com/package/vite-plugin-vue-images
+尝试使用此插件自动引入图片
+```

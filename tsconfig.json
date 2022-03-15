@@ -22,5 +22,6 @@
     "types": ["vite/client", "element-plus/global"],
     "typeRoots": ["./node_modules/@types/", "./types"]
   },
+  "exclude": ["src/vendor/*.ts"],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "types/**/*.ts", "config/**/*.ts", "config/**/*.d.ts", "mock/**/*.ts", "tests/*.ts", "vite.config.ts"]
 }

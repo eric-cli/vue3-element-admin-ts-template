@@ -58,7 +58,7 @@
     }
   })
 
-  const onlyOneChild = ref(null)
+  const onlyOneChild: any = ref(null)
   const resolvePath = (routePath) => {
     if (isExternal(routePath)) {
       return routePath
