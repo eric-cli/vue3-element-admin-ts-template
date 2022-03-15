@@ -41,3 +41,9 @@ watch(
 );
 
 ```
+
+```
+npm i vite-plugin-vue-setup-extend -D
+
+可以直接在script标签上定义name。
+```

@@ -7,9 +7,10 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
 import visualizer from "rollup-plugin-visualizer"
 import compressPlugin from "vite-plugin-compression"
 import { viteMockServe } from "vite-plugin-mock"
-import svgLoader from "./plugins/svg-loader"
 import WindiCSS from "vite-plugin-windicss"
+import VueSetupExtend from "vite-plugin-vue-setup-extend" // 可以直接在script标签上定义name
 import { resolve } from "path"
+import svgLoader from "./plugins/svg-loader"
 
 // https://vitejs.dev/config/
 
@@ -17,11 +18,12 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   console.log(command, mode)
 
   // 根据项目配置。可以配置在.env文件
-  let prodMock = false
+  const prodMock = false
   return {
     plugins: [
       vue(),
       WindiCSS(),
+      VueSetupExtend(),
       svgLoader("./src/icons/svg/"),
       viteMockServe({
         ignore: /^\_/, // 自动读取模拟.ts 文件时，请忽略指定格式的文件
@@ -36,7 +38,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         // 下面这段代码会被注入 main.ts
         injectCode: `
             import { setupProdMockServer } from '../mock/_createProductionServer';
-      
+
             setupProdMockServer();
             `
       }),

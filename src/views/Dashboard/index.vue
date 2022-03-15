@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Dashboard">
   import AdminDashboard from "./Admin/index.vue"
   import EditorDashboard from "./Editor/index.vue"
   import useUserStore from "@/stores/user"
