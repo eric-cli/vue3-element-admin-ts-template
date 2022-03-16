@@ -1,10 +1,10 @@
 <template>
   <el-form>
     <el-form-item label="Name">
-      <el-input v-model.trim="user.true_name" />
+      <el-input v-model.trim="forms.true_name" />
     </el-form-item>
     <el-form-item label="Email">
-      <el-input v-model.trim="user.email" />
+      <el-input v-model.trim="forms.email" />
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submit">Update</el-button>
@@ -13,12 +13,29 @@
 </template>
 
 <script lang="ts" setup>
+  import { ElMessage } from "element-plus"
+  // TODO 代码优化
   const props = defineProps({
     user: {
       type: Object,
       default: () => {
-        return {}
+        return {
+          name: "",
+          email: ""
+        }
       }
+    }
+  })
+
+  const emit = defineEmits(["update:user"])
+
+  const forms: any = computed({
+    get: () => {
+      return props.user
+    },
+    set: (val) => {
+      console.log(val)
+      emit("update:user", val)
     }
   })
 
