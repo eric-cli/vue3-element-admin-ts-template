@@ -24,7 +24,7 @@
     }
   })
   const EntityId = ref<string>("")
-  const options = {
+  const options: any = {
     backgroundColor: "#394056",
     title: {
       top: 20,

@@ -32,12 +32,12 @@
 
   const permissionStore = usePermissionStore()
   const search = ref("")
-  const options = ref([])
-  const searchPool = ref([])
+  const options: any = ref([])
+  const searchPool: any = ref([])
   const show = ref(false)
-  const fuse = ref(null)
+  const fuse: any = ref(null)
   const router = useRouter()
-  const routes = computed(() => {
+  const routes: any = computed(() => {
     return permissionStore.routes
   })
   const headerSearchSelect = ref<InstanceType<typeof ElSelect>>()
@@ -65,7 +65,7 @@
   const generateRoutes = (routes = [], basePath = "/", prefixTitle = []) => {
     let res: any = []
 
-    routes.forEach((router) => {
+    routes.forEach((router: any) => {
       // skip hidden router
       if (!(router.meta && router.meta.hidden)) {
         const data: any = {
@@ -124,7 +124,7 @@
 
   const optionsArray = computed(() => {
     if (options.value.length) {
-      return options.value.map((ele) => {
+      return options.value.map((ele: any) => {
         return ele.item
       })
     }

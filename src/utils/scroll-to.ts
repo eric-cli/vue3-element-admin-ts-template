@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 Math.easeInOutQuad = function easeInOutQuad(t, b, c, d) {
   t /= d / 2
   if (t < 1) {
@@ -36,13 +39,12 @@ function position() {
     document.body.scrollTop
   )
 }
-
 /**
  * @param {number} to
  * @param {number} duration
  * @param {Function} callback
  */
-export function scrollTo(to, duration, callback) {
+export function scrollTo(to: number, duration: number, callback?) {
   const start = position()
   const change = to - start
   const increment = 20

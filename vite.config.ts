@@ -64,7 +64,6 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
               "useClipboard", // import { useClipboard } from '@vueuse/core',
               "useEventListener", // import { useEventListener } from '@vueuse/core',
               "useTitle", // import { useTitle } from '@vueuse/core',
-              "Fn", // import { useMouse } from '@vueuse/core',
               "tryOnUnmounted", // import { tryOnUnmounted } from '@vueuse/core',
               "useThrottleFn", // import { useThrottleFn } from '@vueuse/core',
               "useDebounceFn", // import { useDebounceFn } from '@vueuse/core',
@@ -85,6 +84,9 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
             //   // alias
             //   ["[from]", "[alias]"],
             // ],
+          },
+          {
+            "element-plus/es": ["ElMessage", "ElNotification"]
           }
         ],
         dts: "src/auto-imports.d.ts",

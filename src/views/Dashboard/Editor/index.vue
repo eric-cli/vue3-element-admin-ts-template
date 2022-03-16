@@ -28,7 +28,7 @@
   const roles = computed(() => {
     return userStore.roles
   })
-  const userInfos = computed(() => {
+  const userInfos: any = computed(() => {
     return userStore.userInfos
   })
 </script>

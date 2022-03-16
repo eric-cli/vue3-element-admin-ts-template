@@ -24,15 +24,15 @@
     }
   })
   const EntityId = ref<string>("")
-  const xAxisData = []
-  const data = []
-  const data2 = []
+  const xAxisData: number[] = []
+  const data: any = []
+  const data2: any = []
   for (let i = 0; i < 50; i += 1) {
     xAxisData.push(i)
     data.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5)
     data2.push((Math.sin(i / 5) * (i / 5 + 10) + i / 6) * 3)
   }
-  const options = {
+  const options: any = {
     backgroundColor: "#08263a",
     grid: {
       left: "5%",

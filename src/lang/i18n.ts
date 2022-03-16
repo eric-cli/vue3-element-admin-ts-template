@@ -20,7 +20,7 @@ export function getLanguage() {
   if (chooseLanguage) return chooseLanguage
 
   // if has not choose language
-  const language = (navigator.language || navigator.browserLanguage).toLowerCase()
+  const language = navigator.language.toLowerCase()
   const locales = Object.keys(messages)
   locales.find((locale) => {
     return language.indexOf(locale) > -1

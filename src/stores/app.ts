@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 
+const logs: any[] = []
+
 const useAppStore = defineStore({
   id: "app", // id必填，且需要唯一
   state: () => {
@@ -11,7 +13,7 @@ const useAppStore = defineStore({
       device: "desktop",
       size: "small",
       language: "en",
-      logs: []
+      logs
     }
   },
   getters: {

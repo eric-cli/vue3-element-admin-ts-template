@@ -38,7 +38,9 @@
   import useTagsViewStore from "@/stores/tagsView"
   import usePermissionStore from "@/stores/permission"
 
-  const { ctx } = getCurrentInstance()
+  const instance: any = getCurrentInstance()
+  console.log(instance)
+
   const tagsViewStore = useTagsViewStore()
   const permissionStore = usePermissionStore()
   const route = useRoute()
@@ -55,8 +57,8 @@
   const selectedTag = ref({})
   const affixTags = ref([])
   const scrollPaneRef: any = ref<HTMLElement | null>(null)
-  const tagRefs = ref([])
-  const setTagRef = (el) => {
+  const tagRefs: any = ref([])
+  const setTagRef = (el: any) => {
     if (el) {
       tagRefs.push(el)
     }
@@ -106,7 +108,7 @@
   const initTags = () => {
     affixTags.value = filterAffixTags(routes.value)
 
-    affixTags.value!.forEach((ele) => {
+    affixTags.value!.forEach((ele: any) => {
       // Must have tag name
       if (ele.name) {
         tagsViewStore.addVisitedView(ele)
@@ -125,7 +127,7 @@
   const moveToCurrentTag = () => {
     const tags = tagRefs.value
     nextTick(() => {
-      tags.forEach((tag) => {
+      tags.forEach((tag: any) => {
         if (tag.to.path === route.path) {
           scrollPaneRef.value?.moveToTarget(tag)
           // when query is different then update
@@ -163,9 +165,9 @@
   }
 
   const closeSelectedTag = (view) => {
-    tagsViewStore.delView(view).then(({ visitedViews }) => {
+    tagsViewStore.delView(view).then((res: any) => {
       if (isActive(view)) {
-        toLastView(visitedViews, view)
+        toLastView(res.visitedViews, view)
       }
     })
   }
@@ -177,25 +179,25 @@
     })
   }
 
-  const closeAllTags = (view) => {
+  const closeAllTags = (view: any) => {
     console.log(view)
+    type C = { visitedViews: any }
+    tagsViewStore.delAllViews().then((res: any) => {
+      console.log(res.visitedViews)
 
-    tagsViewStore.delAllViews().then(({ visitedViews }) => {
-      console.log(visitedViews)
-
-      if (affixTags.value!.some((tag) => tag.path === view.path)) {
+      if (affixTags.value!.some((tag: any) => tag.path === view.path)) {
         console.log(affixTags.value)
         return
       } //  TODO:这段功能是一旦在固定签列表找到当前点击的，就不处理，但是我认为应该继续处理，就跳到这个页面。之后想到了在处理
 
-      toLastView(visitedViews, view)
+      toLastView(res.visitedViews, view)
     })
   }
 
   const openMenu = (tag, e) => {
     const menuMinWidth = 105
-    const offsetLeft = ctx.$el.getBoundingClientRect().left // container margin left
-    const { offsetWidth } = ctx.$el // container width
+    const offsetLeft = instance.ctx.$el.getBoundingClientRect().left // container margin left
+    const { offsetWidth } = instance.ctx.$el // container width
     const maxLeft = offsetWidth - menuMinWidth // left boundary
     const leftValue = e.clientX - offsetLeft + 15 // 15: margin right
 

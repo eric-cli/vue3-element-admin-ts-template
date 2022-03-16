@@ -4,6 +4,7 @@
  * @Example v-clipboard="text"
  */
 import type { DirectiveBinding } from "vue"
+import { ElMessage } from "element-plus"
 import handleClipboard from "@/utils/clipboard"
 
 export const setupClipboardDirective = (app) => {
@@ -16,7 +17,10 @@ export const setupClipboardDirective = (app) => {
         console.log("mounted")
 
         if (!binding.value) {
-          ElMessage.warn("没有需要复制的目标内容")
+          ElMessage({
+            message: "没有需要复制的目标内容",
+            type: "warning"
+          })
           return
         }
         handleClipboard(binding.value)

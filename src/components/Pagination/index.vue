@@ -1,8 +1,8 @@
 <template>
   <div ref="el" :class="{ hidden: hidden }" class="pagination-container">
     <el-pagination
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
+      :current-page="currentPage"
+      :page-size="pageSize"
       :background="background"
       :layout="layout"
       :page-sizes="pageSizes"
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+  import { PropType } from "vue"
   import { scrollTo } from "@/utils/scroll-to"
   // const el = ref<HTMLElement | null>(null);
   const props = defineProps({
@@ -31,7 +32,7 @@
       default: 20
     },
     pageSizes: {
-      type: Array,
+      type: Array as PropType<number[]>,
       default() {
         return [10, 20, 30, 50]
       }
@@ -54,7 +55,7 @@
     }
   })
   const emit = defineEmits(["update:limit", "pagination", "update:page"])
-  const pageSize = computed({
+  const pageSize: any = computed({
     get() {
       return props.limit
     },
@@ -64,7 +65,7 @@
       emit("update:limit", val)
     }
   })
-  const currentPage = computed({
+  const currentPage: any = computed({
     get() {
       return props.page
     },

@@ -12,7 +12,8 @@
   type localType = "zh" | "en"
   const locale = ref<localType>("en")
   const appStore = useAppStore()
-  const size = computed(() => {
+
+  const size: any = computed(() => {
     return appStore.size
   })
   const language = computed(() => {

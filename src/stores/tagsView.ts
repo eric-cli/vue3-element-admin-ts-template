@@ -1,27 +1,30 @@
 import { defineStore } from "pinia"
 
+const cachedViews: any[] = []
+const visitedViews: any[] = []
+
 const useTagsViewStore = defineStore({
   id: "tagsView", // id必填，且需要唯一
   state: () => {
     return {
-      visitedViews: [],
-      cachedViews: []
+      visitedViews,
+      cachedViews
     }
   },
   actions: {
-    addVisitedView(view: { path: any; meta: { title: any } }) {
+    addVisitedView(view: any) {
       // console.log(111, view);
 
       if (this.visitedViews.some((v: { path: any }) => v.path === view.path)) return
       this.visitedViews.push({ ...view, title: view.meta.title || "no-name" })
     },
-    addCachedView(view: { name: any; meta: { noCache: any } }) {
+    addCachedView(view: any) {
       if (this.cachedViews.includes(view.name)) return
       if (!view.meta.noCache) {
         this.cachedViews.push(view.name)
       }
     },
-    updateVisitedView(view: { path: any }) {
+    updateVisitedView(view: any) {
       this.visitedViews.forEach((v) => {
         if (v.path === view.path) {
           v = Object.assign(v, view)
@@ -74,7 +77,7 @@ const useTagsViewStore = defineStore({
         })
       })
     },
-    delOthersCachedViews(view: { name: any }) {
+    delOthersCachedViews(view: any) {
       return new Promise((resolve) => {
         const index = this.cachedViews.indexOf(view.name)
         if (index > -1) {
@@ -86,7 +89,7 @@ const useTagsViewStore = defineStore({
         resolve([...this.cachedViews])
       })
     },
-    delOthersVisitedViews(view: { path: any }) {
+    delOthersVisitedViews(view: any) {
       return new Promise((resolve) => {
         this.visitedViews = this.visitedViews.filter((v: { meta: { affix: any }; path: any }) => {
           return v.meta.affix || v.path === view.path
@@ -94,7 +97,7 @@ const useTagsViewStore = defineStore({
         resolve([...this.visitedViews])
       })
     },
-    delVisitedView(view: { path: any }) {
+    delVisitedView(view: any) {
       return new Promise((resolve) => {
         this.visitedViews.forEach((ele, i) => {
           // TODO 错误验证
@@ -105,7 +108,7 @@ const useTagsViewStore = defineStore({
         resolve([...this.visitedViews])
       })
     },
-    delCachedView(view: { name: any }) {
+    delCachedView(view: any) {
       return new Promise((resolve) => {
         const index = this.cachedViews.indexOf(view.name)
         index > -1 && this.cachedViews.splice(index, 1)

@@ -11,8 +11,8 @@ const useUserStore = defineStore({
     }
   },
   getters: {
-    avatar: (state) => {
-      return state.userInfos.avatar
+    avatar: (state: any) => {
+      return state.userInfos?.avatar
     }
   },
   actions: {
@@ -33,7 +33,7 @@ const useUserStore = defineStore({
       })
     },
     logout() {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         this.$reset()
         resolve()
       })

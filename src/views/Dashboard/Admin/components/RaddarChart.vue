@@ -24,7 +24,7 @@
       default: "300px"
     }
   })
-  const options = {
+  const options: any = {
     tooltip: {
       trigger: "axis",
       axisPointer: {

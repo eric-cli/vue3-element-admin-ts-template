@@ -23,7 +23,7 @@
   })
   const chartRef = ref<HTMLDivElement | null>(null)
   const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
-  const options = {
+  const options: any = {
     tooltip: {
       trigger: "item",
       formatter: "{a} <br/>{b} : {c} ({d}%)"

@@ -269,6 +269,7 @@
 
 <script setup lang="ts">
   import type { ElForm } from "element-plus"
+  import { ElNotification } from "element-plus"
   import { fetchList, fetchPv, createArticle, updateArticle } from "@/apis/article"
   import { parseTime } from "@/utils"
 
@@ -280,8 +281,8 @@
     { key: "JP", display_name: "Japan" },
     { key: "EU", display_name: "Eurozone" }
   ])
-  const tableKey = ref(0)
-  const list = ref([])
+  const tableKey: any = ref(0)
+  const list: any = ref([])
   const total = ref(0)
   const listLoading = ref(true)
   const listQuery = ref({
@@ -299,8 +300,8 @@
   ])
   const statusOptions = ref(["published", "draft", "deleted"])
   const showReviewer = ref(false)
-  const temp: any = ref({
-    id: undefined,
+  let temp: any = reactive({
+    id: 1,
     importance: 1,
     remark: "",
     timestamp: new Date(),
@@ -314,7 +315,7 @@
   const dialogStatus = ref("")
   const pvData = ref([])
   const textMap = ref({ update: "Edit", create: "Create" })
-  const rules = ref({
+  const rules: any = ref({
     type: [{ required: true, message: "type is required", trigger: "change" }],
     timestamp: [
       {
@@ -377,8 +378,8 @@
     handleFilter()
   }
   const resetTemp = () => {
-    temp.value = {
-      id: undefined,
+    temp = {
+      id: 1,
       importance: 1,
       remark: "",
       timestamp: new Date(),
@@ -398,10 +399,10 @@
   const createData = () => {
     dataForm.value?.validate((valid) => {
       if (valid) {
-        temp.value.id = parseInt(Math.random() * 100, 10) + 1024 // mock a id
-        temp.value.author = "vue-element-admin"
-        createArticle(temp.value).then(() => {
-          list.value.unshift(temp.value)
+        temp.id = parseInt(`${Math.random() * 100}`, 10) + 1024 // mock a id
+        temp.author = "vue-element-admin"
+        createArticle(temp).then(() => {
+          list.value.unshift(temp)
           dialogFormVisible.value = false
           ElNotification({
             title: "Success",
@@ -414,8 +415,8 @@
     })
   }
   const handleUpdate = (row) => {
-    temp.value = { ...row } // copy obj
-    temp.value.timestamp = new Date(temp.value.timestamp)
+    temp = { ...row } // copy obj
+    temp.timestamp = new Date(temp.timestamp)
     dialogStatus.value = "update"
     dialogFormVisible.value = true
     nextTick(() => {
@@ -425,11 +426,11 @@
   const updateData = () => {
     dataForm.value?.validate((valid) => {
       if (valid) {
-        const tempData = { ...temp.value }
+        const tempData = { ...temp }
         tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
         updateArticle(tempData).then(() => {
-          const index = list.value.findIndex((v) => v.id === temp.value.id)
-          list.value.splice(index, 1, temp.value)
+          const index = list.value.findIndex((v) => v.id === temp.id)
+          list.value.splice(index, 1, temp)
           dialogFormVisible.value = false
           ElNotification({
             title: "Success",

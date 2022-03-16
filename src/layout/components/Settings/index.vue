@@ -71,7 +71,7 @@
       value: val
     })
   }
-  const sidebarLogo = computed({
+  const sidebarLogo: any = computed({
     get() {
       return settingStore.sidebarLogo
     },
@@ -82,7 +82,7 @@
       })
     }
   })
-  const tagsView = computed({
+  const tagsView: any = computed({
     get() {
       return settingStore.tagsView
     },
@@ -93,7 +93,7 @@
       })
     }
   })
-  const fixedHeader = computed({
+  const fixedHeader: any = computed({
     get() {
       return settingStore.fixedHeader
     },

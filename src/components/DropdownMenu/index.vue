@@ -9,11 +9,13 @@
     </div>
   </div>
 </template>
+s
+<script lang="ts" setup name="DropdownMenu">
+  import { PropType } from "vue"
 
-<script lang="ts" setup>
   const props = defineProps({
     items: {
-      type: Array,
+      type: Array as PropType<DropDownMenuItem[]>,
       default() {
         return []
       }

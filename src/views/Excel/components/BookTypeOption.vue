@@ -19,7 +19,7 @@
   })
   const emit = defineEmits(["update:modelValue"])
 
-  const bookType = computed({
+  const bookType: any = computed({
     get() {
       return props.modelValue
     },

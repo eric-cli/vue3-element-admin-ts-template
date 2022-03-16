@@ -141,8 +141,8 @@
     }
   })
 
-  const form = ref({ ...defaultForm })
-  const loading = ref(false)
+  const form: any = ref({ ...defaultForm })
+  const loading: any = ref(false)
   const userListOptions = ref([])
   const validateRequire = (rule, value, callback) => {
     if (value === "") {
@@ -188,7 +188,7 @@
     get() {
       return +new Date(form.value.display_time)
     },
-    set(val) {
+    set(val: any) {
       form.value.display_time = new Date(val)
     }
   })

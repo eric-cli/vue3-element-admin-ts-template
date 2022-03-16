@@ -85,12 +85,13 @@
       const filterVal = ["id", "title", "author", "pageviews", "display_time"]
       const data: any = formatJson(filterVal, list.value)
       const merges: any = ["A1:A2", "B1:D1", "E1:E2"]
-      excel.export_json_to_excel({
+      const json: any = {
         multiHeader,
         header,
         merges,
         data
-      })
+      }
+      excel.export_json_to_excel(json)
       downloadLoading.value = false
     })
   }

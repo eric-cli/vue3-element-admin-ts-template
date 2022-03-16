@@ -72,7 +72,7 @@
   const hasOneShowingChild = (children = [], parent = {}) => {
     // console.log(children);
 
-    const showingChildren = children.filter((item) => {
+    const showingChildren = children.filter((item: any) => {
       if (item.meta && item.meta.hidden) {
         return false
       }

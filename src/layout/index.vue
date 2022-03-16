@@ -25,13 +25,13 @@
 
   const appStore = useAppStore()
   const settingStore = useSettingStore()
-  const device = computed(() => {
+  const device: any = computed(() => {
     return appStore.device
   })
   const opened = computed(() => {
     return appStore.opened
   })
-  const sidebar = computed(() => {
+  const sidebar: any = computed(() => {
     return appStore.sidebar
   })
   const fixedHeader = computed(() => {

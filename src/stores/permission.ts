@@ -36,12 +36,15 @@ export function filterAsyncRoutes(routes: any[], roles: any) {
   return res
 }
 
+const routes: any[] = []
+const addRoutes: any[] = []
+
 const usePermissionStore = defineStore({
   id: "permission", // id必填，且需要唯一
   state: () => {
     return {
-      routes: [],
-      addRoutes: []
+      routes,
+      addRoutes
     }
   },
   actions: {

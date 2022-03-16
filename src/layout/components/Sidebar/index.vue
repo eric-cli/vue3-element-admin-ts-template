@@ -42,11 +42,11 @@
   const permissionRoutes: any = computed(() => {
     return permissionStore.routes
   })
-  const isCollapse = computed(() => {
+  const isCollapse: any = computed(() => {
     return !appStore.opened
   })
 
-  const activeMenu = computed(() => {
+  const activeMenu: any = computed(() => {
     const { meta, path } = route
     // if set path, the sidebar will highlight the path you set
     if (meta.activeMenu) {

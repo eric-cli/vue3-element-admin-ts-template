@@ -30,8 +30,8 @@
       <el-tab-pane label="Element-Plus-UI Icons">
         <div class="grid">
           <div
-            v-for="item of elementIcons"
-            :key="item"
+            v-for="(item, index) of elementIcons"
+            :key="index"
             @click="handleClipboard(generateElementIconCode(item.name))"
           >
             <el-tooltip placement="top">

@@ -22,7 +22,7 @@
   })
   const emit = defineEmits(["update:modelValue"])
 
-  const filename = computed({
+  const filename: any = computed({
     get() {
       return props.modelValue
     },

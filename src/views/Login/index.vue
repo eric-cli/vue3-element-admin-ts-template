@@ -85,12 +85,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="login">
+  import type { ElInput, ElForm } from "element-plus"
   import { validUsername } from "@/utils/validate"
+
   import SocialSignin from "./components/SocialSignin.vue"
   import useUserStore from "@/stores/user"
 
   type FormInstance = InstanceType<typeof ElForm>
+
   const loginFormRef = ref<FormInstance>()
   const userStore = useUserStore()
   const router = useRouter()
@@ -111,18 +114,19 @@
       callback()
     }
   }
-  const loginRules = reactive({
+  const loginRules = {
     username: [{ required: true, trigger: "blur", validator: validateUsername }],
     password: [{ required: true, trigger: "blur", validator: validatePassword }]
-  })
+  }
+
   const passwordType = ref("password")
   const form = reactive({
     username: "",
     password: ""
   })
-  const username = ref(null)
-  const password = ref(null)
-  const redirect = ref(null)
+  const username = ref<InstanceType<typeof ElInput>>()
+  const password = ref<InstanceType<typeof ElInput>>()
+  const redirect: any = ref(null)
   const otherQuery = ref({})
   let capsTooltip = ref(false)
   const loading = ref(false)
@@ -151,7 +155,7 @@
       return acc
     }, {})
   }
-  const submitForm = (formEl: FormInstance | undefined) => {
+  const submitForm: any = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
       if (valid) {

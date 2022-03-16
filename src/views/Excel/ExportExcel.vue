@@ -72,7 +72,7 @@
   const listLoading = ref(true)
   const downloadLoading = ref(false)
   const filename = ref("")
-  const autoWidth = ref(true)
+  const autoWidth: any = ref(true)
   const bookType = ref("xlsx")
   const fetchData = () => {
     listLoading.value = true

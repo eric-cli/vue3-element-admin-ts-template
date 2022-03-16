@@ -1,5 +1,5 @@
 import NProgress from "nprogress" // progress bar
-import { RouteRecordRaw } from "vue-router"
+import { ElMessage } from "element-plus"
 import router from "./router"
 import useUserStore from "@/stores/user"
 import usePermissionStore from "@/stores/permission"
@@ -11,7 +11,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ["/login", "/auth-redirect"] // no redirect whitelist
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to: any, from, next) => {
   // console.log(to);
 
   // start progress bar
@@ -40,7 +40,7 @@ router.beforeEach(async (to, from, next) => {
 
           const { roles } = userStore
           // generate accessible routes map based on roles
-          const accessRoutes: Array<RouteRecordRaw> = await permissionStore.generateRoutes(roles)
+          const accessRoutes: any = await permissionStore.generateRoutes(roles)
           // dynamically add accessible routes
           accessRoutes.forEach((item) => {
             // console.log(item);
@@ -50,12 +50,15 @@ router.beforeEach(async (to, from, next) => {
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
-        } catch (error) {
+        } catch (error: any) {
           console.log(error)
 
           // remove token and go to login page to re-login
           await userStore.logout()
-          ElMessage.error(error || "Has Error")
+          ElMessage({
+            type: "error",
+            message: error || "Has Error"
+          })
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }

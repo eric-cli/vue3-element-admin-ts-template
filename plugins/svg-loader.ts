@@ -9,7 +9,7 @@ const hasViewBox = /(viewBox="[^>+].*?")/g
 const clearReturn = /(\r)|(\n)/g
 // TODO 此处使用 import.meta.glob('./icons/svg/*.svg')这种功能处理
 function findSvgFile(dir) {
-  const svgRes = []
+  const svgRes: any = []
   const dirents = readdirSync(dir, {
     withFileTypes: true
   })

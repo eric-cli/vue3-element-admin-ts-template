@@ -29,7 +29,7 @@
       list.value = res.data.lists.slice(0, 8)
     })
   }
-  const statusFilter = (status: "success" | "pending") => {
+  const statusFilter = (status: any): StatusFilterType => {
     const statusMap = {
       success: "success",
       pending: "danger"

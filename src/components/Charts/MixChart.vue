@@ -24,14 +24,14 @@
     }
   })
   const EntityId = ref<string>("")
-  const xData: string[] = (function () {
-    const data = []
+  const xData: string[] = (function xData() {
+    const data: any = []
     for (let i = 1; i < 13; i += 1) {
       data.push(`${i}month`)
     }
     return data
   })()
-  const options = {
+  const options: any = {
     backgroundColor: "#344b58",
     title: {
       text: "statistics",

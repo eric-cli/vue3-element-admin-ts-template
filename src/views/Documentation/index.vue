@@ -37,7 +37,7 @@
 <script lang="ts" setup>
   import DropdownMenu from "@/components/DropdownMenu/index.vue"
 
-  const articleList = [
+  const articleList: any = [
     { title: "基础篇", href: "https://juejin.im/post/59097cd7a22b9d0065fb61d2" },
     {
       title: "登录权限篇",

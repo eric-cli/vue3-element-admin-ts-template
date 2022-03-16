@@ -82,7 +82,7 @@ export const generateMixed = (n, j) => {
     "Y",
     "Z"
   ]
-  const arr = []
+  const arr: string[] = []
   for (let h = 0; h < j; h += 1) {
     let res = ""
     for (let i = 0; i < n; i += 1) {

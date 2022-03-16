@@ -15,12 +15,13 @@
     return userStore.roles
   })
   const emit = defineEmits(["change"])
-  const switchRoles = computed({
+  const switchRoles: any = computed({
     get() {
       return userStore.roles[0]
     },
     set(val) {
       userStore.changeRoles(val).then(() => {
+        console.log(val)
         emit("change")
       })
     }

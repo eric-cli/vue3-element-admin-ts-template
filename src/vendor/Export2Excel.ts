@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 import { saveAs } from "file-saver"
 import * as XLSX from "xlsx"
 

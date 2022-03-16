@@ -64,7 +64,7 @@
   import { toggleClass } from "@/utils"
   // import "@/assets/custom-theme/index.css"; // the theme changed version
   const theme = ref(false)
-  const tags = ref([
+  const tags: any = ref([
     { name: "Tag One", type: "" },
     { name: "Tag Two", type: "info" },
     { name: "Tag Three", type: "success" },

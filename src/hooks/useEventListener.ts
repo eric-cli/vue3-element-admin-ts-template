@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import type { Ref } from "vue"
 
 export type RemoveEventFn = () => void

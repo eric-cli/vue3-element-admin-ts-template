@@ -11,12 +11,14 @@
 </template>
 
 <script lang="ts" setup>
+  import type { ElScrollbar } from "element-plus"
+
   const tagAndTagSpacing = 4 // tagAndTagSpacing
   const left = ref(0)
   const emits = defineEmits(["scroll"])
-  const { ctx } = getCurrentInstance()
-  const scrollContainer = ref<InstanceType<typeof ElScrollbar>>()
-  const scrollWrapper = computed(() => {
+  const internalInstance: any = getCurrentInstance()
+  const scrollContainer: any = ref<InstanceType<typeof ElScrollbar>>()
+  const scrollWrapper: any = computed(() => {
     return scrollContainer.value.$refs.wrap$
   })
   const emitScroll = () => {
@@ -32,11 +34,11 @@
 
   const moveToTarget = (currentTag) => {
     // 所有的组件都有一个属性$el:用于获取组件中的元素
-    const $container = scrollContainer.value.$el
+    const $container: any = scrollContainer.value.$el
     console.log($container)
 
     const $containerWidth = $container.offsetWidth
-    const tagList = ctx.parent.ctx.tagRefs
+    const tagList = internalInstance.ctx.parent.ctx.tagRefs
 
     let firstTag = null
     let lastTag = null

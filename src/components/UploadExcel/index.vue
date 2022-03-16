@@ -64,7 +64,7 @@
     excelUploadInput.value!.click()
   }
   const getHeaderRow = (sheet) => {
-    const headers = []
+    const headers: any = []
     const range = XLSX.utils.decode_range(sheet["!ref"])
     let C
     const R = range.s.r

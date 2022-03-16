@@ -17,7 +17,7 @@
   })
   const emit = defineEmits(["update:modelValue"])
 
-  const autoWidth = computed({
+  const autoWidth: any = computed({
     get() {
       return props.modelValue
     },
