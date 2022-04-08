@@ -1,0 +1,1 @@
+import{b as r}from"./index.c192a148.js";function s(a={}){return r({url:"/api/transaction/list",method:"get",params:a})}function e(a){return r({url:"/api/search/user",method:"get",params:{name:a}})}export{e as s,s as t};
