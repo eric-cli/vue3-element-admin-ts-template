@@ -1,0 +1,1 @@
+import{b as t}from"./index.df665f3f.js";function s(r={}){return t({url:"/api/transaction/list",method:"get",params:r})}function e(r){return t({url:"/api/search/user",method:"get",params:{name:r}})}export{e as s,s as t};

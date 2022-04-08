@@ -1,0 +1,1 @@
+import{o as t,j as s,h as o,b5 as r}from"./vendor.25bcfe43.js";/* empty css              */import{_ as c}from"./index.df665f3f.js";const a={},n={style:{padding:"30px"}};function l(_,d){const e=r;return t(),s("div",n,[o(e,{closable:!1,title:"menu 1-3",type:"success"})])}var m=c(a,[["render",l]]);export{m as default};

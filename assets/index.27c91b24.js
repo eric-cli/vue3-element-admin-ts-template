@@ -1,0 +1,1 @@
+import{g as s,o as r,j as n,h as e,w as a,b5 as c}from"./vendor.25bcfe43.js";/* empty css              */import{_}from"./index.df665f3f.js";const l={},d={style:{padding:"30px"}};function f(i,p){const t=s("router-view"),o=c;return r(),n("div",d,[e(o,{closable:!1,title:"menu 1-2",type:"success"},{default:a(()=>[e(t)]),_:1})])}var v=_(l,[["render",f]]);export{v as default};

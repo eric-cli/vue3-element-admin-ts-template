@@ -1,1 +1,0 @@
-import{g as s,o as r,j as n,h as e,w as a,b5 as c}from"./vendor.00b81b82.js";/* empty css              */import{_}from"./index.c192a148.js";const l={},i={style:{padding:"30px"}};function d(p,m){const t=s("router-view"),o=c;return r(),n("div",i,[e(o,{closable:!1,title:"menu 1-2",type:"success"},{default:a(()=>[e(t)]),_:1})])}var v=_(l,[["render",d]]);export{v as default};
